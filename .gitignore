@@ -1,0 +1,215 @@
+# ------------------
+# 1. 操作系统通用
+# ------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*.swp
+*~
+
+# ------------------
+# 2. IDE / 编辑器
+# ------------------
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln.docstates
+
+# ------------------
+# 3. 硬件设计 (KiCad / 立创EDA / 通用)
+# ------------------
+# KiCad 临时文件
+*.kicad_pcb-bak
+*.kicad_pcb-backup
+*.kicad_sch-bak
+fp-info-cache
+fp-lib-table
+sym-lib-table
+*.net
+*.xml.rej
+*.kicad_prl
+# KiCad 项目本地配置
+*.kicad_pro
+*.kicad_wk
+# 立创EDA 导出临时文件
+*.eprj
+*.epro
+# Gerber 输出
+*.gbr
+*.drl
+*.gbl
+*.gbo
+*.gbp
+*.gbs
+*.gko
+*.gto
+*.gtp
+*.gts
+*.gbrjob
+# 生产文件
+*-bom.csv
+*-cpl.csv
+*-pos.csv
+*.zip
+
+# ------------------
+# 4. FPGA (高云 Gowin)
+# ------------------
+# 高云工程生成目录
+impl/
+impl_gwsyn/
+*.ngc
+*.sdc_out
+*.sdf
+*.vo
+*.vho
+*.log
+*.db
+*.cfg
+*.fs
+*.bit
+*.mcs
+*.prm
+*.rpt
+*.gn
+*.lst
+*.pin
+*.trce
+# 高云 Programmer 生成
+*.pro
+*.pro.bak
+
+# ------------------
+# 5. 固件 (STM32) – Keil
+# ------------------
+# Keil MDK
+*.uvguix.*
+*.uvoptx
+*.uvprojx.user
+*.scvd
+*.axf
+*.crf
+*.d
+*.o
+*.dep
+*.map
+*.htm
+*.lnp
+*.iex
+Build/
+Listings/
+Objects/
+DebugConfig/
+*.jlink
+*.elf
+
+# ARM GCC 通用
+*.elf
+*.hex
+*.bin
+*.map
+*.list
+*.lst
+*.o
+*.d
+*.a
+*.so
+*.exe
+
+# ------------------
+# 6. 软件 (Python)
+# ------------------
+# Byte-compiled / optimized / DLL
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+# PyInstaller
+*.manifest
+*.spec
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+# Unit test / coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+# IDE for Python
+.vscode/
+.idea/
+*.sublime-*
+
+# ------------------
+# 7. 文档生成临时文件
+# ------------------
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# ------------------
+# 8. 日志、性能数据（只忽略临时日志，不忽略数据文件）
+# ------------------
+*.log
+*.tmp
+*.swp
+
+# ------------------
+# 9. 压缩包与临时交换文件
+# ------------------
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
+*.bak
+*.old
+*.orig
+
+# ------------------
+# 10. 硬件/固件调试临时文件
+# ------------------
+*.jtag.cfg
+*.svf
+*.xsvf
+*.stp
+*.itm
+*.trc
