@@ -1,0 +1,246 @@
+|
+| Teraspeed Labs Modeling Services.
+| http://www.teraspeedlabs.com
+| 
+[IBIS Ver]     3.2
+[Comment Char] |_char
+[File Name]    ad9765ast.ibs
+[File Rev]     3.0
+[Source]  Teraspeed Labs.
+[Date]    05-27-2015
+[Notes]   Quality Check of this IBIS model: Model Passes IBIS Check
+          Model parses into ICX IS. Simulation done with Hyperlynx. 
+          1. MIN TYP MAX information is based on Temprature and Voltage 
+             characteristics only. 
+|
+[Disclaimer]
+|
+| Use: Teraspeed Labs ("Teraspeed") has 
+| licensed IBIS models to specific integrated circuit 
+| suppliers ("IC Vendors") for use and distribution as 
+| follows: Each IC Vendor may use IBIS Models, and distribute
+| them to IC Vendor's custumers to use solely for developing
+| printed circute board designs. Users of this model may 
+| modify the IBIS model to suit its specific applications but
+| rights to derivative works and such modifications shell belong
+| to Teraspeed. No other distribution of these materials is 
+| permitted.
+|
+| DISCLAIMER OF WARRANTY: UNLESS OTHERWISE AGREED TO IN WRITING
+| TERASPEED DISCLAIMS AND USER WAIVES ALL WARRANTIES, EXPRESS 
+| OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY AND
+| FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL 
+| TERASPEED BE LIABLE FOR ANY DIRECT OR INDIRECT DAMAGES, 
+| WHETHER IN CONTRACT OR TORT, INCLUDING, WITHOUT LIMITATION,
+| LOST PROFITS, BUSINESS INTERRUPTION, OR LOST INFORMATION 
+| ARISING OUT OF THE USE OF OR THE INABILITY TO USE THE MODEL,
+| EVEN IF TERASPEED HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+| DAMAGES. 
+|
+[Copyright]
+|
+| This file is the legal property of Teraspeed Copyright(c) 2015.
+| All other rights are reserved. 
+|
+[Component] AD9765AST
+[Manufacturer] Analog Devices
+|
+[Package]
+| variable   typ   min   max
+R_pkg  0.060ohms  0.058ohms  0.062ohms
+L_pkg  4.957nH    4.820nH    5.130nH  
+C_pkg  0.258pF    0.240pF    0.280pF  
+|
+[Pin] signal_name  model_name  R_pin  L_pin C_pin
+|
+1   DB11-P1       in    0.062  5.13n  0.28p
+2   DB10-P1       in    0.06   5.04n  0.27p
+3   DB9-P1        in    0.059  4.95n  0.26p
+4   DB8-P1        in    0.059  4.9n   0.25p
+5   DB7-P1        in    0.058  4.87n  0.25p
+6   DB6-P1        in    0.058  4.85n  0.24p
+7   DB5-P1        in    0.058  4.85n  0.24p
+8   DB4-P1        in    0.058  4.87n  0.25p
+9   DB3-P1        in    0.059  4.9n   0.25p
+10  DB2-P1        in    0.059  4.95n  0.26p
+11  DB1-P1        in    0.06   5.04n  0.27p
+12  DB0-P1        in    0.062  5.13n  0.28p
+13  NC            NC    0.062  5.13n  0.28p
+14  NC            NC    0.06   5.04n  0.27p
+15  DCOM1         GND   0.059  4.95n  0.26p
+16  DVDD1         POWER 0.059  4.9n   0.25p
+17  WRT1/IQWRT    in    0.058  4.87n  0.25p
+18  CLK1/IQCLK    in    0.058  4.85n  0.24p
+19  CLK2/IQRESET  in    0.058  4.85n  0.24p
+20  WRT2/IQSEL    in    0.058  4.87n  0.25p
+21  DCOM2         GND   0.059  4.9n   0.25p
+22  DVDD2         POWER 0.059  4.95n  0.26p
+23  DB11-P2       in    0.06   5.04n  0.27p
+24  DB10-P2       in    0.062  5.13n  0.28p
+25  DB9-P2        in    0.062  5.13n  0.28p
+26  DB8-P2        in    0.06   5.04n  0.27p
+27  DB7-P2        in    0.059  4.95n  0.26p
+28  DB6-P2        in    0.059  4.9n   0.25p
+29  DB5-P2        in    0.058  4.87n  0.25p
+30  DB4-P2        in    0.058  4.85n  0.24p
+31  DB3-P2        in    0.058  4.85n  0.24p
+32  DB2-P2        in    0.058  4.87n  0.25p
+33  DB1-P2        in    0.059  4.9n   0.25p
+34  DB0-P2        in    0.059  4.95n  0.26p
+35  NC            NC    0.06   5.04n  0.27p
+36  NC            NC    0.062  5.13n  0.28p
+37  SLEEP         in    0.062  5.13n  0.28p
+38  ACOM          GND   0.06   5.04n  0.27p
+39  IOUTA2        NC    0.059  4.95n  0.26p
+40  IOUTB2        NC    0.059  4.9n   0.25p
+41  FSADJ2        in    0.058  4.87n  0.25p
+42  GAINCTRL      NC    0.058  4.85n  0.24p
+43  REFIO         NC    0.058  4.85n  0.24p
+44  FSADJ1        in    0.058  4.87n  0.25p
+45  IOUTB1        NC    0.059  4.9n   0.25p
+46  IOUTA1        NC    0.059  4.95n  0.26p
+47  AVDD          POWER 0.06   5.04n  0.27p
+48  MODE          in    0.062  5.13n  0.28p
+|      
+|
+|
+[Model Selector] in
+|
+in3    3.3V operation
+in5    5.0V operation
+|
+|
+|
+[Model] in3
+|
+Model_type Input
+|
+Vinl  = 900.0mV
+Vinh  = 2.100V
+C_comp  2.00000pF 2.00000pF 2.00000pF
+|  
+| variable               typ       min       max
+[Voltage Range]          3.30000V  3.00000V  3.60000V
+[POWER Clamp Reference]  3.30000V  3.00000V  3.60000V
+[GND Clamp Reference]    0.00000V  0.00000V  0.00000V
+|
+[Temperature Range]      25        85        0
+|
+[GND Clamp]
+|
+  -3.30000V   -502.997mA    -481.013mA     -505.076mA
+  -1.04270V    -42.3722mA    -50.4271mA     -38.0480mA
+  -1.02270V    -38.2910mA    -46.6120mA     -34.6767mA
+-982.370mV     -31.4472mA    -38.9190mA     -27.8786mA
+-901.070mV     -17.6510mA    -25.9916mA     -14.1744mA
+-901.050mV     -17.6486mA    -25.9884mA     -14.1710mA
+-860.930mV     -12.9164mA    -19.6090mA     -10.0162mA
+-800.300mV      -5.76496mA   -12.8690mA      -3.73750mA
+-800.280mV      -5.76260mA   -12.8667mA      -3.73656mA
+-759.850mV      -3.14800mA    -8.37228mA     -1.84074mA
+-759.830mV      -3.14729mA    -8.37005mA     -1.83980mA
+-739.470mV      -2.42966mA    -6.10670mA     -1.38285mA
+-699.170mV      -1.00920mA    -3.82441mA   -478.380uA
+-678.980mV    -717.594uA      -2.68100mA   -312.829uA
+-658.750mV    -425.410uA      -2.10161mA   -146.950uA
+-623.500mV    -188.780uA      -1.09205mA   -122.947uA
+-623.460mV    -188.644uA      -1.09090mA   -122.920uA
+-582.690mV     -50.3100uA   -513.545uA      -95.1578uA
+-582.660mV     -50.2985uA   -513.120uA      -95.1374uA
+-552.280mV     -38.6648uA   -190.570uA      -74.4505uA
+-526.995mV     -28.9821uA   -190.570uA      -57.2329uA
+-501.710mV     -19.2995uA    -81.2650uA     -40.0154uA
+-485.575mV     -13.1208uA    -55.7657uA     -29.0284uA
+-461.510mV      -9.62606uA   -17.7340uA     -12.6416uA
+-439.167mV      -6.38138uA    -6.35363uA      0.00000A
+-390.503mV       0.00000A      0.00000A       0.00000A
+0.0000000V       0.00000A      0.00000A       0.00000A
+6.6000000V       0.00000A      0.00000A       0.00000A 
+|
+|
+[POWER Clamp]
+|
+6.6000000V      0.00000A     0.00000A     0.00000A
+0.0000000V      0.00000A     0.00000A     0.00000A
+-160.700mV      0.00000A     0.00000A     0.00000A
+-321.400mV      0.00000A     0.00000A     8.30855uA
+-350.350mV      0.00000A     0.00000A    10.4561uA
+-381.700mV      9.26236uA    0.00000A    12.7818uA
+-497.800mV     43.5642uA    47.3691uA    21.3945uA
+-509.400mV     46.9914uA    62.1798uA    22.2550uA
+-579.200mV     67.6138uA   151.300uA     27.4330uA
+-700.700mV    103.511uA      1.90799mA   36.4463uA
+-741.100mV    632.881uA      3.35971mA  307.470uA
+-801.900mV      2.65793mA    5.60793mA    1.92067mA
+-918.100mV      8.36423mA   12.3356mA     7.74908mA
+  -1.01880V    15.3881mA    19.4640mA    14.2908mA
+  -1.05920V    18.2061mA    22.3239mA    17.0587mA
+  -1.11990V    22.4400mA    26.6208mA    21.2174mA
+  -1.24170V    30.9356mA    35.2430mA    29.5622mA
+  -3.30000V   174.504mA    180.949mA    170.581mA
+|     
+|
+[Model] in5
+|
+Model_type Input
+|
+Vinl  = 1.300V
+Vinh  = 3.500V
+C_comp  2.00000pF  2.00000pF  2.00000pF
+|
+| variable               typ       min       max
+[Voltage Range]          5.00000V  4.50000V  5.50000V
+[POWER Clamp Reference]  5.00000V  4.50000V  5.50000V
+[GND Clamp Reference]    0.00000V  0.00000V  0.00000V
+|      
+[Temperature Range]      25        85        0         
+|
+[GND Clamp]
+|
+-5.00000V    -609.422mA   -566.667mA   -544.096mA
+-1.02250V    -30.4900mA   -35.3319mA   -28.2632mA
+-982.070mV   -25.5024mA   -29.9310mA   -23.0199mA
+-901.030mV   -15.5049mA   -20.8060mA   -12.5100mA
+-880.790mV   -13.0080mA   -18.5270mA   -10.9273mA
+-820.540mV   -7.90782mA   -11.7430mA   -6.21602mA
+-779.980mV   -4.47440mA   -8.73353mA   -3.04440mA
+-739.440mV   -2.60143mA   -5.72554mA   -1.43870mA
+-719.210mV   -1.66680mA   -4.22451mA   -1.08832mA
+-719.160mV   -1.66584mA   -4.22080mA   -1.08745mA
+-678.870mV   -895.921uA   -2.60933mA   -389.630uA
+-658.610mV   -508.762uA   -1.79900mA   -256.053uA
+-658.590mV   -508.380uA   -1.79860mA   -255.922uA
+-643.380mV   -363.900uA   -1.49495mA   -155.640uA
+-610.370mV   -50.3371uA   -835.933uA   -122.990uA
+-602.660mV   -49.5427uA   -682.010uA   -115.364uA
+-561.790mV   -45.3319uA   -302.130uA   -74.9390uA
+-551.469mV   -44.2685uA   -279.499uA   -64.7301uA
+-546.106mV   -43.7160uA   -267.742uA   -63.7029uA
+-481.843mV   -4.66223uA   -126.835uA   -51.3928uA
+-450.870mV   -1.47112uA   -58.9225uA   -45.4597uA
+-338.752mV     0.00000A     0.00000A     0.00000A
+0.000000V      0.00000A     0.00000A     0.00000A
+10.0000V       0.00000A     0.00000A     0.00000A
+|           
+[POWER Clamp]
+|
+10.0000V     0.00000A     0.00000A     0.00000A
+0.00000V     0.00000A     0.00000A     0.00000A
+-68.5999mV   0.00000A     0.00000A     0.00000A
+-137.200mV   0.00000A     0.00000A     8.30152uA
+-177.800mV   0.00000A     0.00000A     28.0119uA
+-299.500mV   0.00000A     0.00000A     87.0939uA
+-359.750mV   0.00000A     0.00000A     116.344uA
+-380.600mV   24.3398uA    0.00000A     126.466uA
+-620.100mV   303.927uA    1.74241mA    242.737uA
+-719.500mV   419.965uA    2.46557mA    290.993uA
+-780.600mV   2.29194mA    4.71217mA    1.18590mA
+-922.200mV   9.56464mA    12.2357mA    8.48230mA
+-1.24020V    31.3971mA    34.0092mA    28.4404mA
+-1.28110V    34.2051mA    36.8096mA    31.0305mA
+-1.43760V    44.9498mA    47.5252mA    40.9414mA
+-5.00000V    289.529mA    291.443mA    266.541mA
+|   
+|
+|
+[End]
