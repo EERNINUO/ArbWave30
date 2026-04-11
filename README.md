@@ -26,8 +26,8 @@
 
 ### 硬件指标（V1.0）
 - 波形：正弦、方波、三角波、锯齿波、阶梯波、直流
-- 正弦波最高 **30MHz**，方波最高 **5MHz**（上升沿 <15ns）
-- 幅值范围（高阻）：0~20Vpp（DC~10MHz），14Vpp（10~20MHz），10Vpp（20~30MHz）
+- 正弦波最高 **30MHz**，方波最高 **5MHz**（上升沿 <50ns）
+- 幅值范围（高阻）：20Vpp（DC\~10MHz），14Vpp（10\~20MHz），10Vpp（20\~30MHz）
 - 幅值分辨率：2mV（典型），偏移范围 ±5V
 - 总谐波失真（THD）：< -50dBc @10MHz 满幅
 - 相位噪声：-100dBc/Hz @10kHz offset（30MHz 载波）(目标值)
@@ -37,7 +37,7 @@
 ### 控制与接口
 - USB 2.0（USBTMC 或 CDC 类），支持 SCPI-1999 命令集
 - SMA 输出，SMA 触发 I/O，SMA 外部时钟输入
-- 电源输入：15~36V DC，功耗 <20W
+- 电源输入：24V DC，功耗 <20W
 
 ### 软件与扩展路线
 - V1.0：单通道 + 基础波形 + 核心 SCPI
@@ -49,8 +49,10 @@
 ## 🧱 仓库结构
 ArbWave30/  
 ├── docs/ # 设计文档  
+│    └──  LICENSE # CC BY-SA 4.0
 ├── hardware/ # 原理图、PCB源文件 (🚧 开发中)  
 ├── firmware/ (🚧 开发中)   
+│    ├── LICENSE # CERN-OHL-S-2.0  
 │    ├── fpga/ # FPGA 设计源代码（Verilog）  
 │    └── mcu/ # MCU 固件源代码（C/C++）  
 ├── datasheets/ # 组件数据手册，参考设计  
@@ -104,10 +106,24 @@ inst.write('OUTPut1 ON')
 
 ## 📜 许可证
 Copyright © 2026 EERNINUO
-本项目采用 GNU General Public License v3.0 开源协议。
-您可以自由使用、修改、分发，但必须公开源代码，并保留原始版权声明。
 
-详细条款请见 [LICENSE](LICENSE) 文件。
+本项目采用**多许可证策略**，不同部分适用不同许可证：
+
+| 组成部分 | 许可证 |
+|----------|--------|
+| 固件 (MCU/FPGA 代码) | [GNU General Public License v3.0](LICENSE) |
+| 硬件设计文件 (原理图、PCB、BOM) | [CERN Open Hardware Licence Version 2 - Strongly Reciprocal](hardware/LICENSE) |
+| 文档、图片、README | [Creative Commons Attribution-ShareAlike 4.0 International](docs/LICENSE) |
+
+这意味着：
+- 你可以自由使用、修改、分享固件代码，但任何衍生代码也必须以 GPL-3.0 开源。
+- 你可以基于硬件设计文件制作、分发物理设备，但必须同时开源你对设计文件的修改，并保留署名。
+- 你可以复制和修改文档，但必须同样以 CC BY-SA 4.0 分享，并注明原作者。
+
+**商标声明**：`ArbWave30` 名称及标志未经授权不得用于商业产品。
+
+## ⚠️ 免责声明
+注意：本项目为个人学习与开源作品，不保证商业级可靠性。使用前请仔细阅读免责声明。
 
 ## 📫 联系方式
 项目主页: https://github.com/EERNINUO/ArbWave30
@@ -115,5 +131,4 @@ Copyright © 2026 EERNINUO
 ## ⭐ Star History
 如果您觉得这个项目有帮助，请给一个 Star ⭐，谢谢！
 
-## ⚠️ 免责声明
-注意：本项目为个人学习与开源作品，不保证商业级可靠性。使用前请仔细阅读免责声明。
+
