@@ -1,5 +1,7 @@
 <div align="center">
 
+<!-- Assisted-by: DeepSeek - 文档框架 -->
+
 # ArbWave30
 30MHz 任意波形发生器 | FPGA + 高速DAC | SCPI 可控 
 
@@ -51,12 +53,13 @@ ArbWave30/
 ├── docs/ # 设计文档  
 │    ├── pic/ # 设计图片  
 │    ├── adr/ # 决策记录  
-│    └──  LICENSE # CC BY-SA 4.0
-├── hardware/ # 原理图、PCB源文件 (🚧 开发中) 
+│    └──  LICENSE # CC BY-SA 4.0  
+├── hardware/ # 原理图、PCB源文件 (🚧 开发中)   
 ├── firmware/ (🚧 开发中)   
 │    ├── LICENSE # CERN-OHL-S-2.0  
 │    ├── fpga/ # FPGA 设计源代码（Verilog）  
 │    └── mcu/ # MCU 固件源代码（C/C++）  
+├── simulink/ # LTspice 仿真文件  
 ├── datasheets/ # 组件数据手册，参考设计  
 ├── scripts/ # 自动化测试脚本（PyVISA）(🚧 开发中)  
 ├── LICENSE # GPL-3.0  
@@ -123,6 +126,11 @@ Copyright © 2026 EERNINUO
 - 你可以复制和修改文档，但必须同样以 CC BY-SA 4.0 分享，并注明原作者。
 
 **商标声明**：`ArbWave30` 名称及标志未经授权不得用于商业产品。
+
+## 🤖 AI 辅助声明
+
+本项目文档框架由 GitHub Copilot / DeepSeek 辅助生成。
+作者已逐一审查并测试，但如有任何问题欢迎提交 Issue。
 
 ## ⚠️ 免责声明
 注意：本项目为个人学习与开源作品，不保证商业级可靠性。使用前请仔细阅读免责声明。

@@ -1,0 +1,129 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="第 1 页" id="TxLXrtDV0SvFbWssVwrK">
+    <mxGraphModel dx="990" dy="458" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ujSYvksa_aTUGT47OSkH-1" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#FFFF99,#1F2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);rotation=0;" value="10MHz晶振&#xa;10M OSC" vertex="1">
+          <mxGeometry height="39" width="80" x="310" y="181.93" as="geometry" />
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-2" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#FFFF99,#1F2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);rotation=0;" value="CDCI6214&#xa;时钟发生器" vertex="1">
+          <mxGeometry height="54" width="90" x="230" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-3" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#FFFF99,#1F2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);rotation=0;" value="10MHz&#xa;参考输出" vertex="1">
+          <mxGeometry height="40" width="80" x="470" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-4" edge="1" parent="1" source="ujSYvksa_aTUGT47OSkH-1" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.739;entryY=1.017;rounded=0;fontSize=12;startSize=8;endSize=8;entryDx=0;entryDy=0;entryPerimeter=0;exitDx=0;exitDy=0;" target="ujSYvksa_aTUGT47OSkH-5" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="353" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-5" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;direction=south;rotation=90;size=22.5;horizontal=0;fillColor=light-dark(#FFFF99,#1F2020);" value="高频继电器" vertex="1">
+          <mxGeometry height="105" width="43" x="354.5" y="247.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-6" edge="1" parent="1" source="ujSYvksa_aTUGT47OSkH-5" style="endArrow=classic;html=1;fontSize=12;startSize=8;endSize=8;curved=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;rounded=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="376" y="370" />
+            </Array>
+            <mxPoint x="388" y="335" as="sourcePoint" />
+            <mxPoint x="320" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-7" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#FFFF99,#1F2020);strokeColor=default;fontColor=light-dark(#333333,#cccccc);verticalAlign=middle;rotation=0;" value="10MHz&#xa;外部输入" vertex="1">
+          <mxGeometry height="40" width="80.7" x="510" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-8" edge="1" parent="1" source="ujSYvksa_aTUGT47OSkH-20" style="endArrow=classic;html=1;fontSize=12;startSize=8;endSize=8;curved=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.271;entryY=0.965;entryDx=0;entryDy=0;rounded=1;entryPerimeter=0;" target="ujSYvksa_aTUGT47OSkH-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="454" y="240" />
+              <mxPoint x="400" y="240" />
+            </Array>
+            <mxPoint x="578" y="219" as="sourcePoint" />
+            <mxPoint x="418" y="259" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-9" edge="1" parent="1" source="ujSYvksa_aTUGT47OSkH-2" style="endArrow=classic;html=1;rounded=1;exitX=0.775;exitY=1.002;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=0;exitPerimeter=0;" target="ujSYvksa_aTUGT47OSkH-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="430" />
+            </Array>
+            <mxPoint x="290" y="470" as="sourcePoint" />
+            <mxPoint x="340" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-11" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="274.76" y="399" as="sourcePoint" />
+            <mxPoint x="274.76" y="479" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-12" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="250" y="399" as="sourcePoint" />
+            <mxPoint x="250" y="479" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-13" connectable="0" parent="ujSYvksa_aTUGT47OSkH-12" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="125MHz" vertex="1">
+          <mxGeometry relative="1" x="-0.0267" y="-1" as="geometry">
+            <mxPoint x="11" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-14" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="180" y="372" as="sourcePoint" />
+            <mxPoint x="230" y="371.83" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-15" connectable="0" parent="ujSYvksa_aTUGT47OSkH-14" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="IIC" vertex="1">
+          <mxGeometry relative="1" x="-0.2489" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-16" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" target="ujSYvksa_aTUGT47OSkH-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="300" as="sourcePoint" />
+            <mxPoint x="450" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-17" connectable="0" parent="ujSYvksa_aTUGT47OSkH-16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Ctrl" vertex="1">
+          <mxGeometry relative="1" x="-0.4279" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-19" edge="1" parent="1" source="ujSYvksa_aTUGT47OSkH-7" style="endArrow=classic;html=1;fontSize=12;startSize=8;endSize=8;curved=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=1;" target="ujSYvksa_aTUGT47OSkH-18" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points" />
+            <mxPoint x="510" y="130.07" as="sourcePoint" />
+            <mxPoint x="480" y="129.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-18" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#FFFF99,#1F2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);rotation=0;" value="时钟缓冲器" vertex="1">
+          <mxGeometry height="39" width="80" x="510.7" y="180.93" as="geometry" />
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-22" edge="1" parent="1" source="ujSYvksa_aTUGT47OSkH-18" style="endArrow=classic;html=1;fontSize=12;startSize=8;endSize=8;curved=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;rounded=1;" target="ujSYvksa_aTUGT47OSkH-20" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points" />
+            <mxPoint x="511" y="200" as="sourcePoint" />
+            <mxPoint x="410" y="279" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-20" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#FFFF99,#1F2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);rotation=0;" value="时钟有效性&#xa;检测" vertex="1">
+          <mxGeometry height="39" width="80" x="414" y="180.93" as="geometry" />
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-24" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="454" y="180" as="sourcePoint" />
+            <mxPoint x="454" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ujSYvksa_aTUGT47OSkH-25" connectable="0" parent="ujSYvksa_aTUGT47OSkH-24" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Ctrl" vertex="1">
+          <mxGeometry relative="1" x="-0.4279" y="-1" as="geometry">
+            <mxPoint x="-1" y="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
