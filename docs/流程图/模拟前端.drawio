@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="第 1 页" id="d1ggA5xLA7QFUOL10ASV">
-    <mxGraphModel dx="2166" dy="620" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1576" dy="439" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -66,17 +66,12 @@
         <mxCell id="zqeuPSSoInIjc-zsn6Fr-25" edge="1" parent="1" source="zqeuPSSoInIjc-zsn6Fr-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="zqeuPSSoInIjc-zsn6Fr-20" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="zqeuPSSoInIjc-zsn6Fr-23" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#99FF99;strokeColor=#36393d;rotation=0;direction=east;" value="单极性转双极性&#xa;(OPA2197)" vertex="1">
+        <mxCell id="zqeuPSSoInIjc-zsn6Fr-23" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#99FF99;strokeColor=#36393d;rotation=0;direction=east;" value="差分转单端&#xa;(OPA2197)" vertex="1">
           <mxGeometry height="50" width="90" x="260" y="330" as="geometry" />
         </mxCell>
         <mxCell id="zqeuPSSoInIjc-zsn6Fr-27" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="zqeuPSSoInIjc-zsn6Fr-23" value="">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="180" y="355" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="14dMBvb6ljjxetD_nmKU-1" connectable="0" parent="zqeuPSSoInIjc-zsn6Fr-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="直流偏置" vertex="1">
-          <mxGeometry relative="1" x="-0.811" as="geometry">
-            <mxPoint x="23" y="-15" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="zqeuPSSoInIjc-zsn6Fr-28" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="zqeuPSSoInIjc-zsn6Fr-3" value="">
@@ -167,6 +162,28 @@
         <mxCell id="zqeuPSSoInIjc-zsn6Fr-47" connectable="0" parent="zqeuPSSoInIjc-zsn6Fr-46" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#FF9999;" value="±5V" vertex="1">
           <mxGeometry relative="1" x="-0.3275" y="1" as="geometry">
             <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nJ_mcUP7JhJS0xZjdX-m-4" edge="1" parent="1" source="nJ_mcUP7JhJS0xZjdX-m-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="zqeuPSSoInIjc-zsn6Fr-23" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nJ_mcUP7JhJS0xZjdX-m-5" connectable="0" parent="nJ_mcUP7JhJS0xZjdX-m-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="差分电压信号" vertex="1">
+          <mxGeometry relative="1" x="-0.3514" y="-1" as="geometry">
+            <mxPoint x="11" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nJ_mcUP7JhJS0xZjdX-m-1" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#99FF99;strokeColor=#36393d;rotation=0;direction=east;" value="I/V转换" vertex="1">
+          <mxGeometry height="50" width="90" x="80" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="nJ_mcUP7JhJS0xZjdX-m-2" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="354.71" as="sourcePoint" />
+            <mxPoint x="80" y="354.71" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nJ_mcUP7JhJS0xZjdX-m-3" connectable="0" parent="nJ_mcUP7JhJS0xZjdX-m-2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="差分电流信号" vertex="1">
+          <mxGeometry relative="1" x="-0.811" as="geometry">
+            <mxPoint x="23" y="-15" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
