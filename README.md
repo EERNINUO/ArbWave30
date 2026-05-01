@@ -15,9 +15,9 @@
   <a href="https://raw.githubusercontent.com/EERNINUO/ArbWave30/main/LICENSE" style="margin: 2px;">
     <img src="https://img.shields.io/github/license/EERNINUO/ArbWave30" alt="许可证">
   </a>
-  <a href="https://github.com/EERNINUO/ArbWave30/releases" style="margin: 2px;">
+  <!-- <a href="https://github.com/EERNINUO/ArbWave30/releases" style="margin: 2px;">
     <img src="https://img.shields.io/github/v/release/EERNINUO/ArbWave30?color=blueviolet&include_prereleases" alt="发布版本">
-  </a>
+  </a> -->
 </p>
 
 </div>
@@ -53,10 +53,13 @@ ArbWave30/
 ├── docs/ # 设计文档  
 │    ├── pic/ # 设计图片  
 │    ├── adr/ # 决策记录  
+│    ├── 硬件设计文档/ # 硬件设计文档  
 │    └──  LICENSE # CC BY-SA 4.0  
 ├── hardware/ # 原理图、PCB源文件 (🚧 开发中)   
+│    ├── analog_board/ # 模拟板 PCB设计  
+│    ├── control_board/ # 控制板 PCB设计  
+│    └── LICENSE # CERN-OHL-S-2.0   
 ├── firmware/ (🚧 开发中)   
-│    ├── LICENSE # CERN-OHL-S-2.0  
 │    ├── fpga/ # FPGA 设计源代码（Verilog）  
 │    └── mcu/ # MCU 固件源代码（C/C++）  
 ├── simulink/ # LTspice 仿真文件  
