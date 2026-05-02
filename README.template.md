@@ -2,6 +2,7 @@
 
 <!-- Assisted-by: DeepSeek - 文档框架 -->
 
+
 # ArbWave30
 30MHz 任意波形发生器 | FPGA + 高速DAC | SCPI 可控 
 
@@ -23,6 +24,8 @@
 </div>
 
 ---
+
+{{BRANCH_WARNING}}
 
 ## ✨ 特性
 
