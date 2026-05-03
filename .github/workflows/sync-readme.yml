@@ -33,9 +33,9 @@ jobs:
         run: |
           REF_NAME="${{ github.ref_name }}"
           if [ "$REF_NAME" = "releases" ]; then
-            WARNING="> 本分支为稳定发布版本。开发版本请见 [\`develop\`](https://github.com/yourname/ArbWave30/tree/develop) 分支。"
+            WARNING="> 本分支为稳定发布版本。开发版本请见 [\`develop\`](https://github.com/EERNINUO/ArbWave30/tree/develop) 分支。"
           elif [ "$REF_NAME" = "develop" ]; then
-            WARNING="> > **⚠️ 注意**：你当前查看的是 \`develop\` 开发分支，内容可能不稳定。\n> 推荐使用稳定发布版本：[查看 Releases](https://github.com/yourname/ArbWave30/releases)"
+            WARNING="> **⚠️ 注意**：你当前查看的是 **develop** 开发分支，内容可能不稳定。\n> 推荐使用稳定发布版本：[查看 Releases](https://github.com/EERNINUO/ArbWave30/releases)"
           else
             WARNING="> **ℹ️ 提示**：你正在查看一个非默认分支。"
           fi
