@@ -2099,7 +2099,7 @@
 					(type none)
 				)
 			)
-			(text private "PWR"
+			(text "PWR"
 				(at 3.048 -49.784 0)
 				(effects
 					(font
@@ -2553,7 +2553,7 @@
 					(type none)
 				)
 			)
-			(text private "Ctrl"
+			(text "Ctrl"
 				(at 4.064 -56.134 0)
 				(effects
 					(font
@@ -2845,7 +2845,7 @@
 					(type none)
 				)
 			)
-			(text private "BANK0"
+			(text "BANK0"
 				(at 5.588 -54.864 0)
 				(effects
 					(font
@@ -3209,7 +3209,7 @@
 					(type none)
 				)
 			)
-			(text private "BANK1"
+			(text "BANK1"
 				(at 6.858 -38.1 0)
 				(effects
 					(font
@@ -3447,7 +3447,7 @@
 					(type none)
 				)
 			)
-			(text private "BANK2"
+			(text "BANK2"
 				(at 6.858 -27.94 0)
 				(effects
 					(font
@@ -3613,7 +3613,7 @@
 					(type none)
 				)
 			)
-			(text private "BANK3"
+			(text "BANK3"
 				(at 5.588 -41.91 0)
 				(effects
 					(font
@@ -3887,7 +3887,7 @@
 					(type none)
 				)
 			)
-			(text private "BANK4"
+			(text "BANK4"
 				(at 5.588 -49.53 0)
 				(effects
 					(font
@@ -4215,7 +4215,7 @@
 					(type none)
 				)
 			)
-			(text private "BANK5"
+			(text "BANK5"
 				(at 6.858 -48.26 0)
 				(effects
 					(font
@@ -4224,7 +4224,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -31.75 180)
+				(at 27.94 -6.35 180)
 				(length 5.08)
 				(name "IOB5A"
 					(effects
@@ -4242,7 +4242,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -34.29 180)
+				(at 27.94 -8.89 180)
 				(length 5.08)
 				(name "IOB5B"
 					(effects
@@ -4260,7 +4260,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -36.83 180)
+				(at 27.94 -11.43 180)
 				(length 5.08)
 				(name "IOB6A"
 					(effects
@@ -4278,7 +4278,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -39.37 180)
+				(at 27.94 -13.97 180)
 				(length 5.08)
 				(name "IOB6B"
 					(effects
@@ -4296,7 +4296,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -41.91 180)
+				(at 27.94 -16.51 180)
 				(length 5.08)
 				(name "IOB7A"
 					(effects
@@ -4314,7 +4314,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -44.45 180)
+				(at 27.94 -19.05 180)
 				(length 5.08)
 				(name "IOB7B"
 					(effects
@@ -4332,7 +4332,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -6.35 180)
+				(at 27.94 -21.59 180)
 				(length 5.08)
 				(name "IOB12A"
 					(effects
@@ -4350,7 +4350,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -8.89 180)
+				(at 27.94 -24.13 180)
 				(length 5.08)
 				(name "IOB12B"
 					(effects
@@ -4368,7 +4368,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -11.43 180)
+				(at 27.94 -26.67 180)
 				(length 5.08)
 				(name "IOB14A"
 					(effects
@@ -4386,7 +4386,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -13.97 180)
+				(at 27.94 -29.21 180)
 				(length 5.08)
 				(name "IOB14B"
 					(effects
@@ -4404,7 +4404,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -16.51 180)
+				(at 27.94 -31.75 180)
 				(length 5.08)
 				(name "IOB17A"
 					(effects
@@ -4422,7 +4422,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -19.05 180)
+				(at 27.94 -34.29 180)
 				(length 5.08)
 				(name "IOB17B"
 					(effects
@@ -4440,7 +4440,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -21.59 180)
+				(at 27.94 -36.83 180)
 				(length 5.08)
 				(name "IOB20A"
 					(effects
@@ -4458,7 +4458,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -24.13 180)
+				(at 27.94 -39.37 180)
 				(length 5.08)
 				(name "IOB20B"
 					(effects
@@ -4476,7 +4476,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -26.67 180)
+				(at 27.94 -41.91 180)
 				(length 5.08)
 				(name "IOB22A"
 					(effects
@@ -4494,7 +4494,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 27.94 -29.21 180)
+				(at 27.94 -44.45 180)
 				(length 5.08)
 				(name "IOB22B"
 					(effects
@@ -4525,7 +4525,7 @@
 					(type none)
 				)
 			)
-			(text private "BANK6"
+			(text "BANK6"
 				(at 5.588 -38.1 0)
 				(effects
 					(font
@@ -4763,7 +4763,7 @@
 					(type none)
 				)
 			)
-			(text private "BANK7"
+			(text "BANK7"
 				(at 5.842 -26.67 0)
 				(effects
 					(font
@@ -5407,7 +5407,7 @@
 			(pin input inverted
 				(at 7.62 -22.86 90)
 				(length 6.35)
-				(name "*DIS"
+				(name "~{DIS}"
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -5666,7 +5666,7 @@
 			(pin input inverted
 				(at 8.89 -22.86 90)
 				(length 6.35)
-				(name "*PD"
+				(name "~{PD}"
 					(effects
 						(font
 							(size 0.508 0.508)
