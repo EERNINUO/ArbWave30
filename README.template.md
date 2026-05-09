@@ -25,8 +25,7 @@
 
 ---
 
-> > **⚠️ 注意**：你当前查看的是  开发分支，内容可能不稳定。
-> 推荐使用稳定发布版本：[查看 Releases](https://github.com/yourname/ArbWave30/releases)
+{{BRANCH_WARNING}}
 
 ## ✨ 特性
 
