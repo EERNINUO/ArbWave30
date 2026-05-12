@@ -31,7 +31,7 @@
 					)
 				)
 			)
-			(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+			(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 				(at 12.446 3.048 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -6732,7 +6732,7 @@
 		(fields_autoplaced yes)
 		(uuid "6b611221-288c-4df7-89b7-29028b9a64aa")
 		(property "Reference" "U1"
-			(at 55.0896 60.96 0)
+			(at 63.9705 60.96 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6742,7 +6742,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 55.0896 63.5 0)
+			(at 63.9705 63.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6751,7 +6751,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 58.166 59.182 0)
 			(hide yes)
 			(show_name no)

@@ -862,7 +862,7 @@
 	)
 	(rectangle
 		(start 21.59 62.23)
-		(end 266.7 125.73)
+		(end 195.58 125.73)
 		(stroke
 			(width 0)
 			(type default)
@@ -3357,6 +3357,59 @@
 			(type default)
 		)
 		(uuid "fe90fbe9-59d9-469f-9837-6adf24c1c058")
+	)
+	(rule_area
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(polyline
+			(pts
+				(xy 13.97 16.51) (xy 13.97 133.35) (xy 280.67 133.35) (xy 280.67 16.51)
+			)
+			(stroke
+				(width 0)
+				(type dash)
+			)
+			(fill
+				(type none)
+			)
+			(uuid "ce16d1c0-c71a-41d4-b3c1-d6d36e59d049")
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 15.24 16.51 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a95ee54e-eed0-45ef-a962-5c13ad47398a")
+		(property "网络类" "POWER"
+			(at 15.9385 13.97 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Component Class" ""
+			(at -149.86 1.27 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:C")

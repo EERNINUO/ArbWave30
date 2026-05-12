@@ -31,7 +31,7 @@
 					)
 				)
 			)
-			(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+			(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 				(at 12.446 3.048 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -6256,6 +6256,114 @@
 		)
 		(uuid "d2d19834-2f25-49d1-acfc-3b1163bed1f4")
 	)
+	(rule_area
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(polyline
+			(pts
+				(xy 172.085 110.49) (xy 172.72 157.48) (xy 189.23 157.48) (xy 188.595 110.49)
+			)
+			(stroke
+				(width 0)
+				(type dash)
+			)
+			(fill
+				(type none)
+			)
+			(uuid "16b8540c-2e2d-4ceb-afa0-56d38a9d6e4b")
+		)
+	)
+	(rule_area
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(polyline
+			(pts
+				(xy 100.965 109.22) (xy 101.6 156.21) (xy 118.11 156.21) (xy 117.475 109.22)
+			)
+			(stroke
+				(width 0)
+				(type dash)
+			)
+			(fill
+				(type none)
+			)
+			(uuid "a755c313-d160-498b-88e7-cf5054ad5815")
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 104.14 109.22 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "05acd864-1c3c-4ec6-b414-2e8f3918e68e")
+		(property "网络类" "DAC_data_port"
+			(at 104.8385 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Component Class" ""
+			(at -39.37 -8.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 175.26 110.49 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2f189380-f903-49c7-bec3-35e699440549")
+		(property "网络类" "DAC_data_port"
+			(at 175.9585 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Component Class" ""
+			(at 31.75 -7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+	)
 	(symbol
 		(lib_id "Device:R")
 		(at 261.62 148.59 180)
@@ -6780,7 +6888,7 @@
 		(fields_autoplaced yes)
 		(uuid "361e7c11-c880-45d1-8620-9cc8360d6526")
 		(property "Reference" "U1"
-			(at 230.4312 124.46 0)
+			(at 235.4205 124.46 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6790,7 +6898,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 230.4312 127 0)
+			(at 235.4205 127 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6799,7 +6907,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 229.616 122.682 0)
 			(hide yes)
 			(show_name no)
@@ -7289,7 +7397,7 @@
 		(fields_autoplaced yes)
 		(uuid "383f6433-a4aa-4a6e-a636-856b13e3405b")
 		(property "Reference" "U1"
-			(at 264.7212 21.59 0)
+			(at 269.7105 21.59 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7299,7 +7407,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 264.7212 24.13 0)
+			(at 269.7105 24.13 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7308,7 +7416,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 263.906 19.812 0)
 			(hide yes)
 			(show_name no)
@@ -7994,7 +8102,7 @@
 		(fields_autoplaced yes)
 		(uuid "45ea41f8-481f-4e73-90bb-1f63708ff001")
 		(property "Reference" "U1"
-			(at 158.0412 106.68 0)
+			(at 163.0305 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8004,7 +8112,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 158.0412 109.22 0)
+			(at 163.0305 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8013,7 +8121,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 157.226 104.902 0)
 			(hide yes)
 			(show_name no)
@@ -8492,7 +8600,7 @@
 	)
 	(symbol
 		(lib_id "ArbWave30_lib:GW2AR-LV18EQ144C8/I7")
-		(at 24.13 118.11 0)
+		(at 250.19 80.01 0)
 		(unit 6)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8503,7 +8611,7 @@
 		(fields_autoplaced yes)
 		(uuid "6366dbea-a169-49c9-a51d-ccb874160bb2")
 		(property "Reference" "U1"
-			(at 39.2962 115.57 0)
+			(at 268.4405 78.74 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8513,7 +8621,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 39.2962 118.11 0)
+			(at 268.4405 81.28 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8522,8 +8630,8 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
-			(at 36.576 115.062 0)
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
+			(at 262.636 76.962 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8534,7 +8642,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 24.13 118.11 0)
+			(at 250.19 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8545,7 +8653,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 24.13 118.11 0)
+			(at 250.19 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9189,7 +9297,7 @@
 		(fields_autoplaced yes)
 		(uuid "7714f683-7e2f-48d9-b9ba-e8956170e79f")
 		(property "Reference" "U1"
-			(at 86.9212 105.41 0)
+			(at 93.1805 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9199,7 +9307,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 86.9212 107.95 0)
+			(at 93.1805 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9208,7 +9316,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 87.376 104.902 0)
 			(hide yes)
 			(show_name no)
@@ -10071,7 +10179,7 @@
 		(fields_autoplaced yes)
 		(uuid "c58e8681-03e0-4288-b80d-4b06924a046f")
 		(property "Reference" "U1"
-			(at 123.7512 26.67 0)
+			(at 130.0105 27.94 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10081,7 +10189,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 123.7512 29.21 0)
+			(at 130.0105 30.48 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10090,7 +10198,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 124.206 26.162 0)
 			(hide yes)
 			(show_name no)
@@ -10580,7 +10688,7 @@
 		(fields_autoplaced yes)
 		(uuid "c6dfec99-4901-4a5b-8c2b-91666bb54a33")
 		(property "Reference" "U1"
-			(at 190.4262 22.86 0)
+			(at 196.0505 22.86 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10590,7 +10698,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 190.4262 25.4 0)
+			(at 196.0505 25.4 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10599,7 +10707,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 190.246 21.082 0)
 			(hide yes)
 			(show_name no)
@@ -11089,7 +11197,7 @@
 		(fields_autoplaced yes)
 		(uuid "e5a8d694-0e7b-4ff6-861d-0e5900c0da26")
 		(property "Reference" "U1"
-			(at 231.14 77.47 0)
+			(at 236.6905 78.74 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11099,7 +11207,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 231.14 80.01 0)
+			(at 236.6905 81.28 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11108,7 +11216,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 230.886 76.962 0)
 			(hide yes)
 			(show_name no)
@@ -11775,7 +11883,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 59.436 27.432 0)
 			(hide yes)
 			(show_name no)

@@ -2043,7 +2043,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ArbWave30_lib:QFP-144_20x20_Pitch0.5mm"
+		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
 			(at 12.446 3.048 0)
 			(show_name no)
 			(do_not_autoplace no)
