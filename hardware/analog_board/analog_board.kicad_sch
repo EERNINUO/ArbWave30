@@ -5,6 +5,28 @@
 	(uuid "ca4be128-f2cd-4bef-b262-ed123f9c630d")
 	(paper "A4")
 	(lib_symbols)
+	(junction
+		(at 72.39 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "46a3a26e-916a-4065-9b3e-9df7a5a6417f")
+	)
+	(junction
+		(at 72.39 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "defd8a6f-2492-422d-95cd-1d37103044ee")
+	)
+	(wire
+		(pts
+			(xy 99.06 50.8) (xy 99.06 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a912b83-4204-4d2d-87aa-d71e5fe0a878")
+	)
 	(bus
 		(pts
 			(xy 72.39 74.93) (xy 81.28 74.93)
@@ -27,6 +49,26 @@
 	)
 	(wire
 		(pts
+			(xy 72.39 50.8) (xy 72.39 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5bb99abd-ff6a-4a74-94a1-f6464e5b9237")
+	)
+	(wire
+		(pts
+			(xy 72.39 53.34) (xy 96.52 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79bf635c-8cb1-464b-9a7e-c23f2015a21e")
+	)
+	(wire
+		(pts
 			(xy 72.39 82.55) (xy 81.28 82.55)
 		)
 		(stroke
@@ -34,6 +76,46 @@
 			(type default)
 		)
 		(uuid "86160ead-83d4-41e7-8a45-abd050f57080")
+	)
+	(wire
+		(pts
+			(xy 54.61 59.69) (xy 54.61 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a56dd0c3-7dc9-471b-942c-8dd2dba66327")
+	)
+	(wire
+		(pts
+			(xy 57.15 59.69) (xy 57.15 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba440a1b-a4d3-4d25-8ceb-16adb9357e23")
+	)
+	(wire
+		(pts
+			(xy 49.53 59.69) (xy 49.53 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1bc0e17-522e-4f0f-8538-0527eec6b189")
+	)
+	(wire
+		(pts
+			(xy 96.52 53.34) (xy 96.52 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d9603dfd-c7e6-47c0-a9b6-92b704359744")
 	)
 	(bus
 		(pts
@@ -44,6 +126,16 @@
 			(type default)
 		)
 		(uuid "f052e544-8cbe-4fb8-8863-34f5c7b3f957")
+	)
+	(wire
+		(pts
+			(xy 72.39 50.8) (xy 99.06 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9df0f21-650c-4dc8-b626-f804dff2de4a")
 	)
 	(image
 		(at 59.69 176.53)
@@ -1312,11 +1404,12 @@
 	)
 	(sheet
 		(at 81.28 67.31)
-		(size 26.67 25.4)
+		(size 29.21 25.4)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
 			(type solid)
@@ -1326,7 +1419,7 @@
 		)
 		(uuid "0038aa63-4831-4c1d-98ec-8ad35a3c76ff")
 		(property "Sheetname" "DAC"
-			(at 81.534 66.548 0)
+			(at 81.28 66.5984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1337,7 +1430,7 @@
 			)
 		)
 		(property "Sheetfile" "DAC.kicad_sch"
-			(at 81.28 93.472 0)
+			(at 81.28 93.2946 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1345,26 +1438,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
-			)
-		)
-		(pin "CLKP" input
-			(at 96.52 67.31 90)
-			(uuid "c6641a12-c11f-4995-b620-876b02862903")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "CLKN" input
-			(at 93.98 67.31 90)
-			(uuid "277f7681-5f82-4d97-9a96-ad9cc47d1cb1")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 		(pin "P1D[0..15]" input
@@ -1397,7 +1470,7 @@
 				(justify left)
 			)
 		)
-		(pin "Data_Clock" input
+		(pin "Data_Clock" output
 			(at 81.28 82.55 180)
 			(uuid "e9dadf78-8a80-4c5c-9c9d-7697078090da")
 			(effects
@@ -1405,6 +1478,46 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+		(pin "DAC_CLK+" input
+			(at 99.06 67.31 90)
+			(uuid "ed77e778-8bd7-46f2-b6ba-35c99ddd69e3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "DAC_CKL-" input
+			(at 96.52 67.31 90)
+			(uuid "acec0229-f2bb-4ce3-9f49-beb2d54dfbd7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "OUT1" output
+			(at 110.49 77.47 0)
+			(uuid "b354cb96-e54f-4702-8cb6-0f16ba31b844")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "OUT2" output
+			(at 110.49 82.55 0)
+			(uuid "609e9ea4-4303-40a4-9522-b90fd55497f0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 		(instances
@@ -1416,8 +1529,103 @@
 		)
 	)
 	(sheet
-		(at 39.37 115.57)
-		(size 33.02 16.51)
+		(at 40.64 44.45)
+		(size 31.75 15.24)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "2e7e8b08-0bd8-45f7-9050-e3d0fbfdd30b")
+		(property "Sheetname" "Clock"
+			(at 40.64 43.7384 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Clock.kicad_sch"
+			(at 48.006 42.672 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "FPGA_CLK+" output
+			(at 57.15 59.69 270)
+			(uuid "a788d160-4c6d-4ba3-b627-98d42c6542bc")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "FPGA_CLK-" output
+			(at 54.61 59.69 270)
+			(uuid "601b00b7-13d0-4566-824e-10132be0fc9d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "DAC_CLK+" output
+			(at 72.39 50.8 0)
+			(uuid "58043fb8-af6e-407b-9e43-d1b2c5212aa5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "DAC_CKL-" output
+			(at 72.39 53.34 0)
+			(uuid "2e7dffc8-c45e-4e7a-84f1-2425be8a200f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "Clock_NRST" input
+			(at 49.53 59.69 270)
+			(uuid "9248c5c6-8626-4ae3-99dc-53cc85fd06ae")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "analog_board"
+				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 81.28 105.41)
+		(size 29.21 13.97)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -1432,7 +1640,7 @@
 		)
 		(uuid "42bc75d8-e3f2-4254-93e5-487ab6f94356")
 		(property "Sheetname" "Power"
-			(at 39.37 114.8584 0)
+			(at 81.28 104.6984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1443,7 +1651,7 @@
 			)
 		)
 		(property "Sheetfile" "Powe.kicad_sch"
-			(at 39.37 132.6646 0)
+			(at 81.28 119.9646 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1462,7 +1670,7 @@
 		)
 	)
 	(sheet
-		(at 40.64 40.64)
+		(at 40.64 105.41)
 		(size 31.75 13.97)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1478,7 +1686,7 @@
 		)
 		(uuid "c645e397-5dfc-4ecb-9e7f-5fbc65c2060e")
 		(property "Sheetname" "FPGA_Config"
-			(at 40.64 39.9284 0)
+			(at 40.64 104.6984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1489,7 +1697,7 @@
 			)
 		)
 		(property "Sheetfile" "FPGA_Config.kicad_sch"
-			(at 40.64 55.1946 0)
+			(at 40.64 119.9646 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1545,7 +1753,7 @@
 				(justify left top)
 			)
 		)
-		(pin "P1D[0..15]" input
+		(pin "P1D[0..15]" output
 			(at 72.39 74.93 0)
 			(uuid "ccc2bf08-e437-4f34-b637-fecac3590655")
 			(effects
@@ -1556,7 +1764,7 @@
 			)
 		)
 		(pin "FPGA_Ctrl" input
-			(at 40.64 74.93 180)
+			(at 40.64 82.55 180)
 			(uuid "700d6dd3-15df-4aa8-a122-0e01808a3b7b")
 			(effects
 				(font
@@ -1575,7 +1783,7 @@
 				(justify right)
 			)
 		)
-		(pin "P2D[0..15]" input
+		(pin "P2D[0..15]" output
 			(at 72.39 78.74 0)
 			(uuid "42d070de-1d93-49e0-89fb-2169c5e64d7e")
 			(effects
@@ -1585,7 +1793,7 @@
 				(justify right)
 			)
 		)
-		(pin "DAC_SPI" input
+		(pin "DAC_SPI" output
 			(at 72.39 86.36 0)
 			(uuid "a17c1c2b-0f71-4026-88fd-5c45c19655c6")
 			(effects
@@ -1608,6 +1816,16 @@
 		(pin "FPGA_CLK-" input
 			(at 54.61 67.31 90)
 			(uuid "60efc29d-f281-49ce-ab57-7d4736e149f1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "Clock_NRST" output
+			(at 49.53 67.31 90)
+			(uuid "8a7f85de-e904-4a89-a468-7a16b6c6136f")
 			(effects
 				(font
 					(size 1.27 1.27)
