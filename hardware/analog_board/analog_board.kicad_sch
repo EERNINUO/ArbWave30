@@ -4028,16 +4028,6 @@
 				(justify right)
 			)
 		)
-		(pin "DAC_CKL-" input
-			(at 119.38 67.31 90)
-			(uuid "acec0229-f2bb-4ce3-9f49-beb2d54dfbd7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
 		(pin "OUT1" output
 			(at 133.35 77.47 0)
 			(uuid "b354cb96-e54f-4702-8cb6-0f16ba31b844")
@@ -4051,6 +4041,16 @@
 		(pin "OUT2" output
 			(at 133.35 82.55 0)
 			(uuid "609e9ea4-4303-40a4-9522-b90fd55497f0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "DAC_CLK-" input
+			(at 119.38 67.31 90)
+			(uuid "70d34042-efd7-4e69-869e-2c877ce17f2c")
 			(effects
 				(font
 					(size 1.27 1.27)

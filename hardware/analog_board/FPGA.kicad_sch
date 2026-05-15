@@ -3851,12 +3851,6 @@
 		(uuid "5d8aa85c-9a5d-4a07-ac78-cb9278a8ac01")
 	)
 	(junction
-		(at 240.03 152.4)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "68b72638-dc71-438f-9bd7-13850bd9b8e4")
-	)
-	(junction
 		(at 88.9 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3921,6 +3915,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dcb8bf98-2404-48eb-a74b-c819bf849dbc")
+	)
+	(junction
+		(at 240.03 152.4)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dce41689-9c71-4575-8475-2eb9da6e321a")
 	)
 	(junction
 		(at 88.9 68.58)
@@ -5073,7 +5073,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 152.4) (xy 241.3 152.4)
+			(xy 240.03 152.4) (xy 242.57 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5921,16 +5921,6 @@
 		)
 		(uuid "74609cb2-9346-4162-b991-d0575905aa20")
 	)
-	(label "FPGA_CLK-"
-		(at 224.79 148.59 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "779bd473-d04d-4f6f-9113-09ae1b06841c")
-	)
 	(label "P2D12"
 		(at 146.05 148.59 0)
 		(effects
@@ -6121,16 +6111,6 @@
 		)
 		(uuid "d80ca9f8-c5a9-4253-895f-cdf66e1f6e50")
 	)
-	(label "FPGA_CLK+"
-		(at 224.79 146.05 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "da9b0154-8f2c-49c9-9d8d-d1cfb26d9c76")
-	)
 	(label "Ctrl_SPI_MISO"
 		(at 139.7 44.45 0)
 		(effects
@@ -6273,14 +6253,25 @@
 	)
 	(hierarchical_label "FPGA_CLK-"
 		(shape input)
-		(at 241.3 152.4 0)
+		(at 241.3 142.24 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "4d358c26-8a66-480c-b6ec-ae06f081125b")
+		(uuid "3fad229d-b691-4ac4-9e9e-fcff93802b0e")
+	)
+	(hierarchical_label "FPGA_CLK+"
+		(shape input)
+		(at 242.57 152.4 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "48b88b35-f269-4dcd-8ca1-7a9b01872f6b")
 	)
 	(hierarchical_label "P2D[0..15]"
 		(shape output)
@@ -6325,17 +6316,6 @@
 			(justify left)
 		)
 		(uuid "6772e4b1-5cfd-48f1-bd5a-46c11b0e2f0f")
-	)
-	(hierarchical_label "FPGA_CLK+"
-		(shape input)
-		(at 241.3 142.24 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "82e2282f-a193-40fd-9e37-c57b4d64c659")
 	)
 	(hierarchical_label "Clock_NRST"
 		(shape output)

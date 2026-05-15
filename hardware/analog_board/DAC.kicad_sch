@@ -9050,26 +9050,6 @@
 		)
 		(uuid "35ee9f6e-216c-4964-bae9-c346e846404a")
 	)
-	(label "DAC_CLK-"
-		(at 27.94 193.04 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3662402f-83d0-45a5-9130-047b1958a5d6")
-	)
-	(label "DAC_CLK+"
-		(at 27.94 161.29 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3686887b-e765-4eda-9111-065bf9523074")
-	)
 	(label "P2D12"
 		(at 57.15 123.19 180)
 		(effects
@@ -9451,7 +9431,7 @@
 		)
 		(uuid "40b65d3f-906a-4855-b270-0a74dbd25677")
 	)
-	(hierarchical_label "DAC_CKL-"
+	(hierarchical_label "DAC_CLK-"
 		(shape input)
 		(at 26.67 193.04 180)
 		(effects
@@ -9515,7 +9495,7 @@
 			)
 			(justify right)
 		)
-		(uuid "d4d48734-0e54-4ad5-a927-71dbf20f52c7")
+		(uuid "f6d50f00-60ce-4677-8800-35ff683a7a1c")
 	)
 	(hierarchical_label "Data_Clock"
 		(shape output)

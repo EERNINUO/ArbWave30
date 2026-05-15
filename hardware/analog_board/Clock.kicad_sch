@@ -1629,6 +1629,15 @@
 		(at 120.65 90.17)
 		(uuid "fe7eaf98-120d-4e7c-8171-4c337ee568f5")
 	)
+	(bus_entry
+		(at 116.84 99.06)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8bcc4db-bd8d-49ba-a28b-91a7fa20586a")
+	)
 	(wire
 		(pts
 			(xy 114.3 55.88) (xy 104.14 55.88)
@@ -2240,6 +2249,28 @@
 		)
 		(uuid "2769bdb5-e208-4242-9d44-c4f908106e05")
 	)
+	(hierarchical_label "DAC_CLK+"
+		(shape input)
+		(at 176.53 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4279787d-8bb7-4b2b-a657-ea3a5c620f92")
+	)
+	(hierarchical_label "DAC_CLK-"
+		(shape input)
+		(at 176.53 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6318bff7-ea0d-4af6-a9d9-b83ed051a0c3")
+	)
 	(hierarchical_label "Clock_NRST"
 		(shape input)
 		(at 120.65 170.18 180)
@@ -2261,28 +2292,6 @@
 			(justify left)
 		)
 		(uuid "da7d8d37-aa0d-4f08-b148-6377d27d4c35")
-	)
-	(hierarchical_label "DAC_CLK+"
-		(shape output)
-		(at 176.53 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "dfc79a9c-e0b2-4a7a-b246-b60845d7e024")
-	)
-	(hierarchical_label "DAC_CKL-"
-		(shape output)
-		(at 176.53 97.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "e6bdcae9-4ece-407d-aaae-85abf99a3ac6")
 	)
 	(rule_area
 		(exclude_from_sim no)
@@ -3020,7 +3029,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 128.778 163.83 90)
 			(hide yes)
 			(show_name no)
@@ -3342,7 +3351,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 169.672 86.36 90)
 			(hide yes)
 			(show_name no)
@@ -3888,7 +3897,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 118.11 56.642 90)
 			(hide yes)
 			(show_name no)
@@ -3967,7 +3976,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 115.57 96.012 90)
 			(hide yes)
 			(show_name no)
@@ -4361,7 +4370,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 118.11 54.102 90)
 			(hide yes)
 			(show_name no)
