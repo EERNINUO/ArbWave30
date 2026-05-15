@@ -1602,7 +1602,7 @@
 		(uuid "55aac82b-4828-4d99-821a-9e6b033df3fd")
 	)
 	(no_connect
-		(at 40.64 58.42)
+		(at 40.64 57.15)
 		(uuid "59707edc-ea87-4171-8820-fe78cf11de64")
 	)
 	(no_connect
@@ -1861,7 +1861,7 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 48.26) (xy 48.26 50.8)
+			(xy 48.26 46.99) (xy 48.26 49.53)
 		)
 		(stroke
 			(width 0)
@@ -1971,7 +1971,7 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 68.58) (xy 48.26 66.04)
+			(xy 48.26 67.31) (xy 48.26 64.77)
 		)
 		(stroke
 			(width 0)
@@ -2051,7 +2051,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 58.42) (xy 64.77 58.42)
+			(xy 55.88 57.15) (xy 64.77 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2190,7 +2190,7 @@
 		(uuid "a038f159-2f9e-4d8c-8536-fe70f7781677")
 	)
 	(label "CLK_{IN}"
-		(at 58.42 58.42 0)
+		(at 58.42 57.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2531,7 +2531,7 @@
 			)
 		)
 		(property "Value" "Clock_V_{DD}"
-			(at 127.0001 154.94 90)
+			(at 129.54 157.4799 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2696,7 +2696,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
 			(at 99.06 55.88 0)
 			(hide yes)
 			(show_name no)
@@ -2855,13 +2855,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 142.24 133.35 0)
+			(at 144.78 129.5399 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -2933,13 +2934,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 106.68 68.58 0)
+			(at 109.22 64.7699 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -3068,7 +3070,7 @@
 	)
 	(symbol
 		(lib_id "power:+1V8")
-		(at 48.26 48.26 0)
+		(at 48.26 46.99 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3079,7 +3081,7 @@
 		(fields_autoplaced yes)
 		(uuid "8ec1bc58-41ac-4041-a940-6cd9b614ecb6")
 		(property "Reference" "#PWR0122"
-			(at 48.26 52.07 0)
+			(at 48.26 50.8 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3090,17 +3092,18 @@
 			)
 		)
 		(property "Value" "Clock_V_{TCXO}"
-			(at 48.26 43.18 0)
+			(at 50.8 45.7199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 48.26 48.26 0)
+			(at 48.26 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3111,7 +3114,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 48.26 48.26 0)
+			(at 48.26 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3122,7 +3125,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+1V8\""
-			(at 48.26 48.26 0)
+			(at 48.26 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3146,7 +3149,7 @@
 	)
 	(symbol
 		(lib_id "Oscillator:ASE-xxxMHz")
-		(at 48.26 58.42 0)
+		(at 48.26 57.15 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3156,7 +3159,7 @@
 		(dnp no)
 		(uuid "8fd377e9-5f62-451b-bf43-0bc284f27a05")
 		(property "Reference" "Y1"
-			(at 39.37 48.768 0)
+			(at 39.37 47.498 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3166,7 +3169,7 @@
 			)
 		)
 		(property "Value" "ASE-10MHz"
-			(at 39.37 51.308 0)
+			(at 39.37 50.038 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3176,7 +3179,7 @@
 			)
 		)
 		(property "Footprint" "Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm"
-			(at 66.04 67.31 0)
+			(at 66.04 66.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3187,7 +3190,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.abracon.com/Oscillators/ASV.pdf"
-			(at 45.72 58.42 0)
+			(at 45.72 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3198,7 +3201,7 @@
 			)
 		)
 		(property "Description" "3.3V CMOS SMD Crystal Clock Oscillator, Abracon"
-			(at 48.26 58.42 0)
+			(at 48.26 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3253,13 +3256,14 @@
 			)
 		)
 		(property "Value" "Clock_V_{DD}"
-			(at 76.2 153.67 0)
+			(at 78.74 157.4799 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -3410,13 +3414,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 127 187.96 0)
+			(at 129.54 184.1499 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -3545,7 +3550,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 48.26 68.58 0)
+		(at 48.26 67.31 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3556,7 +3561,7 @@
 		(fields_autoplaced yes)
 		(uuid "bdcaa759-0d14-4d5c-842e-8acb8baab757")
 		(property "Reference" "#PWR083"
-			(at 48.26 74.93 0)
+			(at 48.26 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3567,17 +3572,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 48.26 73.66 0)
+			(at 50.8 68.5799 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 48.26 68.58 0)
+			(at 48.26 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3588,7 +3594,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 48.26 68.58 0)
+			(at 48.26 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3599,7 +3605,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 48.26 68.58 0)
+			(at 48.26 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3796,7 +3802,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 171.4499 77.47 90)
+			(at 173.99 80.0099 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4033,14 +4039,13 @@
 			)
 		)
 		(property "Value" "Clock_V_{DD}"
-			(at 105.41 95.2499 90)
+			(at 107.95 92.71 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -4112,13 +4117,14 @@
 			)
 		)
 		(property "Value" "Clock_V_{VCO}"
-			(at 165.1 82.55 0)
+			(at 167.64 86.3599 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -4190,13 +4196,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 76.2 185.42 0)
+			(at 78.74 181.6099 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""

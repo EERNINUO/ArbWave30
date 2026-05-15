@@ -5673,13 +5673,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 69.85 130.81 0)
+			(at 72.39 126.9999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -5830,13 +5831,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 218.44 144.78 0)
+			(at 220.98 140.9699 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -5908,14 +5910,13 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 158.75 54.6099 90)
+			(at 161.29 50.8 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -6325,13 +6326,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 194.31 80.01 0)
+			(at 196.85 76.1999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -6664,14 +6666,13 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 168.91 64.7699 90)
+			(at 171.45 62.23 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -6732,7 +6733,7 @@
 		(fields_autoplaced yes)
 		(uuid "6b611221-288c-4df7-89b7-29028b9a64aa")
 		(property "Reference" "U1"
-			(at 63.9705 60.96 0)
+			(at 55.0896 60.96 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6742,7 +6743,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 63.9705 63.5 0)
+			(at 55.0896 63.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7410,14 +7411,13 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 167.64 120.6499 90)
+			(at 170.18 116.84 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -7648,13 +7648,14 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 194.31 39.37 0)
+			(at 196.85 43.1799 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""

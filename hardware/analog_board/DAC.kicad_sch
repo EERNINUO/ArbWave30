@@ -10047,7 +10047,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "05d319c1-3c07-4ab5-aeb3-e857dcc5a278")
 		(property "Reference" "R35"
 			(at 170.688 38.1 90)
@@ -10942,14 +10942,13 @@
 			)
 		)
 		(property "Value" "+1.8VA_DAC"
-			(at 45.72 39.3699 90)
+			(at 48.26 36.83 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -11181,14 +11180,13 @@
 			)
 		)
 		(property "Value" "+1.8VD_DAC"
-			(at 45.72 57.1499 90)
+			(at 48.26 54.61 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -11232,103 +11230,6 @@
 				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d/0038aa63-4831-4c1d-98ec-8ad35a3c76ff"
 					(reference "#PWR060")
 					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Amplifier_Operational:NE5532")
-		(at 199.39 154.94 180)
-		(unit 2)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "184a8eca-eb55-4d70-b03f-0fb472789616")
-		(property "Reference" "U7"
-			(at 194.818 159.766 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NE5532"
-			(at 194.818 162.306 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 199.39 154.94 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ne5532.pdf"
-			(at 199.39 154.94 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Dual Low-Noise Operational Amplifiers, DIP-8/SOIC-8"
-			(at 199.39 154.94 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "6"
-			(uuid "4d524fed-98f2-4803-97f7-61a1bfa873cf")
-		)
-		(pin "3"
-			(uuid "07aaaa8d-7840-4d1f-a0b5-bf2fb1ab24a1")
-		)
-		(pin "7"
-			(uuid "546feab7-1fc6-4d90-990f-27538d0a4092")
-		)
-		(pin "4"
-			(uuid "9abdd9d3-49a1-4c06-aabd-e0fda9c936bc")
-		)
-		(pin "1"
-			(uuid "7e12c4ff-417d-46dd-9b8d-3a7450a0a736")
-		)
-		(pin "5"
-			(uuid "22a665af-e66c-4432-a59a-2321609ae14e")
-		)
-		(pin "8"
-			(uuid "912540f4-8957-40c8-a766-c80547e3c62c")
-		)
-		(pin "2"
-			(uuid "e6d00b8b-ffbf-4058-b425-8f736df43a06")
-		)
-		(instances
-			(project "analog_board"
-				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d/0038aa63-4831-4c1d-98ec-8ad35a3c76ff"
-					(reference "U7")
-					(unit 2)
 				)
 			)
 		)
@@ -11939,13 +11840,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 227.33 138.43 0)
+			(at 229.87 134.6199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -12573,13 +12475,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 245.11 20.32 0)
+			(at 247.65 24.1299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -13261,6 +13164,104 @@
 			(project "analog_board"
 				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d/0038aa63-4831-4c1d-98ec-8ad35a3c76ff"
 					(reference "R29")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 199.39 154.94 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4585e10f-14c8-4bce-9700-8132aa2a6966")
+		(property "Reference" "U6"
+			(at 199.39 144.78 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NE5532"
+			(at 199.39 147.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 199.39 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ne5532.pdf"
+			(at 199.39 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Dual Low-Noise Operational Amplifiers, DIP-8/SOIC-8"
+			(at 199.39 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "6"
+			(uuid "67447d6d-5a16-47a3-a857-97286ced0f24")
+		)
+		(pin "7"
+			(uuid "a3d8f25a-232d-49cb-900b-582c719551eb")
+		)
+		(pin "5"
+			(uuid "9195b478-a6c6-4b02-9ae5-f11923497c21")
+		)
+		(pin "8"
+			(uuid "9c045de0-f994-4bce-b526-b5c926c36970")
+		)
+		(pin "3"
+			(uuid "057a1d53-6b3a-4f8e-9c06-d3e38d8e7e23")
+		)
+		(pin "1"
+			(uuid "bbc54969-6cc8-48aa-b264-4cbd0b9b488d")
+		)
+		(pin "2"
+			(uuid "7515fb39-ff05-4c47-924d-36df6039f9cf")
+		)
+		(pin "4"
+			(uuid "7101e476-6be9-44f4-9b08-a25d2acadfaf")
+		)
+		(instances
+			(project "analog_board"
+				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d/0038aa63-4831-4c1d-98ec-8ad35a3c76ff"
+					(reference "U6")
 					(unit 1)
 				)
 			)
@@ -15447,13 +15448,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 133.35 67.31 0)
+			(at 132.08 67.3099 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -15606,13 +15608,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 133.35 57.15 0)
+			(at 132.08 57.1499 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -15835,28 +15838,28 @@
 		(fields_autoplaced yes)
 		(uuid "80f51987-1350-4754-bc9d-faba5cbe73ca")
 		(property "Reference" "U6"
-			(at 127 173.9899 0)
+			(at 129.54 173.9899 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "NE5532"
-			(at 127 176.5299 0)
+			(at 129.54 176.5299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 125.73 175.26 0)
 			(hide yes)
 			(show_name no)
@@ -16417,13 +16420,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 232.41 22.86 0)
+			(at 234.95 26.6699 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -16495,13 +16499,14 @@
 			)
 		)
 		(property "Value" "-5VA"
-			(at 179.07 90.17 0)
+			(at 181.61 86.3599 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -17000,14 +17005,13 @@
 			)
 		)
 		(property "Value" "+3.3VD_DAC"
-			(at 45.72 105.4099 90)
+			(at 48.26 102.87 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -17747,13 +17751,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 217.17 88.9 0)
+			(at 219.71 85.0899 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -17825,13 +17830,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 162.56 92.71 0)
+			(at 165.1 88.8999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -17982,13 +17988,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 160.02 184.15 0)
+			(at 158.75 184.1499 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -18288,7 +18295,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "a58f6e25-5c13-4601-8519-b4d032ab68e7")
 		(property "Reference" "R38"
 			(at 163.068 115.57 90)
@@ -18621,13 +18628,14 @@
 			)
 		)
 		(property "Value" "-5VA"
-			(at 171.45 166.37 0)
+			(at 173.99 162.5599 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -18938,14 +18946,13 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 45.72 41.9099 90)
+			(at 48.26 38.1 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -19416,14 +19423,13 @@
 			)
 		)
 		(property "Value" "+1.8VA_DAC"
-			(at 45.72 52.0699 90)
+			(at 48.26 49.53 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -19814,13 +19820,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 227.33 100.33 0)
+			(at 229.87 104.1399 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -20457,7 +20464,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 207.01 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -20807,13 +20814,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 154.94 168.91 0)
+			(at 157.48 165.0999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -20885,13 +20893,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 209.55 165.1 0)
+			(at 212.09 161.2899 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -21834,13 +21843,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 232.41 60.96 0)
+			(at 234.95 57.1499 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""

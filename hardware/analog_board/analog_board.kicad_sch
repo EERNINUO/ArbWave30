@@ -3192,13 +3192,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 43.18 129.54 0)
+			(at 45.72 125.7299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -3392,13 +3393,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 24.13 91.44 0)
+			(at 26.67 87.6299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -3872,7 +3874,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_VH_B8P-VH-B_1x08_P3.96mm_Vertical"
+		(property "Footprint" "Connector_JST:JST_VH_B8P-VH_1x08_P3.96mm_Vertical"
 			(at 24.13 114.3 0)
 			(hide yes)
 			(show_name no)
@@ -4059,7 +4061,53 @@
 		(instances
 			(project "analog_board"
 				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d"
-					(page "5")
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 104.14 128.27)
+		(size 29.21 13.97)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "2778ca1f-a926-40a2-90e4-1d03d1477780")
+		(property "Sheetname" "Power"
+			(at 104.14 127.5584 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Power.kicad_sch"
+			(at 104.14 142.8246 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "analog_board"
+				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d"
+					(page "7")
 				)
 			)
 		)
@@ -4154,14 +4202,14 @@
 		(instances
 			(project "analog_board"
 				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d"
-					(page "6")
+					(page "5")
 				)
 			)
 		)
 	)
 	(sheet
-		(at 104.14 101.6)
-		(size 29.21 13.97)
+		(at 63.5 128.27)
+		(size 31.75 13.97)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -4175,8 +4223,8 @@
 			(color 0 0 0 0)
 		)
 		(uuid "42bc75d8-e3f2-4254-93e5-487ab6f94356")
-		(property "Sheetname" "Power"
-			(at 104.14 100.8884 0)
+		(property "Sheetname" "Power_Filter"
+			(at 63.5 127.5584 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4186,8 +4234,8 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "Powe.kicad_sch"
-			(at 104.14 116.1546 0)
+		(property "Sheetfile" "Power_Filter.kicad_sch"
+			(at 63.5 142.8246 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4200,7 +4248,7 @@
 		(instances
 			(project "analog_board"
 				(path "/ca4be128-f2cd-4bef-b262-ed123f9c630d"
-					(page "4")
+					(page "6")
 				)
 			)
 		)

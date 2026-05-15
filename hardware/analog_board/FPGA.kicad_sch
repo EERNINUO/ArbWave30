@@ -6570,13 +6570,14 @@
 			)
 		)
 		(property "Value" "VCC_Core"
-			(at 88.9 29.21 0)
+			(at 91.44 33.0199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -6746,14 +6747,13 @@
 			)
 		)
 		(property "Value" "VCC_PLLL"
-			(at 34.29 59.6899 90)
+			(at 36.83 57.15 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -6991,7 +6991,7 @@
 		(fields_autoplaced yes)
 		(uuid "361e7c11-c880-45d1-8620-9cc8360d6526")
 		(property "Reference" "U1"
-			(at 213.8305 130.81 0)
+			(at 208.8412 130.81 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7001,7 +7001,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 213.8305 133.35 0)
+			(at 208.8412 133.35 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7500,7 +7500,7 @@
 		(fields_autoplaced yes)
 		(uuid "383f6433-a4aa-4a6e-a636-856b13e3405b")
 		(property "Reference" "U1"
-			(at 202.4005 78.74 0)
+			(at 197.4112 78.74 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7510,7 +7510,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 202.4005 81.28 0)
+			(at 197.4112 81.28 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8205,7 +8205,7 @@
 		(fields_autoplaced yes)
 		(uuid "45ea41f8-481f-4e73-90bb-1f63708ff001")
 		(property "Reference" "U1"
-			(at 123.6605 110.49 0)
+			(at 118.6712 110.49 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8215,7 +8215,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 123.6605 113.03 0)
+			(at 118.6712 113.03 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8714,7 +8714,7 @@
 		(fields_autoplaced yes)
 		(uuid "6366dbea-a169-49c9-a51d-ccb874160bb2")
 		(property "Reference" "U1"
-			(at 265.9005 82.55 0)
+			(at 262.8162 81.28 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8724,7 +8724,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 265.9005 85.09 0)
+			(at 262.8162 83.82 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9400,7 +9400,7 @@
 		(fields_autoplaced yes)
 		(uuid "7714f683-7e2f-48d9-b9ba-e8956170e79f")
 		(property "Reference" "U1"
-			(at 53.8105 110.49 0)
+			(at 47.5512 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9410,7 +9410,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 53.8105 113.03 0)
+			(at 47.5512 111.76 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10116,14 +10116,13 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 34.29 36.8299 90)
+			(at 36.83 33.02 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -10282,7 +10281,7 @@
 		(fields_autoplaced yes)
 		(uuid "c58e8681-03e0-4288-b80d-4b06924a046f")
 		(property "Reference" "U1"
-			(at 130.0105 27.94 0)
+			(at 123.7512 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10292,7 +10291,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 130.0105 30.48 0)
+			(at 123.7512 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10791,7 +10790,7 @@
 		(fields_autoplaced yes)
 		(uuid "c6dfec99-4901-4a5b-8c2b-91666bb54a33")
 		(property "Reference" "U1"
-			(at 196.0505 22.86 0)
+			(at 190.4262 22.86 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10801,7 +10800,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 196.0505 25.4 0)
+			(at 190.4262 25.4 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11379,7 +11378,7 @@
 		(fields_autoplaced yes)
 		(uuid "e5a8d694-0e7b-4ff6-861d-0e5900c0da26")
 		(property "Reference" "U1"
-			(at 269.7105 16.51 0)
+			(at 264.16 15.24 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11389,7 +11388,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 269.7105 19.05 0)
+			(at 264.16 17.78 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11978,14 +11977,13 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 34.29 64.7699 90)
+			(at 36.83 60.96 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -12057,14 +12055,13 @@
 			)
 		)
 		(property "Value" "VCC_PLLR"
-			(at 34.29 54.6099 90)
+			(at 36.83 52.07 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
