@@ -3851,7 +3851,7 @@
 		(uuid "5d8aa85c-9a5d-4a07-ac78-cb9278a8ac01")
 	)
 	(junction
-		(at 240.03 160.02)
+		(at 240.03 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "68b72638-dc71-438f-9bd7-13850bd9b8e4")
@@ -3905,7 +3905,7 @@
 		(uuid "d7bd6467-b49b-4a84-9dd0-e0749f7a0fb6")
 	)
 	(junction
-		(at 240.03 149.86)
+		(at 240.03 142.24)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d8e77e5f-7a87-4973-940b-8d808b632dc7")
@@ -4553,7 +4553,7 @@
 	)
 	(wire
 		(pts
-			(xy 236.22 160.02) (xy 240.03 160.02)
+			(xy 236.22 152.4) (xy 240.03 152.4)
 		)
 		(stroke
 			(width 0)
@@ -4583,7 +4583,7 @@
 	)
 	(wire
 		(pts
-			(xy 236.22 149.86) (xy 236.22 153.67)
+			(xy 236.22 142.24) (xy 236.22 146.05)
 		)
 		(stroke
 			(width 0)
@@ -4853,7 +4853,7 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 153.67) (xy 236.22 153.67)
+			(xy 223.52 146.05) (xy 236.22 146.05)
 		)
 		(stroke
 			(width 0)
@@ -5003,7 +5003,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 149.86) (xy 241.3 149.86)
+			(xy 240.03 142.24) (xy 241.3 142.24)
 		)
 		(stroke
 			(width 0)
@@ -5013,7 +5013,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 158.75) (xy 240.03 160.02)
+			(xy 240.03 151.13) (xy 240.03 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5073,7 +5073,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 160.02) (xy 241.3 160.02)
+			(xy 240.03 152.4) (xy 241.3 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5223,7 +5223,7 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 156.21) (xy 236.22 156.21)
+			(xy 223.52 148.59) (xy 236.22 148.59)
 		)
 		(stroke
 			(width 0)
@@ -5313,7 +5313,7 @@
 	)
 	(wire
 		(pts
-			(xy 236.22 149.86) (xy 240.03 149.86)
+			(xy 236.22 142.24) (xy 240.03 142.24)
 		)
 		(stroke
 			(width 0)
@@ -5483,7 +5483,7 @@
 	)
 	(wire
 		(pts
-			(xy 236.22 160.02) (xy 236.22 156.21)
+			(xy 236.22 152.4) (xy 236.22 148.59)
 		)
 		(stroke
 			(width 0)
@@ -5503,7 +5503,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 149.86) (xy 240.03 151.13)
+			(xy 240.03 142.24) (xy 240.03 143.51)
 		)
 		(stroke
 			(width 0)
@@ -5922,7 +5922,7 @@
 		(uuid "74609cb2-9346-4162-b991-d0575905aa20")
 	)
 	(label "FPGA_CLK-"
-		(at 224.79 156.21 0)
+		(at 224.79 148.59 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6122,7 +6122,7 @@
 		(uuid "d80ca9f8-c5a9-4253-895f-cdf66e1f6e50")
 	)
 	(label "FPGA_CLK+"
-		(at 224.79 153.67 0)
+		(at 224.79 146.05 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6273,7 +6273,7 @@
 	)
 	(hierarchical_label "FPGA_CLK-"
 		(shape input)
-		(at 241.3 160.02 0)
+		(at 241.3 152.4 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6328,7 +6328,7 @@
 	)
 	(hierarchical_label "FPGA_CLK+"
 		(shape input)
-		(at 241.3 149.86 0)
+		(at 241.3 142.24 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6469,7 +6469,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 240.03 154.94 180)
+		(at 240.03 147.32 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6479,7 +6479,7 @@
 		(dnp no)
 		(uuid "14bf7a13-c40e-4572-860c-c8caa0a65135")
 		(property "Reference" "R21"
-			(at 237.998 155.702 90)
+			(at 237.998 148.082 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6489,7 +6489,7 @@
 			)
 		)
 		(property "Value" "100R"
-			(at 242.316 155.702 90)
+			(at 242.316 148.082 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6499,7 +6499,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 241.808 154.94 90)
+			(at 241.808 147.32 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6510,7 +6510,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 240.03 154.94 0)
+			(at 240.03 147.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6521,7 +6521,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 240.03 154.94 0)
+			(at 240.03 147.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6980,7 +6980,7 @@
 	)
 	(symbol
 		(lib_id "ArbWave30_lib:GW2AR-LV18EQ144C8/I7")
-		(at 195.58 132.08 0)
+		(at 195.58 124.46 0)
 		(unit 5)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6991,7 +6991,7 @@
 		(fields_autoplaced yes)
 		(uuid "361e7c11-c880-45d1-8620-9cc8360d6526")
 		(property "Reference" "U1"
-			(at 208.8412 130.81 0)
+			(at 208.8412 123.19 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7001,7 +7001,7 @@
 			)
 		)
 		(property "Value" "GW2A-LV18EQ144"
-			(at 208.8412 133.35 0)
+			(at 208.8412 125.73 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7011,7 +7011,7 @@
 			)
 		)
 		(property "Footprint" "ArbWave30_lib:LQFP-144_20x20_Pitch0.5mm"
-			(at 208.026 129.032 0)
+			(at 208.026 121.412 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7022,7 +7022,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 132.08 0)
+			(at 195.58 124.46 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7033,7 +7033,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 195.58 132.08 0)
+			(at 195.58 124.46 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
