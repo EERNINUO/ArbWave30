@@ -3440,12 +3440,6 @@
 		(uuid "0f3e87e8-2766-4d6e-92e4-069e38b52dfe")
 	)
 	(junction
-		(at 273.05 30.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0f75130c-5b5e-4a12-8db6-4d4ff8330ff3")
-	)
-	(junction
 		(at 67.31 176.53)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3516,6 +3510,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "32d17c16-9377-47f2-a86a-2598e1e18e45")
+	)
+	(junction
+		(at 179.07 119.38)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3509a087-7816-43e9-bc95-d46d0a6c70e0")
 	)
 	(junction
 		(at 218.44 52.07)
@@ -3636,6 +3636,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5da360a1-e178-4ccf-a094-c7621030bd15")
+	)
+	(junction
+		(at 273.05 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5ed8af5d-3be4-4e31-9866-c1b8c45fef9a")
 	)
 	(junction
 		(at 196.85 31.75)
@@ -3824,6 +3830,12 @@
 		(uuid "a8f31912-a04b-4446-8428-0782bb9aac4f")
 	)
 	(junction
+		(at 186.69 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ac03a736-5f55-4206-89ca-c850317fdb72")
+	)
+	(junction
 		(at 168.91 129.54)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3840,6 +3852,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b2d57049-21d7-4a85-b8e2-d6be764009fb")
+	)
+	(junction
+		(at 189.23 119.38)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b48c233f-9b57-464b-9d77-eb8745ed38de")
 	)
 	(junction
 		(at 279.4 41.91)
@@ -3870,6 +3888,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c5b89f3b-7832-4c80-a746-19bf593fad3b")
+	)
+	(junction
+		(at 196.85 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c6ac6d53-708d-48e8-97ef-5dba295cebba")
 	)
 	(junction
 		(at 162.56 148.59)
@@ -4321,6 +4345,16 @@
 	)
 	(wire
 		(pts
+			(xy 186.69 41.91) (xy 196.85 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0270e1bf-5205-4e5a-9323-f0dcc42fee8c")
+	)
+	(wire
+		(pts
 			(xy 262.89 41.91) (xy 264.16 41.91)
 		)
 		(stroke
@@ -4348,6 +4382,16 @@
 			(type default)
 		)
 		(uuid "04df09a1-cf4a-4315-a9fc-7670e290143e")
+	)
+	(wire
+		(pts
+			(xy 179.07 119.38) (xy 189.23 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0514ab99-9d7f-4ca0-9422-a2c1a50335bb")
 	)
 	(wire
 		(pts
@@ -4451,13 +4495,13 @@
 	)
 	(wire
 		(pts
-			(xy 254 31.75) (xy 252.73 31.75)
+			(xy 189.23 119.38) (xy 189.23 120.65)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0ba51a01-0d40-4759-abf3-7017195b9a74")
+		(uuid "0b5c71c7-2c59-45a5-a651-d380a637b903")
 	)
 	(wire
 		(pts
@@ -4801,7 +4845,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 118.11) (xy 189.23 120.65)
+			(xy 189.23 118.11) (xy 189.23 119.38)
 		)
 		(stroke
 			(width 0)
@@ -5201,7 +5245,7 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 40.64) (xy 196.85 43.18)
+			(xy 196.85 40.64) (xy 196.85 41.91)
 		)
 		(stroke
 			(width 0)
@@ -5251,7 +5295,7 @@
 	)
 	(wire
 		(pts
-			(xy 179.07 118.11) (xy 179.07 120.65)
+			(xy 179.07 118.11) (xy 179.07 119.38)
 		)
 		(stroke
 			(width 0)
@@ -5271,7 +5315,7 @@
 	)
 	(wire
 		(pts
-			(xy 176.53 41.91) (xy 207.01 41.91)
+			(xy 176.53 41.91) (xy 186.69 41.91)
 		)
 		(stroke
 			(width 0)
@@ -5408,6 +5452,16 @@
 			(type default)
 		)
 		(uuid "48efe96d-1b8f-4f3b-a0d6-28291cbcb18d")
+	)
+	(wire
+		(pts
+			(xy 189.23 119.38) (xy 199.39 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48f21c4f-ef53-4588-865b-e70bd0d6a89e")
 	)
 	(wire
 		(pts
@@ -5691,6 +5745,16 @@
 	)
 	(wire
 		(pts
+			(xy 186.69 41.91) (xy 186.69 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5be4da60-3a50-43df-bff8-880856778730")
+	)
+	(wire
+		(pts
 			(xy 107.95 186.69) (xy 109.22 186.69)
 		)
 		(stroke
@@ -5738,16 +5802,6 @@
 			(type default)
 		)
 		(uuid "615289ef-a9ab-47fa-be16-e0b47b43cbf4")
-	)
-	(wire
-		(pts
-			(xy 252.73 31.75) (xy 252.73 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "615ee57d-afc0-416d-92f8-74e2a3c95a71")
 	)
 	(wire
 		(pts
@@ -6861,7 +6915,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 30.48) (xy 273.05 30.48)
+			(xy 252.73 30.48) (xy 273.05 30.48)
 		)
 		(stroke
 			(width 0)
@@ -6941,7 +6995,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 30.48) (xy 254 31.75)
+			(xy 252.73 30.48) (xy 252.73 34.29)
 		)
 		(stroke
 			(width 0)
@@ -7171,6 +7225,16 @@
 	)
 	(wire
 		(pts
+			(xy 196.85 41.91) (xy 196.85 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af85380c-82dd-4c7b-8457-99aefb1aba05")
+	)
+	(wire
+		(pts
 			(xy 210.82 119.38) (xy 210.82 120.65)
 		)
 		(stroke
@@ -7278,6 +7342,16 @@
 			(type default)
 		)
 		(uuid "b32f45f1-480d-47e2-9056-b4a43c956f12")
+	)
+	(wire
+		(pts
+			(xy 179.07 119.38) (xy 179.07 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b355f5a6-eadd-4314-922b-3814586b5db4")
 	)
 	(wire
 		(pts
@@ -7871,6 +7945,16 @@
 	)
 	(wire
 		(pts
+			(xy 196.85 41.91) (xy 207.01 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d66a3c12-35fb-40f2-a53c-5543a0e4aa7b")
+	)
+	(wire
+		(pts
 			(xy 226.06 41.91) (xy 226.06 68.58)
 		)
 		(stroke
@@ -7921,7 +8005,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 119.38) (xy 199.39 119.38)
+			(xy 168.91 119.38) (xy 179.07 119.38)
 		)
 		(stroke
 			(width 0)
@@ -8491,7 +8575,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 40.64) (xy 186.69 43.18)
+			(xy 186.69 40.64) (xy 186.69 41.91)
 		)
 		(stroke
 			(width 0)
@@ -9301,7 +9385,7 @@
 		(dnp no)
 		(polyline
 			(pts
-				(xy 151.765 19.05) (xy 264.795 19.05) (xy 265.43 63.5) (xy 152.4 63.5)
+				(xy 152.4 19.05) (xy 265.43 19.05) (xy 265.43 63.5) (xy 152.4 63.5)
 			)
 			(stroke
 				(width 0)
@@ -11166,7 +11250,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "179ad96c-5f84-46e1-a8aa-452ef0109228")
 		(property "Reference" "#PWR060"
 			(at 53.34 57.15 0)
@@ -11180,7 +11263,7 @@
 			)
 		)
 		(property "Value" "+1.8VD_DAC"
-			(at 48.26 54.61 90)
+			(at 41.148 57.15 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13179,10 +13262,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "4585e10f-14c8-4bce-9700-8132aa2a6966")
 		(property "Reference" "U6"
-			(at 199.39 144.78 0)
+			(at 193.294 158.242 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13192,7 +13274,7 @@
 			)
 		)
 		(property "Value" "NE5532"
-			(at 199.39 147.32 0)
+			(at 193.294 160.782 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -19409,7 +19491,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "b1b32579-e1f2-4c6e-bd01-9e0d5a850bf8")
 		(property "Reference" "#PWR042"
 			(at 53.34 52.07 0)
@@ -19423,7 +19504,7 @@
 			)
 		)
 		(property "Value" "+1.8VA_DAC"
-			(at 48.26 49.53 90)
+			(at 41.148 52.07 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
