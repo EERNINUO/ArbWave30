@@ -1,5 +1,5 @@
 (version 1)
 (rule Clock
-	(constraint skew (max 0.127mm))
+	(constraint skew (max 0.127mm) (within_diff_pairs))
 	(condition "A.hasNetclass('LVDS_CLK')")
 )
