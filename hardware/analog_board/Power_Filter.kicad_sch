@@ -10426,7 +10426,7 @@
 			)
 		)
 		(property "Value" "100pF"
-			(at 61.976 77.724 0)
+			(at 59.436 77.724 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
