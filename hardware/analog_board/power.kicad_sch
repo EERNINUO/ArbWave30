@@ -1976,6 +1976,24 @@
 					)
 				)
 				(pin input line
+					(at 10.16 6.35 180)
+					(length 2.54)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
 					(at 10.16 10.16 180)
 					(length 2.54)
 					(name "SENSE/FB"
@@ -2221,6 +2239,62 @@
 						)
 					)
 					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13092,6 +13166,18 @@
 		)
 		(pin "21"
 			(uuid "1bab35ff-5303-4225-bfe9-46982e368be1")
+		)
+		(pin "2"
+			(uuid "07ec89b4-7e5a-4442-b800-0a03696810e0")
+		)
+		(pin "19"
+			(uuid "cff3c811-b82b-4e96-ac46-7b9cf171efda")
+		)
+		(pin "17"
+			(uuid "2a83107d-f5ec-41e7-9cbc-59cdd55b63a1")
+		)
+		(pin "18"
+			(uuid "e9d04937-55b6-435a-9c81-e843c2819d61")
 		)
 		(instances
 			(project "analog_board"

@@ -1,0 +1,12 @@
+AR checking written on:
+'C:\Users\18902\Desktop\code\signal_source\hardware\ArbWave30\hardware\analog_board\analog_board_AR-Check.txt'
+'action_menu_annular_check.py'
+version = 1.7.2
+Testing PCB for Annular Rings
+TH Pads >= 0.125 Vias >= 0.125
+PHD margin on PTH = 0
+
+AR Via violation of 0.1 at XY 51.308,84.7344
+VIAS that Pass = 484; Fails = 1
+TH PADS that Pass = 86; Fails = 0
+NPTH PADS that Pass = 0; Fails = 0
