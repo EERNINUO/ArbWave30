@@ -4408,7 +4408,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "e0dd3165-ff71-4f99-ad72-c19f738b0b99")
 		(property "Reference" "#PWR0109"
 			(at 113.03 95.25 0)
@@ -4422,7 +4421,7 @@
 			)
 		)
 		(property "Value" "Clock_V_{DD}"
-			(at 107.95 92.71 90)
+			(at 100.584 95.25 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4486,7 +4485,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "e2f1df1b-d415-4e57-af13-c37e53bcbf42")
 		(property "Reference" "#PWR0114"
 			(at 165.1 91.44 0)
@@ -4500,7 +4498,7 @@
 			)
 		)
 		(property "Value" "Clock_V_{VCO}"
-			(at 167.64 86.3599 0)
+			(at 159.766 83.058 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

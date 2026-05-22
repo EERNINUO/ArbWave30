@@ -11262,7 +11262,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "12a8112f-bdbc-43f5-9107-837032470be3")
 		(property "Reference" "#PWR049"
 			(at 53.34 39.37 0)
@@ -11276,7 +11275,7 @@
 			)
 		)
 		(property "Value" "+1.8VA_DAC"
-			(at 48.26 36.83 90)
+			(at 41.148 39.116 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -19816,7 +19815,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "acd5ae60-206c-4d4a-8af8-9bfa04b2a361")
 		(property "Reference" "#PWR032"
 			(at 43.18 41.91 0)
@@ -19830,7 +19828,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 48.26 38.1 90)
+			(at 44.704 41.91 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
