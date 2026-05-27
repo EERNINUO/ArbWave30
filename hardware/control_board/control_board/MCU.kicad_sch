@@ -4552,7 +4552,7 @@
 		(uuid "1991715f-67c5-43d2-9c22-9eb0183cbab9")
 	)
 	(bus_entry
-		(at 207.01 95.25)
+		(at 215.9 95.25)
 		(size 2.54 2.54)
 		(stroke
 			(width 0)
@@ -4570,7 +4570,7 @@
 		(uuid "6fbf9db4-fbd3-434a-9d1a-b3efbd452389")
 	)
 	(bus_entry
-		(at 207.01 97.79)
+		(at 215.9 97.79)
 		(size 2.54 2.54)
 		(stroke
 			(width 0)
@@ -4588,7 +4588,7 @@
 		(uuid "8a9b0064-1c00-40e2-b657-82253200a6a4")
 	)
 	(bus_entry
-		(at 207.01 92.71)
+		(at 215.9 92.71)
 		(size 2.54 2.54)
 		(stroke
 			(width 0)
@@ -4796,6 +4796,16 @@
 	)
 	(wire
 		(pts
+			(xy 194.31 92.71) (xy 215.9 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19409569-8054-4638-88d2-1506a64e551e")
+	)
+	(wire
+		(pts
 			(xy 171.45 52.07) (xy 171.45 59.69)
 		)
 		(stroke
@@ -4966,7 +4976,7 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 97.79) (xy 207.01 97.79)
+			(xy 194.31 97.79) (xy 215.9 97.79)
 		)
 		(stroke
 			(width 0)
@@ -5156,7 +5166,7 @@
 	)
 	(bus
 		(pts
-			(xy 209.55 100.33) (xy 222.25 100.33)
+			(xy 218.44 100.33) (xy 231.14 100.33)
 		)
 		(stroke
 			(width 0)
@@ -5546,7 +5556,7 @@
 	)
 	(bus
 		(pts
-			(xy 209.55 95.25) (xy 209.55 100.33)
+			(xy 218.44 95.25) (xy 218.44 100.33)
 		)
 		(stroke
 			(width 0)
@@ -5663,16 +5673,6 @@
 			(type default)
 		)
 		(uuid "985d64ab-7e37-4d15-b4ca-776323aca6d4")
-	)
-	(wire
-		(pts
-			(xy 194.31 92.71) (xy 207.01 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9b949826-7531-45e9-afec-f00a42502be2")
 	)
 	(wire
 		(pts
@@ -6016,7 +6016,7 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 95.25) (xy 207.01 95.25)
+			(xy 194.31 95.25) (xy 215.9 95.25)
 		)
 		(stroke
 			(width 0)
@@ -6485,7 +6485,7 @@
 		(uuid "1b996c3d-8373-417a-800d-a98ffedcc19e")
 	)
 	(label "SWDIO"
-		(at 199.39 100.33 0)
+		(at 195.58 100.33 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6494,8 +6494,8 @@
 		)
 		(uuid "1f9966e2-3210-42ab-9926-f16bc5216b0a")
 	)
-	(label "USB_D+"
-		(at 198.12 97.79 0)
+	(label "USB_D.USB_D+"
+		(at 195.58 97.79 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6514,8 +6514,8 @@
 		)
 		(uuid "256bccae-0d55-4647-bb47-55a7f4b4a251")
 	)
-	(label "USB_D-"
-		(at 198.12 95.25 0)
+	(label "USB_D.USB_D-"
+		(at 195.58 95.25 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6614,8 +6614,8 @@
 		)
 		(uuid "5f350c59-3e67-49b5-ace7-3e62def51bb6")
 	)
-	(label "VBUS_Check"
-		(at 194.31 92.71 0)
+	(label "USB_D.VBUS_Check"
+		(at 195.58 92.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6675,7 +6675,7 @@
 		(uuid "8f6ac291-2428-44eb-83c1-a7b506b2df31")
 	)
 	(label "SWCLK"
-		(at 199.39 102.87 0)
+		(at 195.58 102.87 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6745,7 +6745,7 @@
 		(uuid "a44f1cc5-c1e8-452c-96f1-26f1e6cd0397")
 	)
 	(label "USB_D{USB}"
-		(at 210.82 100.33 0)
+		(at 219.71 100.33 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6755,7 +6755,7 @@
 		(uuid "aa5c2071-6320-4c55-9012-c717db632a63")
 	)
 	(label "Debug_TX"
-		(at 196.85 105.41 0)
+		(at 195.58 105.41 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6897,7 +6897,7 @@
 	)
 	(hierarchical_label "USB"
 		(shape bidirectional)
-		(at 222.25 100.33 0)
+		(at 231.14 100.33 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7355,7 +7355,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SPI_MISO"
+		(property "Value" "MISO"
 			(at 230.886 62.484 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7533,7 +7533,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SPI_CS"
+		(property "Value" "CS"
 			(at 226.06 62.484 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9197,7 +9197,7 @@
 				)
 			)
 		)
-		(property "Value" "SW_MEC_5G"
+		(property "Value" "BOOT0"
 			(at 49.53 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -9524,7 +9524,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "IIC_SCL"
+		(property "Value" "SCL"
 			(at 137.414 110.49 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10778,7 +10778,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "IIC_SDA"
+		(property "Value" "SDA"
 			(at 137.414 113.03 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11244,7 +11244,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SPI_MOSI"
+		(property "Value" "MOSI"
 			(at 233.426 62.484 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12175,7 +12175,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SPI_CLK"
+		(property "Value" "CLK"
 			(at 228.6 62.484 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12377,7 +12377,7 @@
 				)
 			)
 		)
-		(property "Value" "SW_MEC_5G"
+		(property "Value" "NRST"
 			(at 64.77 133.35 0)
 			(hide yes)
 			(show_name no)
