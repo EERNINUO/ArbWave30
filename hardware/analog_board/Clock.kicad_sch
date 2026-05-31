@@ -1806,15 +1806,6 @@
 		(at 120.65 90.17)
 		(uuid "fe7eaf98-120d-4e7c-8171-4c337ee568f5")
 	)
-	(bus_entry
-		(at 116.84 99.06)
-		(size 2.54 2.54)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8bcc4db-bd8d-49ba-a28b-91a7fa20586a")
-	)
 	(wire
 		(pts
 			(xy 114.3 55.88) (xy 104.14 55.88)
@@ -2594,8 +2585,8 @@
 			(justify left bottom)
 		)
 		(uuid "7bd4620d-0ebf-40b4-b09a-c7b593cbe9f3")
-		(property "网络类" "LVDS_CLK"
-			(at 94.742 105.41 0)
+		(property "网络类" "50Ω"
+			(at 100.076 105.41 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
