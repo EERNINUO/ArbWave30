@@ -4194,7 +4194,7 @@
 					)
 				)
 			)
-			(property "Value" "W25Q32JVSS"
+			(property "Value" "GD25Q32JVSS"
 				(at 7.62 11.43 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -7884,7 +7884,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "W25Q32JVSS"
+		(property "Value" "GD25Q32JVSS"
 			(at 205.74 60.9599 0)
 			(show_name no)
 			(do_not_autoplace no)
