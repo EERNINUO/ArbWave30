@@ -1,6 +1,6 @@
 <!------------------------------------------------------------------------
 SPDX-License-Identifier: CC-BY-SA-4.0
-Copyright (C) 2026 [Your Name/Organization]
+Copyright (C) 2026 [EERNINUO]
 
 This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. 
 To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.
@@ -22,12 +22,12 @@ ArbWave30 项目定位为一款 30MHz 任意波形发生器，核心价值在于
 
 1. **MCU 引脚紧张**：STM32F411CEU6 (48 脚) 在满足 USB、SPI (至 FPGA)、I2C (至EEPROM)、调试接口及电源管理后，所剩 GPIO 难以支持矩阵键盘 + 编码器 + SPI 屏幕，且强行增加会严重制约 PCB 布局。
 2. **本地显示价值有限**：1.8 寸小屏无法清晰显示波形、频率、幅值等参数；2.8 寸触摸屏虽可行，但会增加大量的 UI 代码调试工作，分散对模拟前端、FPGA DDS 和 SCPI 解释器等核心模块的精力。
-3. **核心应用场景为远程控制**：项目的典型使用场景是连接 PC，通过 Python/PyVISA 等工具发送 SCPI 命令进行自动化测试或手动调试。本地操作并非刚需。
+3. **核心应用场景为远程控制**：项目的典型使用场景大部分都有连接 PC 的条件，可通过 Python/PyVISA 等工具发送 SCPI 命令进行自动化测试或手动调试。大部分情况下本地操作并非刚需。
 4. **低成本迭代**：V1.0 应尽快完成硬件验证和基本功能，本地交互可作为 V3.0 的增强特性，届时可选用 Linux 核心板 + 大屏方案，体验更好且不拖累主进度。
 
 ## 决策
 
-**V1.0 和 V2.0 版本完全取消所有本地人机交互硬件（按键、编码器、TFT/LCD 屏幕），仅保留一个状态 LED（用于指示 USB 枚举和输出使能状态）。**
+**V1.0 和 V2.0 版本完全取消所有本地人机交互硬件（按键、编码器、TFT/LCD 屏幕），仅保留若干个状态 LED 指示状态）。**
 
 控制板的核心职责限定为：
 - USB 通信（USBTMC 或 CDC 类），实现 SCPI 服务器
