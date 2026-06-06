@@ -2,31 +2,36 @@
 
 <!-- Assisted-by: DeepSeek - 文档框架 -->
 
-
 # ArbWave30
 30MHz 任意波形发生器 | FPGA + 高速DAC | SCPI 可控 
 
 <p align="center">
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
-    <img alt="GitHub 仓库星标" src="https://img.shields.io/github/stars/EERNINUO/ArbWave30">
+    <img alt="仓库状态" src="https://img.shields.io/badge/status-MVP 设计中-blue">
   </a>
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
-    <img alt="GitHub 仓库分支" src="https://img.shields.io/github/forks/EERNINUO/ArbWave30">
+    <img alt="GitHub 仓库星标" src="https://img.shields.io/github/stars/EERNINUO/ArbWave30">
+  </a>
+  <br/>
+  <a href="https://raw.githubusercontent.com/EERNINUO/ArbWave30/main/LICENSE" style="margin: 2px;">
+    <img src="https://img.shields.io/badge/License-GPL--3.0-red" alt="许可证">
   </a>
   <a href="https://raw.githubusercontent.com/EERNINUO/ArbWave30/main/LICENSE" style="margin: 2px;">
-    <img src="https://img.shields.io/github/license/EERNINUO/ArbWave30" alt="许可证">
+    <img src="https://img.shields.io/badge/License-CC--BY--SA--4.0-green" alt="许可证">
+  </a>
+    <a href="https://raw.githubusercontent.com/EERNINUO/ArbWave30/main/LICENSE" style="margin: 2px;">
+    <img src="https://img.shields.io/badge/License-CERN--OHL--S--2.0-blue" alt="许可证">
   </a>
   <!-- <a href="https://github.com/EERNINUO/ArbWave30/releases" style="margin: 2px;">
     <img src="https://img.shields.io/github/v/release/EERNINUO/ArbWave30?color=blueviolet&include_prereleases" alt="发布版本">
   </a> -->
 </p>
-
 </div>
 
 ---
 
 > **⚠️ 注意**：你当前查看的是 **develop** 开发分支，内容可能不稳定。
-> 推荐使用稳定发布版本：[查看 Releases](https://github.com/EERNINUO/ArbWave30/releases)
+> 推荐使用稳定发布版本：[查看 Releases](https://github.com/EERNINUO/ArbWave30/tree/releases)
 
 ## ✨ 特性
 
@@ -55,7 +60,7 @@
 ## 🧱 仓库结构
 ArbWave30/  
 ├── docs/ # 设计文档  
-│    ├── pic/ # 设计图片  
+│    ├── pic/ # 文档图片  
 │    ├── adr/ # 决策记录  
 │    ├── 硬件设计文档/ # 硬件设计文档  
 │    └──  LICENSE # CC BY-SA 4.0  
@@ -76,7 +81,7 @@ ArbWave30/
 
 ## 🚀 快速开始
 
-> 项目处于 **V1.0 草案阶段**，硬件尚未打样，待硬件验证完成后，将提供：
+> 项目处于 **最小可行产品（MVP）设计阶段**，硬件尚未验证，待硬件验证完成后，将提供：
 > - 打样 PCB 的 Gerber 文件及 BOM
 > - FPGA 比特流烧录方法（通过 JTAG  加载）
 > - 固件编译与升级步骤
