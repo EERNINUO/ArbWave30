@@ -1,0 +1,2 @@
+该程序为FPGA时钟系统测试
+将此程序烧录进FPGA后，J_SIG SPI_CS 输出 1Hz 方波信号，J_SIG SPI_CLK 输出 PLL 锁定情况（1 为锁定成功，0 为锁定失败），J_SIG SPI_MISO 输出 150MHz 时钟信号（若锁定成功）
