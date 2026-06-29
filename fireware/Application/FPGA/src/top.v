@@ -21,14 +21,14 @@ module ArbWave30 (
         input                ctrl_spi_sck,
         input                ctrl_spi_mosi,
         output               ctrl_spi_miso,
-    
+
         input                ctrl_gpio1,
         input                ctrl_gpio2,
 
         // DAC data interface
         input                dco,
-        output  reg  [15:0]  data_ch1,
-        // output reg[15:0] data_ch2,
+        output       [15:0]  ch1_data_out,
+        // output reg  [15:0]  ch2_data_out,
 
         // DAC ctrl（DAC控制）
         output               dac_ctrl_spi_cs,
@@ -41,11 +41,18 @@ module ArbWave30 (
         // output  reg  [3:0]  AFE_Ctrl_ch2
     );
 
-    parameter SYS_CLK_FREQ = 15_000_000; // 系统时钟频率，单位Hz
+    parameter SYS_CLK_FREQ = 150_000_000; // 系统时钟频率，单位Hz
 
-    wire sys_clk;
-    wire sys_rst_n, dac_data_rst_n;
-    wire pll_lock;
+    wire                  sys_clk;
+    wire                  sys_rst_n, dac_data_rst_n;
+    wire                  pll_lock;
+
+    reg                   ch1_enable;
+    reg           [15:0]  ch1_amplitude;
+    reg   signed  [15:0]  ch1_offset;
+    reg           [47:0]  ch1_freq_ctrl_word;
+    reg           [47:0]  ch1_phase_ctrl_word;
+    wire          [15:0]  ch1_data;
 
     // 系统控制模块
     sys_ctrl u_sys_ctrl(
@@ -59,5 +66,37 @@ module ArbWave30 (
                  .dac_data_rst_n(dac_data_rst_n),
                  .pll_lock(pll_lock)
              );
+
+    // 波形生成模块
+    wave_generation u_wave_generation(
+                        .sys_clk             	(sys_clk              ),
+                        .sys_rst_n           	(sys_rst_n            ),
+                        .ch1_enable          	(ch1_enable           ),
+                        .ch1_amplitude       	(ch1_amplitude        ),
+                        .ch1_offset          	(ch1_offset           ),
+                        .ch1_freq_ctrl_word  	(ch1_freq_ctrl_word   ),
+                        .ch1_phase_ctrl_word 	(ch1_phase_ctrl_word  ),
+                        .ch1_data_out        	(ch1_data       )
+                    );
+
+    // 默认值
+    always @(posedge sys_clk or negedge sys_rst_n) begin
+        if (!sys_rst_n) begin
+            ch1_enable <= 1'b1; // 通道1始终使能
+            ch1_freq_ctrl_word <= 48'd1_876_499_844_738;
+            ch1_phase_ctrl_word <= 48'd0; // 默认相位控制字为0
+            ch1_amplitude <= 16'd65535; // 默认幅度为最大值
+            ch1_offset <= 16'd0; // 默认偏置为0s
+        end
+        else begin
+            // 将来在这里插入 SPI 写入条件
+            ch1_enable <= ch1_enable; // 通道1始终使能
+            ch1_freq_ctrl_word <= ch1_freq_ctrl_word;
+            ch1_phase_ctrl_word <= ch1_phase_ctrl_word; // 默认相位控制字为0
+            ch1_amplitude <= ch1_amplitude; // 默认幅度为最大值
+            ch1_offset <= ch1_offset; // 默认偏置为0s
+
+        end
+    end
 
 endmodule
