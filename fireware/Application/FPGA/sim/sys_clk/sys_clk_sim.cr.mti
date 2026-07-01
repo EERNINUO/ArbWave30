@@ -1,0 +1,22 @@
+C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/gowin_rpll/gowin_rpll.v {1 {vlog -work sys_clk_sim -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/gowin_rpll/gowin_rpll.v
+Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module Gowin_rPLL
+
+Top level modules:
+	Gowin_rPLL
+
+} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/sys_clk/sys_ctrl_tb.v {1 {vlog -work sys_clk_sim -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/sys_clk/sys_ctrl_tb.v
+Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module sys_ctrl_tb
+
+Top level modules:
+	sys_ctrl_tb
+
+} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/sys_ctrl.v {1 {vlog -work sys_clk_sim -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/sys_ctrl.v
+Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module sys_ctrl
+
+Top level modules:
+	sys_ctrl
+
+} {} {}}
