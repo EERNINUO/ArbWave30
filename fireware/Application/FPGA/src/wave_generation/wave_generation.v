@@ -32,7 +32,7 @@ assign ch1_rst_n = sys_rst_n & ch1_enable;  // 通道1复位信号，低有效
 DDS_II_Top u_dds_ii_ch1 (
     .clk_i(sys_clk),                        // 输入时钟
     .rst_n_i(ch1_rst_n),                    // 输入复位，低有效
-    .phase_valid_i(1'b1),                   // 相位有效信号，始终为高电平
+    .phase_valid_i(ch1_rst_n),              // 相位有效信号，始终为高电平
     .phase_inc_i(ch1_freq_ctrl_word),       // 频率控制字输入
     .phase_off_i(ch1_phase_ctrl_word),      // 相位控制字输入
     .phase_out_o(),                         // 相位输出
