@@ -1,0 +1,83 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/18902/Desktop/code/private/FPGA/GW/GW2AR_test/sim
+T_opt
+!s110 1782916483
+Vi8RIjVZR:2;zKHMdH>?;<3
+04 11 4 work sys_ctrl_tb fast 0
+=1-f4c88a4e9fd5-6a452583-1de-9c34
+o-quiet -auto_acc_if_foreign -work sys_clk_sim -L GW2A -Lf GW2A +acc
+Z0 tCvgOpt 0
+n@_opt
+OL;O;10.6d;65
+vGowin_rPLL
+Z1 !s110 1782916426
+!i10b 1
+!s100 4fc8;kPG`eVN@e<cIg=OF2
+IZ[l9W2`ER>N648ZLcLUGa2
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/sys_clk
+w1782573467
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/gowin_rpll/gowin_rpll.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/gowin_rpll/gowin_rpll.v
+L0 11
+Z4 OL;L;10.6d;65
+r1
+!s85 0
+31
+Z5 !s108 1782916426.000000
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/gowin_rpll/gowin_rpll.v|
+!s90 -reportprogress|300|-work|sys_clk_sim|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/gowin_rpll/gowin_rpll.v|
+!i113 0
+Z6 o-work sys_clk_sim -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R0
+n@gowin_r@p@l@l
+vsys_ctrl
+R1
+!i10b 1
+!s100 NGXZUo54mTIWT_OXJYCZk0
+I>Wd9Q]QA<TnV^X>E9iUjc0
+R2
+R3
+w1782743924
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/sys_ctrl.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/sys_ctrl.v
+L0 13
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/sys_ctrl.v|
+!s90 -reportprogress|300|-work|sys_clk_sim|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/sys_ctrl.v|
+!i113 0
+R6
+R0
+vsys_ctrl_tb
+R1
+!i10b 1
+!s100 ji?hHUhhH5I2lHloPj1bf1
+IU_S^IBfzD`Bc`fz5GT8Jb3
+R2
+R3
+w1782916414
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/sys_clk/sys_ctrl_tb.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/sys_clk/sys_ctrl_tb.v
+L0 14
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/sys_clk/sys_ctrl_tb.v|
+!s90 -reportprogress|300|-work|sys_clk_sim|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/sys_clk/sys_ctrl_tb.v|
+!i113 0
+R6
+R0

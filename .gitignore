@@ -82,6 +82,13 @@ impl_gwsyn/
 *.pro
 *.pro.bak
 
+# modelsim 仿真
+*.wlf
+*.qtl
+*.qdb
+*.qpg
+
+
 # ------------------
 # 5. 固件 (STM32) – Keil
 # ------------------
