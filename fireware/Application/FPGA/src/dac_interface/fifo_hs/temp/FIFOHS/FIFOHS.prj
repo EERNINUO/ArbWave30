@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gowin-synthesis-project>
+<Project>
+    <Version>beta</Version>
+    <Device id="GW2AR-18C" package="eLQFP144" speed="8" partNumber="GW2AR-LV18EQ144C8/I7"/>
+    <FileList>
+        <File path="E:/Gowin/Gowin_V1.9.12.01_x64/IDE/ipcore/FIFO_HS/data/fifo_hs.v" type="verilog"/>
+        <File path="E:/Gowin/Gowin_V1.9.12.01_x64/IDE/ipcore/FIFO_HS/data/fifo_hs_top.v" type="verilog"/>
+    </FileList>
+    <OptionList>
+        <Option type="disable_insert_pad" value="1"/>
+        <Option type="include_path" value="E:/Gowin/Gowin_V1.9.12.01_x64/IDE/ipcore/FIFO_HS/data"/>
+        <Option type="include_path" value="C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/fifo_hs/temp/FIFOHS"/>
+        <Option type="ip_version" value="1.0"/>
+        <Option type="output_file" value="fifo_hs.vg"/>
+        <Option type="output_template" value="fifo_hs_tmp.v"/>
+        <Option type="ram_balance" value="1"/>
+        <Option type="ram_rw_check" value="1"/>
+        <Option type="vcc" value="1.0"/>
+        <Option type="vccx" value="3.3"/>
+        <Option type="verilog_language" value="sysv-2017"/>
+    </OptionList>
+</Project>

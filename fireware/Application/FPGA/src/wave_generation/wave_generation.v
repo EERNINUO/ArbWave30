@@ -11,16 +11,16 @@
  */
 
 module wave_generation(
-    input                   sys_clk,              // 系统时钟
-    input                   sys_rst_n,            // 系统复位，低有效
+    input                sys_clk,              // 系统时钟
+    input                sys_rst_n,            // 系统复位，低有效
 
-    input                   ch1_enable,           // 通道1使能信号
-    input          [15: 0]  ch1_amplitude,        // 通道1幅度控制，16位，范围0~65535
-    input  signed  [15: 0]  ch1_offset,           // 通道1偏置控制，
-    input          [47: 0]  ch1_freq_ctrl_word,   // 通道1频率控制字，48位，范围0~2^48-1
-    input          [47: 0]  ch1_phase_ctrl_word,  // 通道1相位控制字，48位，范围0~2^48-1
+    input                ch1_enable,           // 通道1使能信号
+    input        [15: 0] ch1_amplitude,        // 通道1幅度控制，16位，范围0~65535
+    input signed [15: 0] ch1_offset,           // 通道1偏置控制，
+    input        [47: 0] ch1_freq_ctrl_word,   // 通道1频率控制字，48位，范围0~2^48-1
+    input        [47: 0] ch1_phase_ctrl_word,  // 通道1相位控制字，48位，范围0~2^48-1
 
-    output reg     [15: 0]  ch1_data_out          // 通道1输出数据，16位，范围0~65535
+    output reg   [15: 0] ch1_data_out          // 通道1输出数据，16位，范围0~65535
 );
 
 wire                   ch1_rst_n;  // 通道1复位信号，低有效

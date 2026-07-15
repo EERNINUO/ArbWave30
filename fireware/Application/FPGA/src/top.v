@@ -18,7 +18,7 @@ module ArbWave30 (
 
         // MCU communicate interface
         input                ctrl_spi_cs,
-        input                ctrl_spi_sck,
+        input                ctrl_spi_clk,
         input                ctrl_spi_mosi,
         output               ctrl_spi_miso,
 
@@ -32,7 +32,7 @@ module ArbWave30 (
 
         // DAC ctrl（DAC控制）
         output               dac_ctrl_spi_cs,
-        output               dac_ctrl_spi_sck,
+        output               dac_ctrl_spi_clk,
         output               dac_ctrl_spi_mosi,
         input                dac_ctrl_spi_miso
 
@@ -58,7 +58,7 @@ module ArbWave30 (
     sys_ctrl u_sys_ctrl(
                  .clk_in_p(clk_in_p),
                  .clk_in_n(clk_in_n),
-                 .dco_clk(dco),
+                 .data_clk(dco),
                  .ext_rst(ext_rst),
 
                  .sys_clk(sys_clk),
@@ -78,6 +78,15 @@ module ArbWave30 (
                         .ch1_phase_ctrl_word 	(ch1_phase_ctrl_word  ),
                         .ch1_data_out        	(ch1_data       )
                     );
+
+    dac_interface u_dac_interface(
+                      .sys_clk   	    (sys_clk      ),
+                      .data_clk  	    (dco          ),
+                      .sys_rst_n 	    (sys_rst_n    ),
+                      .ch1_data_in   	(ch1_data     ),
+                      .ch1_data_out  	(ch1_data_out )
+                  );
+
 
     // 默认值
     always @(posedge sys_clk or negedge sys_rst_n) begin

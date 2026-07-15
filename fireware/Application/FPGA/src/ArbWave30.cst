@@ -1,0 +1,57 @@
+//Copyright (C)2014-2025 Gowin Semiconductor Corporation.
+//All rights reserved. 
+//File Title: Physical Constraints file
+//Tool Version: V1.9.12.01 (64-bit)
+//Part Number: GW2AR-LV18EQ144C8/I7
+//Device: GW2AR-18
+//Device Version: C
+//Created Time: Sat 06 27 17:00:30 2026
+
+IO_LOC "ch1_data_out[15]" 72;
+IO_PORT "ch1_data_out[15]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[14]" 71;
+IO_PORT "ch1_data_out[14]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[13]" 70;
+IO_PORT "ch1_data_out[13]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[12]" 69;
+IO_PORT "ch1_data_out[12]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[11]" 68;
+IO_PORT "ch1_data_out[11]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[10]" 67;
+IO_PORT "ch1_data_out[10]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[9]" 66;
+IO_PORT "ch1_data_out[9]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[8]" 65;
+IO_PORT "ch1_data_out[8]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[7]" 64;
+IO_PORT "ch1_data_out[7]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[6]" 63;
+IO_PORT "ch1_data_out[6]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[5]" 62;
+IO_PORT "ch1_data_out[5]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[4]" 61;
+IO_PORT "ch1_data_out[4]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[3]" 60;
+IO_PORT "ch1_data_out[3]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[2]" 59;
+IO_PORT "ch1_data_out[2]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[1]" 58;
+IO_PORT "ch1_data_out[1]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "ch1_data_out[0]" 57;
+IO_PORT "ch1_data_out[0]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "dac_ctrl_spi_cs" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8;
+IO_LOC "dac_ctrl_spi_mosi" 34;
+IO_PORT "dac_ctrl_spi_mosi" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "dac_ctrl_spi_clk" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8;
+IO_LOC "ctrl_spi_miso" 130;
+IO_PORT "ctrl_spi_miso" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "dco" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_PORT "ext_rst" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC "clk_in_p" 106,105;
+IO_PORT "clk_in_p" IO_TYPE=LVDS25 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "ctrl_spi_cs" 131;
+IO_PORT "ctrl_spi_cs" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "ctrl_spi_mosi" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC "ctrl_spi_clk" 132;
+IO_PORT "ctrl_spi_clk" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+    

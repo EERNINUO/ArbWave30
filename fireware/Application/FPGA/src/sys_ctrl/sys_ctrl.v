@@ -11,10 +11,10 @@
  */
 
 module sys_ctrl(
-        input clk_in_p,
-        input clk_in_n,
-        input dco_clk,
-        input ext_rst,
+        input  clk_in_p,
+        input  clk_in_n,
+        input  data_clk,
+        input  ext_rst,
 
         output sys_clk,
         output sys_rst_n,
@@ -62,7 +62,7 @@ module sys_ctrl(
     //============================
     reg dac_data_rst_dly_1, dac_data_rst_dly_2;
 
-    always @(posedge dco_clk or negedge rst_n_a) begin
+    always @(posedge data_clk or negedge rst_n_a) begin
         if (!rst_n_a) begin
             dac_data_rst_dly_1 <= 1'b0;
             dac_data_rst_dly_2 <= 1'b0;
