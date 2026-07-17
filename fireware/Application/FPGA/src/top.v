@@ -79,12 +79,18 @@ module ArbWave30 (
                         .ch1_data_out        	(ch1_data       )
                     );
 
-    dac_interface u_dac_interface(
+    dac_interface #(
+        .SYS_CLK_FREQ(SYS_CLK_FREQ)
+    )u_dac_interface (
                       .sys_clk   	    (sys_clk      ),
                       .data_clk  	    (dco          ),
                       .sys_rst_n 	    (sys_rst_n    ),
                       .ch1_data_in   	(ch1_data     ),
-                      .ch1_data_out  	(ch1_data_out )
+                      .ch1_data_out  	(ch1_data_out ),
+                      .cs               (dac_ctrl_spi_cs  ),
+                      .clk              (dac_ctrl_spi_clk  ),
+                      .mosi             (dac_ctrl_spi_mosi  ),
+                      .miso             (dac_ctrl_spi_miso )
                   );
 
 

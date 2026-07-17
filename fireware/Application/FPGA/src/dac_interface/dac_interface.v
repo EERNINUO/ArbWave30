@@ -10,13 +10,23 @@
  * ...
  */
 
-module dac_interface (
+module dac_interface #(
+	parameter SYS_CLK_FREQ = 150_000_000
+)(
+	// 系统接口
     input  wire        sys_clk,
 	input  wire        data_clk,
     input  wire        sys_rst_n,
 
+	// DAC 数据接口
     input  wire [15:0] ch1_data_in,
-    output wire [15:0] ch1_data_out
+    output wire [15:0] ch1_data_out,
+
+	// DAC 控制接口
+	output wire        cs,
+	output wire        clk,
+	output wire        mosi,
+	input 			   miso
 );
 
     // internal signals                                            
@@ -32,6 +42,22 @@ FIFO_HS_Top your_instance_name(
 	.Q(ch1_data_out), //output [15:0] Q
 	.Empty(), //output Empty
 	.Full() //output Full
+);
+
+
+SPI_master #(
+	.SYS_CLK_FREQ 	(150_000_000)
+) u_SPI_master (
+	.sys_clk   	(sys_clk    ),
+	.sys_rst_n 	(sys_rst_n  ),
+	.cs        	(cs         ),
+	.clk       	(clk        ),
+	.mosi      	(mosi       ),
+	.miso      	(miso       ),
+	.send_data 	(8'h00      ),
+	.start     	(1'd0),
+	.rece_data 	(),
+	.busy      	()
 );
 
 
