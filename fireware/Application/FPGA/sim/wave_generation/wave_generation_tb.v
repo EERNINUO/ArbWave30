@@ -10,7 +10,6 @@
  * ...
  */
 `timescale 1ns/1ps
-
 module wave_generation_tb();
 
 parameter SYS_CLK_FREQ = 150_000_000; // 系统时钟频率，单位Hz

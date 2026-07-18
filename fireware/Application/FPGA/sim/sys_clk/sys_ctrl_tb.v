@@ -14,7 +14,7 @@
 module sys_ctrl_tb();
 
 parameter SYS_CLK_FREQ = 150_000_000; // 系统时钟频率，单位Hz
-parameter DCO_CLK_FREQ = 150_000_000 / SYS_CLK_FREQ; // 系统时钟周期，单位Hz
+parameter DCO_CLK_FREQ = 150_000_000; // DCO时钟频率，单位Hz
 
 // input declaration of module sys_ctrl
 reg clk_in_p;

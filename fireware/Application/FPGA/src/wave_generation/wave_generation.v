@@ -42,7 +42,7 @@ DDS_II_Top u_dds_ii_ch1 (
 
 always @(posedge sys_clk or negedge ch1_rst_n) begin
     if (!ch1_rst_n) begin
-        ch1_data_out <= 16'd32768;  // 复位时输出中间值（偏置为0）
+        ch1_data_out <= 16'd0;  // 复位时输出中间值（偏置为0）
     end else begin
         // 将正弦波输出进行幅度和偏置调整
         // ch1_data_out <= ch1_sine_out * ch1_amplitude) + ch1_offset;
