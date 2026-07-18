@@ -45,8 +45,8 @@ always @(posedge sys_clk or negedge ch1_rst_n) begin
         ch1_data_out <= 16'd32768;  // 复位时输出中间值（偏置为0）
     end else begin
         // 将正弦波输出进行幅度和偏置调整
-        // ch1_data_out <= {~ch1_sine_out[15], ch1_sine_out[14:0]} * ch1_amplitude) + ch1_offset;
-        ch1_data_out <= {~ch1_sine_out[15], ch1_sine_out[14:0]};  // 将正弦波输出范围从[-32768, 32767]调整到[0, 65535]
+        // ch1_data_out <= ch1_sine_out * ch1_amplitude) + ch1_offset;
+        ch1_data_out <= ch1_sine_out;  // 将正弦波输出范围从[-32768, 32767]调整到[0, 65535]
     end
 end
 
