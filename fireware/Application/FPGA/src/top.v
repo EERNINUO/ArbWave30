@@ -31,6 +31,7 @@ module ArbWave30 (
         // output reg  [15:0]  ch2_data_out,
 
         // DAC ctrl（DAC控制）
+        output               dac_ctrl_rst_p,
         output               dac_ctrl_spi_cs,
         output               dac_ctrl_spi_clk,
         output               dac_ctrl_spi_mosi,
@@ -87,6 +88,7 @@ module ArbWave30 (
                       .sys_rst_n 	    (sys_rst_n    ),
                       .ch1_data_in   	(ch1_data     ),
                       .ch1_data_out  	(ch1_data_out ),
+                      .rst_p            (dac_ctrl_rst_p),
                       .cs               (dac_ctrl_spi_cs  ),
                       .clk              (dac_ctrl_spi_clk  ),
                       .mosi             (dac_ctrl_spi_mosi  ),
@@ -98,7 +100,7 @@ module ArbWave30 (
     always @(posedge sys_clk or negedge sys_rst_n) begin
         if (!sys_rst_n) begin
             ch1_enable <= 1'b1; // 通道1始终使能
-            ch1_freq_ctrl_word <= 48'd1_876_499_844_738;
+            ch1_freq_ctrl_word <= 48'd1_876_499_844_737;
             ch1_phase_ctrl_word <= 48'd0; // 默认相位控制字为0
             ch1_amplitude <= 16'd65535; // 默认幅度为最大值
             ch1_offset <= 16'd0; // 默认偏置为0s

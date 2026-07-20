@@ -20,30 +20,35 @@ module dac_interface #(
 
 	// DAC 数据接口
     input  wire [15:0] ch1_data_in,
-    output wire [15:0] ch1_data_out,
+    output reg  [15:0] ch1_data_out,
 
 	// DAC 控制接口
+	output reg        rst_p,
 	output wire        cs,
 	output wire        clk,
 	output wire        mosi,
 	input 			   miso
 );
 
-    // internal signals                                            
+wire [15:0] ch1_fifo_out;
 
-FIFO_HS_Top your_instance_name(
+FIFO_HS_Top u_FIFO_HS_Top(
 	.Data(ch1_data_in), //input [15:0] Data
 	.WrClk(sys_clk), //input WrClk
 	.RdClk(data_clk), //input RdClk
 	.WrEn(sys_rst_n), //input WrEn
 	.RdEn(sys_rst_n), //input RdEn
-	.Almost_Empty(), //output Almost_Empty
-	.Almost_Full(), //output Almost_Full
-	.Q(ch1_data_out), //output [15:0] Q
+	.Q(ch1_fifo_out), //output [15:0] Q
 	.Empty(), //output Empty
 	.Full() //output Full
 );
 
+always @(posedge data_clk or negedge sys_rst_n) begin
+    if (!sys_rst_n)
+        ch1_data_out <= 16'd0;
+    else
+        ch1_data_out <= ch1_fifo_out; // 用 DCO 时钟打一拍
+end
 
 SPI_master #(
 	.SYS_CLK_FREQ 	(150_000_000)
@@ -60,6 +65,12 @@ SPI_master #(
 	.busy      	()
 );
 
-
+always @(posedge sys_clk or negedge sys_rst_n) begin
+	if(!sys_rst_n) begin
+		rst_p <= 1'b1;
+	end else begin
+		rst_p <= 1'b0;
+	end
+end
 
 endmodule

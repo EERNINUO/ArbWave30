@@ -5,20 +5,6 @@ Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
 Top level modules:
 	SPI_master
 
-} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/wave_generation/wave_generation.v {1 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/wave_generation/wave_generation.v
-Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
--- Compiling module wave_generation
-
-Top level modules:
-	wave_generation
-
-} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/dac_interface.v {1 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/dac_interface.v
-Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
--- Compiling module dac_interface
-
-Top level modules:
-	dac_interface
-
 } {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/gowin_rpll/gowin_rpll.v {1 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/sys_ctrl/gowin_rpll/gowin_rpll.v
 Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
 -- Compiling module Gowin_rPLL
@@ -33,12 +19,20 @@ Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
 Top level modules:
 	DDS_II_Top
 
-} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/top.v {1 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/top.v
+} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/top/ArbWave30_tb.v {2 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/top/ArbWave30_tb.v
 Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
--- Compiling module ArbWave30
+-- Compiling module ArbWave30_tb
+** Warning: C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/top/ArbWave30_tb.v(76): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 Top level modules:
-	ArbWave30
+	ArbWave30_tb
+
+} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/dac_interface.v {1 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/dac_interface.v
+Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module dac_interface
+
+Top level modules:
+	dac_interface
 
 } {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/fifo_hs/fifo_hs.vo {1 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/fifo_hs/fifo_hs.vo
 Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018

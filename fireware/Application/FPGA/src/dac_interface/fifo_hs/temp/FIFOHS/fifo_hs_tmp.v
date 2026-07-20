@@ -6,7 +6,7 @@
 //Part Number: GW2AR-LV18EQ144C8/I7
 //Device: GW2AR-18
 //Device Version: C
-//Created Time: Mon Jul  6 22:35:01 2026
+//Created Time: Sun Jul 19 23:36:20 2026
 
 //Change the instance name and port connections to the signal names
 //--------Copy here to design--------
@@ -17,8 +17,6 @@
 		.RdClk(RdClk), //input RdClk
 		.WrEn(WrEn), //input WrEn
 		.RdEn(RdEn), //input RdEn
-		.Almost_Empty(Almost_Empty), //output Almost_Empty
-		.Almost_Full(Almost_Full), //output Almost_Full
 		.Q(Q), //output [15:0] Q
 		.Empty(Empty), //output Empty
 		.Full(Full) //output Full

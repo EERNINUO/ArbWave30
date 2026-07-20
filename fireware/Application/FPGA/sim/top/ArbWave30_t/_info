@@ -19,22 +19,22 @@ n@_opt
 Z3 OL;O;10.6d;65
 R0
 T_opt1
-!s110 1784386985
-VVGEVF^ZK2DRXd8`;CeIA^1
+!s110 1784475599
+VA6?6T3LaGIRn^GbN>zk0[0
 04 12 4 work ArbWave30_tb fast 0
-=13-f4c88a4e9fd5-6a5b95a8-2c1-4010
+=5-f4c88a4e9fd5-6a5cefcc-333-a158
 R1
 R2
 n@_opt1
 R3
 vArbWave30
-Z4 !s110 1784386941
+Z4 !s110 1784475592
 !i10b 1
-!s100 ;IG^5iLEe>o7bcFEJN>dP0
-IHL4^Y>n0PiSU^^g<9]1Y22
+!s100 0MeV<f<Un@QbnVUQ?X<0=2
+Ic8[jMm;m>h2a3jcYTkCGX3
 Z5 VDg1SIo80bB@j0V0VzS_@n1
 Z6 dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/top
-w1784298724
+w1784471938
 8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/top.v
 FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/top.v
 Z7 L0 13
@@ -42,7 +42,7 @@ Z8 OL;L;10.6d;65
 r1
 !s85 0
 31
-Z9 !s108 1784386941.000000
+Z9 !s108 1784475592.000000
 !s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/top.v|
 !s90 -reportprogress|300|-work|ArbWave30_t|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/top.v|
 !i113 0
@@ -50,13 +50,13 @@ Z10 o-work ArbWave30_t -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infa
 R2
 n@arb@wave30
 vArbWave30_tb
-!s110 1784386977
+R4
 !i10b 1
 !s100 >AO:^8SXl578OZ^AFKGG=1
 IYINR7Jb^AT]DM4`NOH9F93
 R5
 R6
-w1784386964
+w1784387311
 8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/top/ArbWave30_tb.v
 FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/top/ArbWave30_tb.v
 L0 15
@@ -64,7 +64,7 @@ R8
 r1
 !s85 0
 31
-!s108 1784386977.000000
+R9
 !s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/top/ArbWave30_tb.v|
 !s90 -reportprogress|300|-work|ArbWave30_t|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/top/ArbWave30_tb.v|
 !i113 0
@@ -72,13 +72,13 @@ R10
 R2
 n@arb@wave30_tb
 vdac_interface
-Z11 !s110 1784386942
+R4
 !i10b 1
-!s100 CA@2=OLITMPbPH_oGfzBj1
-IUYBCn`i>Ke7@O0LB:ne>[2
+!s100 MGM?i69j3NHzf0ETFcG^i2
+Il5P8mKaBlBBhGX;cP:L<O0
 R5
 R6
-w1784298359
+w1784463412
 8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/dac_interface.v
 FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/dac_interface.v
 R7
@@ -115,13 +115,13 @@ R10
 R2
 n@d@d@s_@i@i_@top
 vFIFO_HS_Top
-R11
+R4
 !i10b 1
-!s100 :X8C_1iF:ffl=[e1[]M6X2
-IN@olNLTOM;FLMCK670I0o1
+!s100 G@]N0BCHem^0z3J86MQf70
+IdgQdZMEhM>=DU29WfD=Ld0
 R5
 R6
-w1783348501
+w1784475380
 8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/fifo_hs/fifo_hs.vo
 FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/fifo_hs/fifo_hs.vo
 L0 8
@@ -129,7 +129,7 @@ R8
 r1
 !s85 0
 31
-Z12 !s108 1784386942.000000
+R9
 !s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/fifo_hs/fifo_hs.vo|
 !s90 -reportprogress|300|-work|ArbWave30_t|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/fifo_hs/fifo_hs.vo|
 !i113 0
@@ -159,7 +159,7 @@ R10
 R2
 n@gowin_r@p@l@l
 vSPI_master
-R11
+R4
 !i10b 1
 !s100 _`o]QUIG0Z82f:nH@Xdfg2
 IRAU4[bRaNIVgeO<E1`S?`0
@@ -173,7 +173,7 @@ R8
 r1
 !s85 0
 31
-R12
+R9
 !s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/SPI_master.v|
 !s90 -reportprogress|300|-work|ArbWave30_t|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/SPI_master.v|
 !i113 0
@@ -204,11 +204,11 @@ R2
 vwave_generation
 R4
 !i10b 1
-!s100 i[B4X[JX;J6[C_BYc<I=Q0
-IKQXFmWzPcLBXI`<U>IlHA3
+!s100 NGRNollCQ27]OBJPkQ[Xe0
+InJ>h:R9F=c;=Bc=<Di14E1
 R5
 R6
-w1784386854
+w1784475583
 8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/wave_generation/wave_generation.v
 FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/wave_generation/wave_generation.v
 R7

@@ -20,7 +20,7 @@ module wave_generation(
     input        [47: 0] ch1_freq_ctrl_word,   // 通道1频率控制字，48位，范围0~2^48-1
     input        [47: 0] ch1_phase_ctrl_word,  // 通道1相位控制字，48位，范围0~2^48-1
 
-    output reg   [15: 0] ch1_data_out          // 通道1输出数据，16位，范围0~65535
+    output  reg signed [15: 0] ch1_data_out          // 通道1输出数据，16位，范围0~65535
 );
 
 wire                   ch1_rst_n;  // 通道1复位信号，低有效
@@ -46,7 +46,7 @@ always @(posedge sys_clk or negedge ch1_rst_n) begin
     end else begin
         // 将正弦波输出进行幅度和偏置调整
         // ch1_data_out <= ch1_sine_out * ch1_amplitude) + ch1_offset;
-        ch1_data_out <= ch1_sine_out;  // 将正弦波输出范围从[-32768, 32767]调整到[0, 65535]
+        ch1_data_out <= ch1_sine_out;  
     end
 end
 
