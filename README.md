@@ -109,14 +109,14 @@ ArbWave30/
 │    └── LICENSE # CERN-OHL-S-2.0   
 ├── firmware/ (🚧 开发中)   
 │    ├── fpga/ # FPGA 设计源代码（Verilog）  
-│    │    ├── Application/ # 项目代码
-│    │    └── FPGA_Test_Hardware/ # FPGA 硬件测试代码
-│    │         ├── FPGA_Clock_Test/ # 时钟测试代码
-│    │         └── FPGA_Hardware_Test/ # FPGA 硬件测试代码
-│    └── mcu/ # MCU 固件源代码（C/C++）  
-│         ├── Application/ # 项目代码
-│         └── MCU_Test_Hardware/ # MCU 硬件测试代码
-│              └── min_system_test/ # MCU 最小系统测试代码
+│    │    ├── Application/ # 项目代码   
+│    │    └── FPGA_Test_Hardware/ # FPGA 硬件测试代码   
+│    │         ├── FPGA_Clock_Test/ # 时钟测试代码   
+│    │         └── FPGA_Hardware_Test/ # FPGA 硬件测试代码   
+│    └── mcu/ # MCU 固件源代码（C/C++）   
+│         ├── Application/ # 项目代码   
+│         └── MCU_Test_Hardware/ # MCU 硬件测试代码   
+│              └── min_system_test/ # MCU 最小系统测试代码   
 ├── simulink/ # LTspice 仿真文件  
 ├── datasheets/ # 组件数据手册，参考设计  
 ├── scripts/ # 自动化测试脚本（PyVISA）(🚧 开发中)  
