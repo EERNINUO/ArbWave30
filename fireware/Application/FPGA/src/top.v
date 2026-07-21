@@ -74,7 +74,7 @@ module ArbWave30 (
                         .sys_rst_n           	(sys_rst_n            ),
                         .ch1_enable          	(ch1_enable           ),
                         .ch1_amplitude       	(ch1_amplitude        ),
-                        .ch1_offset          	(ch1_offset           ),
+                        .offset          	(ch1_offset           ),
                         .ch1_freq_ctrl_word  	(ch1_freq_ctrl_word   ),
                         .ch1_phase_ctrl_word 	(ch1_phase_ctrl_word  ),
                         .ch1_data_out        	(ch1_data       )
@@ -102,8 +102,8 @@ module ArbWave30 (
             ch1_enable <= 1'b1; // 通道1始终使能
             ch1_freq_ctrl_word <= 48'd1_876_499_844_737;
             ch1_phase_ctrl_word <= 48'd0; // 默认相位控制字为0
-            ch1_amplitude <= 16'd65535; // 默认幅度为最大值
-            ch1_offset <= 16'd0; // 默认偏置为0s
+            ch1_amplitude <= 16'd32768; // 默认幅度为最大值
+            ch1_offset <= 16'd16384; // 默认偏置为0s
         end
         else begin
             // 将来在这里插入 SPI 写入条件

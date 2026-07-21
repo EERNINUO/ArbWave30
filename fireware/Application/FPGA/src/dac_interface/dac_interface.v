@@ -65,6 +65,7 @@ SPI_master #(
 	.busy      	()
 );
 
+// DAC 复位信号
 always @(posedge sys_clk or negedge sys_rst_n) begin
 	if(!sys_rst_n) begin
 		rst_p <= 1'b1;

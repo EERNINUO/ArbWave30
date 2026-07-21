@@ -11,17 +11,24 @@
  */
 
 module wave_generation(
-    input                sys_clk,              // 系统时钟
-    input                sys_rst_n,            // 系统复位，低有效
+    input                    sys_clk,              // 系统时钟
+    input                    sys_rst_n,            // 系统复位，低有效
 
-    input                ch1_enable,           // 通道1使能信号
-    input        [15: 0] ch1_amplitude,        // 通道1幅度控制，16位，范围0~65535
-    input signed [15: 0] ch1_offset,           // 通道1偏置控制，
-    input        [47: 0] ch1_freq_ctrl_word,   // 通道1频率控制字，48位，范围0~2^48-1
-    input        [47: 0] ch1_phase_ctrl_word,  // 通道1相位控制字，48位，范围0~2^48-1
+    input                    ch1_enable,           // 通道1使能信号
+    input           [15: 0]  ch1_amplitude,        // 通道1幅度控制，16位，范围0~65535
+    input   signed  [15: 0]  offset,           // 通道1偏置控制，
+    input           [47: 0]  ch1_freq_ctrl_word,   // 通道1频率控制字，48位，范围0~2^48-1
+    input           [47: 0]  ch1_phase_ctrl_word,  // 通道1相位控制字，48位，范围0~2^48-1
 
-    output  reg signed [15: 0] ch1_data_out          // 通道1输出数据，16位，范围0~65535
+    output  signed  [15: 0]  ch1_data_out          // 通道1输出数据，16位，范围0~65535
 );
+
+localparam sine_wave = 4'd0;
+localparam square_wave = 4'd1;
+localparam triangle_wave = 4'd2;
+localparam sawtooth_wave = 4'd3;
+localparam noise = 4'd4;
+
 
 wire                   ch1_rst_n;  // 通道1复位信号，低有效
 wire  signed  [15: 0]  ch1_sine_out;  // 通道1正弦波输出，16位，范围-32768~32767
@@ -40,14 +47,19 @@ DDS_II_Top u_dds_ii_ch1 (
     .data_valid_o()                         // 数据有效信号
 );
 
+reg signed [15: 0] wave_mux;
 always @(posedge sys_clk or negedge ch1_rst_n) begin
     if (!ch1_rst_n) begin
-        ch1_data_out <= 16'd0;  // 复位时输出中间值（偏置为0）
+        wave_mux <= 16'd0;  // 复位时输出中间值（偏置为0）
     end else begin
-        // 将正弦波输出进行幅度和偏置调整
-        // ch1_data_out <= ch1_sine_out * ch1_amplitude) + ch1_offset;
-        ch1_data_out <= ch1_sine_out;  
+        wave_mux <= ch1_sine_out;
     end
 end
+
+
+wire signed [16:0] int_amplitude = {1'b0, ch1_amplitude};
+wire signed [31:0] mult_out =  wave_mux * int_amplitude;
+wire signed [15:0] right_shift = $signed(mult_out[31:16]);
+assign ch1_data_out = right_shift + offset;
 
 endmodule
