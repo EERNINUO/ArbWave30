@@ -69,15 +69,15 @@ module ArbWave30 (
              );
 
     // 波形生成模块
-    wave_generation u_wave_generation(
+    wave_generation ch1_wave_generation(
                         .sys_clk             	(sys_clk              ),
                         .sys_rst_n           	(sys_rst_n            ),
-                        .ch1_enable          	(ch1_enable           ),
-                        .ch1_amplitude       	(ch1_amplitude        ),
+                        .enable          	(ch1_enable           ),
+                        .amplitude       	(ch1_amplitude        ),
                         .offset          	(ch1_offset           ),
-                        .ch1_freq_ctrl_word  	(ch1_freq_ctrl_word   ),
-                        .ch1_phase_ctrl_word 	(ch1_phase_ctrl_word  ),
-                        .ch1_data_out        	(ch1_data       )
+                        .freq_ctrl_word  	(ch1_freq_ctrl_word   ),
+                        .phase_ctrl_word 	(ch1_phase_ctrl_word  ),
+                        .data_out        	(ch1_data       )
                     );
 
     dac_interface #(

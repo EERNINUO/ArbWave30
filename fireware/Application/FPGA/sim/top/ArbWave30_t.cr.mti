@@ -12,6 +12,13 @@ Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
 Top level modules:
 	wave_generation
 
+} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/top.v {1 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/top.v
+Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module ArbWave30
+
+Top level modules:
+	ArbWave30
+
 } {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/dac_interface.v {1 {vlog -work ArbWave30_t -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/dac_interface/dac_interface.v
 Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
 -- Compiling module dac_interface
