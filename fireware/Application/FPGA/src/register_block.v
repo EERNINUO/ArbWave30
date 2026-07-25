@@ -123,10 +123,22 @@ reg [15:0] dac_cache_3;
 reg [15:0] dac_cache_4; 
 reg [15:0] dac_cache_5; 
 
+// write_en 上升沿检测
+reg write_en_dly;
+always @(posedge sys_clk or negedge sys_rst_n) begin
+    if (!sys_rst_n) begin
+        write_en_dly <= 1'b0;
+    end else begin
+        write_en_dly <= write_en;
+    end
+end
+
+assign write_en_rise = write_en & ~write_en_dly;
+
 // SPI 寄存器写入
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
-        sys_ctrl_reg <= 8'h00;
+        sys_ctrl_reg <= 8'h0000;
         ch1_freq_l_shadow   <= 16'h0000;
         ch1_freq_m_shadow   <= 16'h0000;
         ch1_freq_h_shadow   <= 16'h0000;
@@ -148,7 +160,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         dac_cache_3  <= 16'h0000;
         dac_cache_4  <= 16'hf901;
         dac_cache_5  <= 16'h0000;
-    end else if (write_en) begin
+    end else if (write_en_rise) begin
         case (addr_w)
             7'h02: sys_ctrl_reg <= data_in;
             7'h10: ch1_ctrl_shadow <= data_in;
@@ -177,8 +189,8 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             default: ; // 非法地址忽略
         endcase
     end
-    else if (sys_ctrl_reg[DAC_CMD_WRITE]) begin
-        // TODO
+    else if (sys_ctrl_reg[UPDATE] == 1'b1) begin
+        sys_ctrl_reg[UPDATE] <= 1'b0;
     end
 end
 
@@ -219,8 +231,6 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch2_offset   <= ch2_offset_shadow;
         ch2_phase    <= ch2_phase_shadow;
         ch2_duty     <= ch2_duty_shadow;
-
-        sys_ctrl_reg[UPDATE] <= 1'b0;
     end
 end
 
