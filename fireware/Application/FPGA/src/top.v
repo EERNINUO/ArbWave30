@@ -48,12 +48,12 @@ module ArbWave30 (
     wire                  sys_rst_n, dac_data_rst_n;
     wire                  pll_lock;
 
-    reg                   ch1_enable;
-    reg           [15:0]  ch1_amplitude;
-    reg   signed  [15:0]  ch1_offset;
-    reg           [47:0]  ch1_freq_ctrl_word;
-    reg           [47:0]  ch1_phase_ctrl_word;
-    wire          [15:0]  ch1_data;
+    wire                   ch1_enable;
+    wire           [15:0]  ch1_amplitude;
+    wire   signed  [15:0]  ch1_offset;
+    wire           [47:0]  ch1_freq_ctrl_word;
+    wire           [15:0]  ch1_phase_ctrl_word;
+    wire           [15:0]  ch1_data;
 
     // 系统控制模块
     sys_ctrl u_sys_ctrl(
@@ -76,44 +76,79 @@ module ArbWave30 (
                         .amplitude       	(ch1_amplitude        ),
                         .offset          	(ch1_offset           ),
                         .freq_ctrl_word  	(ch1_freq_ctrl_word   ),
-                        .phase_ctrl_word 	(ch1_phase_ctrl_word  ),
+                        .phase_ctrl_word 	({ch1_phase_ctrl_word, 32'h00000000}  ),
                         .data_out        	(ch1_data       )
                     );
 
-    dac_interface #(
-        .SYS_CLK_FREQ(SYS_CLK_FREQ)
-    )u_dac_interface (
+    dac_interface u_dac_interface (
                       .sys_clk   	    (sys_clk      ),
                       .data_clk  	    (dco          ),
                       .sys_rst_n 	    (sys_rst_n    ),
                       .ch1_data_in   	(ch1_data     ),
                       .ch1_data_out  	(ch1_data_out ),
                       .rst_p            (dac_ctrl_rst_p),
-                      .cs               (dac_ctrl_spi_cs  ),
+                      .cs               (dac_ctrl_spi_cs   ),
                       .clk              (dac_ctrl_spi_clk  ),
-                      .mosi             (dac_ctrl_spi_mosi  ),
+                      .mosi             (dac_ctrl_spi_mosi ),
                       .miso             (dac_ctrl_spi_miso )
                   );
 
+    // SPI Slave 模块
+    wire [6:0] spi_slave_addr;
+    wire [15:0] spi_slave_rece_data;
+    wire [15:0] spi_slave_trans_data;
+    wire out_data_valid;
 
-    // 默认值
-    always @(posedge sys_clk or negedge sys_rst_n) begin
-        if (!sys_rst_n) begin
-            ch1_enable <= 1'b1; // 通道1始终使能
-            ch1_freq_ctrl_word <= 48'd1_876_499_844_737;
-            ch1_phase_ctrl_word <= 48'd0; // 默认相位控制字为0
-            ch1_amplitude <= 16'd32768; // 默认幅度为最大值
-            ch1_offset <= 16'd16384; // 默认偏置为0s
-        end
-        else begin
-            // 将来在这里插入 SPI 写入条件
-            ch1_enable <= ch1_enable; // 通道1始终使能
-            ch1_freq_ctrl_word <= ch1_freq_ctrl_word;
-            ch1_phase_ctrl_word <= ch1_phase_ctrl_word; // 默认相位控制字为0
-            ch1_amplitude <= ch1_amplitude; // 默认幅度为最大值
-            ch1_offset <= ch1_offset; // 默认偏置为0s
+    wire address_error;
+    
+    spi_slave u_spi_slave(
+        .sys_clk        	(sys_clk         ),
+        .sys_rst_n      	(sys_rst_n       ),
 
-        end
-    end
+        .spi_clk        	(ctrl_spi_clk        ),
+        .spi_cs         	(ctrl_spi_cs        ),
+        .spi_mosi       	(ctrl_spi_mosi        ),
+        .spi_miso       	(ctrl_spi_miso        ),
+        .addr           	(spi_slave_addr            ),
+        .data_out       	(spi_slave_rece_data        ),
+        .data_in        	(spi_slave_trans_data         ),
+        .out_data_valid 	(out_data_valid  ),
+        .address_error  	(address_error   )
+    );
+    
+
+    // 寄存器模块
+
+    register_block u_register_block(
+        .sys_clk             	(sys_clk              ),
+        .sys_rst_n           	(sys_rst_n            ),
+
+        .addr                	(spi_slave_addr       ),
+        .data_in                (spi_slave_rece_data  ),
+        .data_out               (spi_slave_trans_data ),
+        .write_en               (out_data_valid       ),
+        .address_error          (address_error        ),
+
+        .pll_lock            	(pll_lock             ),
+
+        .ch1_enable          	(ch1_enable           ),
+        .ch1_waveform        	(         ),
+        .ch1_freq_ctrl_word  	(ch1_freq_ctrl_word   ),
+        .ch1_phase_ctrl_word 	(ch1_phase_ctrl_word  ),
+        .ch1_ampl_ctrl_word   	(ch1_amplitude    ),
+        .ch1_dc_offset_word  	(ch1_offset   ),
+        .ch1_duty_ctrl_word  	(),
+
+        .ch2_enable          	(),
+        .ch2_waveform        	(),
+        .ch2_freq_ctrl_word  	(),
+        .ch2_phase_ctrl_word 	(),
+        .ch2_ampl_ctrl_word   	(),
+        .ch2_dc_offset_word  	(),
+        .ch2_duty_ctrl_word  	(),
+        .dac_reg_addr        	(),
+        .dac_reg_data        	(),
+        .dac_reg_write       	()
+    );
 
 endmodule

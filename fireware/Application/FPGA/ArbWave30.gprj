@@ -8,6 +8,8 @@
         <File path="src/dac_interface/SPI_master.v" type="file.verilog" enable="1"/>
         <File path="src/dac_interface/dac_interface.v" type="file.verilog" enable="1"/>
         <File path="src/dac_interface/fifo_hs/fifo_hs.v" type="file.verilog" enable="1"/>
+        <File path="src/register_block.v" type="file.verilog" enable="1"/>
+        <File path="src/spi_slave.v" type="file.verilog" enable="1"/>
         <File path="src/sys_ctrl/gowin_rpll/gowin_rpll.v" type="file.verilog" enable="1"/>
         <File path="src/sys_ctrl/sys_ctrl.v" type="file.verilog" enable="1"/>
         <File path="src/top.v" type="file.verilog" enable="1"/>

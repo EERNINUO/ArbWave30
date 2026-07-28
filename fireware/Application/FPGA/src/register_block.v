@@ -14,13 +14,11 @@ module register_block(
     input                        sys_clk,
     input                        sys_rst_n,
 
-    input                [6:0]   addr_w,
+    input                [6:0]   addr,
     input                [15:0]  data_in,
-    input                        write_en,
-
-    input                        read_en,
-    input                [6:0]   addr_r,
     output  reg          [15:0]  data_out,
+    input                        write_en,
+    output  reg                  address_error,
     
     output                       soft_reset,
     output                       clock_source,
@@ -31,7 +29,7 @@ module register_block(
     output               [5:0]   ch1_waveform,
     output               [47:0]  ch1_freq_ctrl_word,
     output               [15:0]  ch1_phase_ctrl_word,
-    output       signed  [15:0]  ch1_amp_ctrl_word,
+    output       signed  [15:0]  ch1_ampl_ctrl_word,
     output       signed  [15:0]  ch1_dc_offset_word,
     output               [9:0]   ch1_duty_ctrl_word,
 
@@ -39,7 +37,7 @@ module register_block(
     output               [5:0]   ch2_waveform,
     output               [47:0]  ch2_freq_ctrl_word,
     output               [15:0]  ch2_phase_ctrl_word,
-    output       signed  [15:0]  ch2_amp_ctrl_word,
+    output       signed  [15:0]  ch2_ampl_ctrl_word,
     output       signed  [15:0]  ch2_dc_offset_word,
     output               [9:0]   ch2_duty_ctrl_word,
     
@@ -161,7 +159,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         dac_cache_4  <= 16'hf901;
         dac_cache_5  <= 16'h0000;
     end else if (write_en_rise) begin
-        case (addr_w)
+        case (addr)
             7'h02: sys_ctrl_reg <= data_in;
             7'h10: ch1_ctrl_shadow <= data_in;
             7'h11: ch1_freq_l_shadow <= data_in;
@@ -186,9 +184,10 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             7'h33: dac_cache_3 <= data_in;
             7'h34: dac_cache_4 <= data_in;
             7'h35: dac_cache_5 <= data_in;
-            default: ; // 非法地址忽略
+            default: ; // 非法地址忽略（ADDRESS_ERROR 在读取块处理）
         endcase
     end
+    // UPDATE 自清零
     else if (sys_ctrl_reg[UPDATE] == 1'b1) begin
         sys_ctrl_reg[UPDATE] <= 1'b0;
     end
@@ -236,7 +235,8 @@ end
 
 // 读取寄存器
 always @(*) begin
-    case (addr_r)
+    address_error = 1'b0;
+    case (addr)
         7'h00: data_out = sys_id_l;               // SYS_ID_L (只读)
         7'h01: data_out = sys_id_h;               // SYS_ID_H (只读)
         7'h02: data_out = sys_ctrl_reg;
@@ -262,7 +262,10 @@ always @(*) begin
         7'h33: data_out = dac_cache_3;
         7'h34: data_out = dac_cache_4;
         7'h35: data_out = dac_cache_5;
-        default: data_out = 16'h0000;
+        default begin
+            data_out = 16'h0000;
+            address_error = 1'b1; // 非法地址
+        end
     endcase
 end
 

@@ -1373,11 +1373,11 @@ WildcardSizeThresholdVerbose = 0
 ; is 10 ns and ScTimeUnit is ns, then the default time unit will be 10 ns.
 ScTimeUnit = ns
 
-; Set SystemC sc_main stack size. The stack size is set as an integer
+; Set SystemC sc stack size. The stack size is set as an integer
 ; number followed by the unit which can be Kb(Kilo-byte), Mb(Mega-byte) or
-; Gb(Giga-byte). Default is 10 Mb. The stack size for sc_main depends
-; on the amount of data on the sc_main() stack and the memory required
-; to succesfully execute the longest function call chain of sc_main().
+; Gb(Giga-byte). Default is 10 Mb. The stack size for sc depends
+; on the amount of data on the sc() stack and the memory required
+; to succesfully execute the longest function call chain of sc().
 ScMainStackSize = 10 Mb
 
 ; Set SystemC thread stack size. The stack size is set as an integer
@@ -1387,15 +1387,15 @@ ScMainStackSize = 10 Mb
 ; to succesfully execute the thread.
 ; ScStackSize = 1 Mb
 
-; Turn on/off execution of remainder of sc_main upon quitting the current
-; simulation session. If the cumulative length of sc_main() in terms of 
+; Turn on/off execution of remainder of sc upon quitting the current
+; simulation session. If the cumulative length of sc() in terms of 
 ; simulation time units is less than the length of the current simulation
-; run upon quit or restart, sc_main() will be in the middle of execution.
-; This switch gives the option to execute the remainder of sc_main upon
-; quitting simulation. The drawback of not running sc_main till the end
-; is memory leaks for objects created by sc_main. If on, the remainder of
-; sc_main will be executed ignoring all delays. This may cause the simulator
-; to crash if the code in sc_main is dependent on some simulation state.
+; run upon quit or restart, sc() will be in the middle of execution.
+; This switch gives the option to execute the remainder of sc upon
+; quitting simulation. The drawback of not running sc till the end
+; is memory leaks for objects created by sc. If on, the remainder of
+; sc will be executed ignoring all delays. This may cause the simulator
+; to crash if the code in sc is dependent on some simulation state.
 ; Default is on.
 ScMainFinishOnQuit = 1
 
