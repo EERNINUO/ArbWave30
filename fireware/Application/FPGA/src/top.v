@@ -45,15 +45,10 @@ module ArbWave30 (
     parameter SYS_CLK_FREQ = 150_000_000; // 系统时钟频率，单位Hz
 
     wire                  sys_clk;
-    wire                  sys_rst_n, dac_data_rst_n;
+    wire                  sys_rst_n, dco_rst_n;
     wire                  pll_lock;
-
-    wire                   ch1_enable;
-    wire           [15:0]  ch1_amplitude;
-    wire   signed  [15:0]  ch1_offset;
-    wire           [47:0]  ch1_freq_ctrl_word;
-    wire           [15:0]  ch1_phase_ctrl_word;
-    wire           [15:0]  ch1_data;
+    wire                  soft_reset;
+    wire                  clock_source;
 
     // 系统控制模块
     sys_ctrl u_sys_ctrl(
@@ -61,14 +56,23 @@ module ArbWave30 (
                  .clk_in_n(clk_in_n),
                  .data_clk(dco),
                  .ext_rst(ext_rst),
+                 .soft_rst(soft_reset),
+                 .clock_source(clock_source),
 
                  .sys_clk(sys_clk),
                  .sys_rst_n(sys_rst_n),
-                 .dac_data_rst_n(dac_data_rst_n),
+                 .dco_rst_n(dco_rst_n),
                  .pll_lock(pll_lock)
              );
 
     // 波形生成模块
+    wire                   ch1_enable;
+    wire           [15:0]  ch1_amplitude;
+    wire   signed  [15:0]  ch1_offset;
+    wire           [47:0]  ch1_freq_ctrl_word;
+    wire           [15:0]  ch1_phase_ctrl_word;
+    wire           [15:0]  ch1_data;
+
     wave_generation ch1_wave_generation(
                         .sys_clk             	(sys_clk              ),
                         .sys_rst_n           	(sys_rst_n            ),
@@ -128,6 +132,9 @@ module ArbWave30 (
         .data_out               (spi_slave_trans_data ),
         .write_en               (out_data_valid       ),
         .address_error          (address_error        ),
+
+        .soft_reset          	(soft_reset           ),
+        .clock_source        	(clock_source         ),
 
         .pll_lock            	(pll_lock             ),
 

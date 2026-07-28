@@ -11,15 +11,19 @@
  */
 
 module sys_ctrl(
-        input  clk_in_p,
-        input  clk_in_n,
-        input  data_clk,
-        input  ext_rst,
+        input   clk_in_p,
+        input   clk_in_n,
+        input   data_clk,
 
-        output sys_clk,
-        output sys_rst_n,
-        output dac_data_rst_n,
-        output pll_lock
+        input   ext_rst,
+        input   soft_rst,
+
+        input   clock_source,
+
+        output  sys_clk,
+        output  sys_rst_n,
+        output  dco_rst_n,
+        output  pll_lock
     );
 
     wire pll_in;
@@ -42,7 +46,7 @@ module sys_ctrl(
     // 异步复位同步释放（系统时钟域）
     //============================
     reg sys_rst_dly_1, sys_rst_dly_2;
-    wire rst_n_a = ext_rst & pll_lock;  // 外部复位或PLL未锁定时都处于复位状态
+    wire rst_n_a = ext_rst & pll_lock & ~soft_rst;  // 外部复位或PLL未锁定时都处于复位状态
 
     always @(posedge sys_clk or negedge rst_n_a) begin
         if (!rst_n_a) begin
@@ -60,19 +64,19 @@ module sys_ctrl(
     //============================
     // 异步复位同步释放（DAC时钟域）
     //============================
-    reg dac_data_rst_dly_1, dac_data_rst_dly_2;
+    reg dco_rst_dly_1, dco_rst_dly_2;
 
     always @(posedge data_clk or negedge rst_n_a) begin
         if (!rst_n_a) begin
-            dac_data_rst_dly_1 <= 1'b0;
-            dac_data_rst_dly_2 <= 1'b0;
+            dco_rst_dly_1 <= 1'b0;
+            dco_rst_dly_2 <= 1'b0;
         end
         else begin
-            dac_data_rst_dly_1 <= 1'b1;
-            dac_data_rst_dly_2 <= dac_data_rst_dly_1;
+            dco_rst_dly_1 <= 1'b1;
+            dco_rst_dly_2 <= dco_rst_dly_1;
         end
     end
 
-    assign dac_data_rst_n = dac_data_rst_dly_2;
+    assign dco_rst_n = dco_rst_dly_2;
 
 endmodule
