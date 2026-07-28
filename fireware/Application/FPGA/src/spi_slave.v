@@ -242,7 +242,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
                 // 数据传输开始，准备发送数据
                 if (spi_address[WR_bit] == 1'b1) begin
                     // 读操作，准备发送数据
-                    tx_data <= data_in;
+                    tx_data <= {data_in[7:0], data_in[15:8]}; // 交换字节顺序
                 end
                 if (address_error) begin
                     ack[ADDR_ERR_bit] <= 1'b1;
@@ -274,7 +274,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
                     // 检查 CRC
                     if (crc_received == crc_reg)begin
                         ack[CRC_ERR] <= 1'b0;
-                        data_out <= rx_data;
+                        data_out <= {rx_data[7:0], rx_data[15:8]}; // 交换字节顺序
                     end
                     else begin
                         ack[CRC_ERR] <= 1'b1;
