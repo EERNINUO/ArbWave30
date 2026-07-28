@@ -55,9 +55,18 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
     end
 end
 
+wire signed [16:0] int_amplitude = {1'b0, amplitude};  // 将幅度扩展为有符号数
 
-wire signed [16:0] int_amplitude = {1'b0, amplitude};
-wire signed [31:0] mult_out =  wave_mux * int_amplitude;
+// 使用 reg 的目的是为了防止组合逻辑过长导致的时序不收敛
+reg signed [31:0] mult_out;
+always @(posedge sys_clk or negedge sys_rst_n) begin
+    if (!sys_rst_n) begin
+        mult_out <= 32'd0;
+    end else begin
+        mult_out <= wave_mux * int_amplitude;
+    end
+end
+
 wire signed [15:0] right_shift = $signed(mult_out[31:16]);
 assign data_out = right_shift + offset;
 
