@@ -225,6 +225,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             crc_received <= 8'h00;
             ack <= 8'h00;
 
+            data_out <= 16'h0000;
             out_data_valid <= 1'b0;
         end
         SPI_ADDR: begin
@@ -232,18 +233,18 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
                 spi_address <= {spi_address[6:0], spi_mosi};
                 crc_reg <= crc(crc_reg, spi_mosi);
                 spi_miso <= 1'b0;
-                if (spi_cnt == 4'h7) begin
-                    addr <= spi_address[6:0];
-                end
             end
-        end
-        SPI_DATA: begin
-            if (spi_cnt == 4'h0) begin
+            if (spi_clk_posedge_dly && spi_cnt == 4'h7) begin
+                addr <= spi_address[6:0];
                 // 数据传输开始，准备发送数据
                 if (spi_address[WR_bit] == 1'b1) begin
                     // 读操作，准备发送数据
                     tx_data <= {data_in[7:0], data_in[15:8]}; // 交换字节顺序
                 end
+            end
+        end
+        SPI_DATA: begin
+            if (spi_cnt == 4'h0) begin
                 if (address_error) begin
                     ack[ADDR_ERR_bit] <= 1'b1;
                 end
@@ -259,8 +260,8 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
                 // 读操作
                 if (spi_clk_negedge) begin
                     spi_miso <= tx_data[15];
-                    crc_reg <= crc(crc_reg, tx_data[15]);
                     tx_data <= {tx_data[14:0], 1'b0};
+                    crc_reg <= crc(crc_reg, tx_data[15]);
                 end
             end
         end
