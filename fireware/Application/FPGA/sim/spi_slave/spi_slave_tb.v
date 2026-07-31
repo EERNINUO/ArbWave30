@@ -50,10 +50,6 @@ u_spi_slave(
 initial sys_clk = 0;
 always #(3.333) sys_clk = ~sys_clk; // 仿真150MHz
 
-// SPI 时钟：故意设为非整数频率，模拟异步关系
-initial spi_clk = 0;
-always #(50.234) spi_clk = ~spi_clk; 
-
 // CRC 计算函数
 function automatic [7:0] crc;
     input [7:0] crcIn;
@@ -79,10 +75,13 @@ task send_byte;
     integer bit_idx;
 begin
     for (bit_idx = 7; bit_idx >= 0; bit_idx = bit_idx - 1) begin
-        @(negedge spi_clk) begin
-            # 5
-            spi_mosi = data[bit_idx];
-        end
+        spi_clk = 0;
+        # 50
+        spi_mosi = data[bit_idx];
+        # 1;
+        spi_clk = 1;
+        # 50;
+        spi_clk = 0;
     end
 end
 endtask
@@ -94,10 +93,13 @@ task receive_byte;
 begin
     byte_data = 8'h00;
     for (i = 7; i >= 0; i = i - 1) begin
-        @(posedge spi_clk) begin
-            # 5 
-            byte_data[i] = spi_miso;
-        end
+        spi_clk = 0;
+        # 50
+        byte_data[i] = spi_miso;
+        # 1;
+        spi_clk = 1;
+        # 50;
+        spi_clk = 0;
     end
 end
 endtask
@@ -119,11 +121,12 @@ begin
     send_byte(crc(8'h00, {1'b0, reg_addr, write_data[7:0], write_data[15:8]})); // 发送 CRC
 
     receive_byte(ack_received);// 接收 ACK
-    @(posedge spi_clk);
+
     # 2;
     spi_cs = 1'b1;
 
     #100;
+    $display("Write to address 0x%02h: data = 0x%04h, received ACK = 0x%02h, expected ACK = 0x%02h", reg_addr, write_data, ack_received, expected_ack);
 end
 endtask
 
@@ -136,8 +139,6 @@ task spi_read;
     reg [15:0] read_data;
     reg [7:0] data_l, data_h;
 begin
-    @(posedge sys_clk);
-    # 2;
     spi_cs = 1'b0;
     
     send_byte({1'b1, reg_addr});// 发送地址（读操作：bit7=1）
@@ -148,16 +149,15 @@ begin
     receive_byte(crc_received);  // 接收 CRC
 
     receive_byte(ack_received);  // 接收 ACK
-    @(posedge spi_clk);
     spi_cs = 1'b1;
 
     read_data = {data_h, data_l};
 
-    // $display("Read from address 0x%02h: received data = 0x%04h, expected data = 0x%04h", reg_addr, read_data, expected_data);
+    $display("Read from address 0x%02h: received data = 0x%04h, expected data = 0x%04h", reg_addr, read_data, expected_data);
 
-    // if (crc_received !== crc(8'h00, {1'b1, reg_addr, data_l, data_h})) begin
-    //     $display("rece CRC error: expected %h, received %h", crc(8'h00, {1'b1, reg_addr, data_l, data_h}), crc_received);
-    // end
+    if (crc_received !== crc(8'h00, {1'b1, reg_addr, data_l, data_h})) begin
+        $display("rece CRC error: expected %h, received %h", crc(8'h00, {1'b1, reg_addr, data_l, data_h}), crc_received);
+    end
 end
 endtask
 
