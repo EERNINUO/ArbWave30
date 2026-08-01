@@ -1,0 +1,16 @@
+C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/register_block.v {2 {vlog -work reg_block -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/register_block.v
+Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module register_block
+** Warning: C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/register_block.v(139): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+
+Top level modules:
+	register_block
+
+} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/reg_block/reg_block_tb.v {1 {vlog -work reg_block -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/reg_block/reg_block_tb.v
+Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module reg_block_tb
+
+Top level modules:
+	reg_block_tb
+
+} {} {}}

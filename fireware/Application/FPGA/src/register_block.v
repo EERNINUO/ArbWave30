@@ -137,6 +137,7 @@ assign write_en_rise = write_en & ~write_en_dly;
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
         sys_ctrl_reg <= 8'h0000;
+        ch1_ctrl_shadow     <= 16'h0000;
         ch1_freq_l_shadow   <= 16'h0000;
         ch1_freq_m_shadow   <= 16'h0000;
         ch1_freq_h_shadow   <= 16'h0000;
@@ -234,39 +235,45 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
 end
 
 // 读取寄存器
-always @(*) begin
-    address_error = 1'b0;
-    case (addr)
-        7'h00: data_out = sys_id_l;               // SYS_ID_L (只读)
-        7'h01: data_out = sys_id_h;               // SYS_ID_H (只读)
-        7'h02: data_out = sys_ctrl_reg;
-        7'h10: data_out = ch1_ctrl;
-        7'h11: data_out = ch1_freq_l;
-        7'h12: data_out = ch1_freq_m;
-        7'h13: data_out = ch1_freq_h;
-        7'h14: data_out = ch1_ampl;
-        7'h15: data_out = ch1_offset;
-        7'h16: data_out = ch1_phase;
-        7'h17: data_out = ch1_duty;
-        7'h20: data_out = ch2_ctrl;
-        7'h21: data_out = ch2_freq_l;
-        7'h22: data_out = ch2_freq_m;
-        7'h23: data_out = ch2_freq_h;
-        7'h24: data_out = ch2_ampl;
-        7'h25: data_out = ch2_offset;
-        7'h26: data_out = ch2_phase;
-        7'h27: data_out = ch2_duty;
-        7'h30: data_out = dac_cache_0;
-        7'h31: data_out = dac_cache_1;
-        7'h32: data_out = dac_cache_2;
-        7'h33: data_out = dac_cache_3;
-        7'h34: data_out = dac_cache_4;
-        7'h35: data_out = dac_cache_5;
-        default begin
-            data_out = 16'h0000;
-            address_error = 1'b1; // 非法地址
-        end
-    endcase
+always @(posedge sys_clk or negedge sys_rst_n) begin
+    if (!sys_rst_n) begin
+        data_out <= 16'h0000;
+        address_error = 1'b0;
+    end 
+    else begin
+        case (addr)
+            7'h00: data_out <= sys_id_l;               // SYS_ID_L (只读)
+            7'h01: data_out <= sys_id_h;               // SYS_ID_H (只读)
+            7'h02: data_out <= sys_ctrl_reg;
+            7'h03: data_out <= {15'b0, pll_lock};
+            7'h10: data_out <= ch1_ctrl;
+            7'h11: data_out <= ch1_freq_l;
+            7'h12: data_out <= ch1_freq_m;
+            7'h13: data_out <= ch1_freq_h;
+            7'h14: data_out <= ch1_ampl;
+            7'h15: data_out <= ch1_offset;
+            7'h16: data_out <= ch1_phase;
+            7'h17: data_out <= ch1_duty;
+            7'h20: data_out <= ch2_ctrl;
+            7'h21: data_out <= ch2_freq_l;
+            7'h22: data_out <= ch2_freq_m;
+            7'h23: data_out <= ch2_freq_h;
+            7'h24: data_out <= ch2_ampl;
+            7'h25: data_out <= ch2_offset;
+            7'h26: data_out <= ch2_phase;
+            7'h27: data_out <= ch2_duty;
+            7'h30: data_out <= dac_cache_0;
+            7'h31: data_out <= dac_cache_1;
+            7'h32: data_out <= dac_cache_2;
+            7'h33: data_out <= dac_cache_3;
+            7'h34: data_out <= dac_cache_4;
+            7'h35: data_out <= dac_cache_5;
+            default begin
+                data_out <= 16'h0000;
+                address_error <= 1'b1; // 非法地址
+            end
+        endcase
+    end
 end
 
 // ---- SYS_CTRL 输出 ----
