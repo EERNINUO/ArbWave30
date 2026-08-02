@@ -213,6 +213,17 @@ end
 // 状态机输出控制
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
+        spi_miso <= 1'bz;
+        spi_address <= 8'h00;
+        addr <= 7'h00;
+        rx_data <= 16'h0000;
+        tx_data <= 16'h0000;
+        crc_reg <= 8'h00;
+        crc_received <= 8'h00;
+        ack <= 8'h00;
+
+        data_out <= 16'h0000;
+        out_data_valid <= 1'b0;
     end 
     else begin
         case(spi_state)
@@ -248,6 +259,9 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
                 if (address_error) begin
                     ack[ADDR_ERR_bit] <= 1'b1;
                 end
+                else begin
+                    ack[ADDR_ERR_bit] <= 1'b0;
+                end
             end
             if (spi_address[WR_bit] == 1'b0) begin
                 // 写操作
@@ -271,7 +285,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
                 if (spi_clk_posedge) begin
                     crc_received <= {crc_received[6:0], spi_mosi};
                 end
-                if (spi_cnt == 4'h7) begin
+                if (spi_cnt == 4'h7 && spi_clk_posedge_dly) begin
                     // 检查 CRC
                     if (crc_received == crc_reg)begin
                         ack[CRC_ERR] <= 1'b0;
@@ -293,15 +307,17 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         SPI_ACK: begin
             if (spi_cnt == 4'h0) begin
                 ack[ACK_bit] <= ~(|ack[7:1]); // 如果没有错误，ACK 位为 1，否则为 0
+                if (spi_address[WR_bit] == 1'b0 && 
+                    ack[ACK_bit] == 1'b1) begin
+                    // 写入数据有效
+                    out_data_valid <= 1'b1;
+                end
             end
             if (spi_clk_negedge) begin
                 spi_miso <= ack[7];
                 ack <= {ack[6:0], 1'b0};
             end
-            if (spi_address[WR_bit] == 1'b0 && spi_cnt == 4'h7) begin
-                // 写入数据有效
-                out_data_valid <= 1'b1;
-            end
+
         end
         endcase
     end
