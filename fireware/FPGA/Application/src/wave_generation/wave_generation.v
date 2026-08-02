@@ -56,13 +56,18 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
 end
 
 // 使用 reg 的目的是为了防止组合逻辑过长导致的时序不收敛
+// 乘积 (wave_mux * amplitude) 为 Q15.16 格式（1符号位，15位整数，16位小数）。
+// 若直接截取高 16 位 [31:16]，等效于除以 2^16（缩放因子 65536）。
+// 由于 amplitude 最大值为 32767（16bit有符号正数），直接截位会导致满幅输出减半。
+// 因此左移 1 位（<<< 1），将缩放因子变为 32768（2^15），
+// 确保 amplitude = 32767 时输出接近满幅 DAC 码值（±32767）。
 reg signed [31:0] mult_out;
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
         mult_out <= 32'd0;
     end else begin
-        mult_out <= wave_mux * amplitude;
-    end
+        mult_out <= (wave_mux * amplitude) <<< 1;
+    end 
 end
 
 wire signed [15:0] right_shift = $signed(mult_out[31:16]);
