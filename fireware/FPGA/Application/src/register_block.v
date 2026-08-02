@@ -238,7 +238,7 @@ end
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
         data_out <= 16'h0000;
-        address_error = 1'b0;
+        address_error <= 1'b0;
     end 
     else begin
         case (addr)

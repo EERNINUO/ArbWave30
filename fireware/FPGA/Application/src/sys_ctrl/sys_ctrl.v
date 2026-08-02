@@ -11,19 +11,20 @@
  */
 
 module sys_ctrl(
-        input   clk_in_p,
-        input   clk_in_n,
-        input   data_clk,
+        input        clk_in_p,
+        input        clk_in_n,
+        input        data_clk,
 
-        input   ext_rst,
-        input   soft_rst,
+        input        ext_rst,
+        input        soft_rst,
 
-        input   clock_source,
+        input        clock_source,
 
-        output  sys_clk,
-        output  sys_rst_n,
-        output  dco_rst_n,
-        output  pll_lock
+        output       sys_clk,
+        output       sys_rst_n,
+        output       dco_rst_n,
+        output  reg  fpga_int,
+        output       pll_lock
     );
 
     wire pll_in;
@@ -78,5 +79,17 @@ module sys_ctrl(
     end
 
     assign dco_rst_n = dco_rst_dly_2;
+
+//============================
+// FPGA 中断信号
+//============================
+    always @(posedge sys_clk or negedge sys_rst_n) begin
+        if (!sys_rst_n) begin
+            fpga_int <= 1'b0;
+        end
+        else begin
+            fpga_int <= 1'b1;
+        end
+    end
 
 endmodule
