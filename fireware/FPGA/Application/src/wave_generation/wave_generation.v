@@ -15,7 +15,7 @@ module wave_generation(
     input                    sys_rst_n,            // 系统复位，低有效
 
     input                    enable,           // 通道1使能信号
-    input           [15: 0]  amplitude,        // 通道1幅度控制，16位，范围0~65535
+    input   signed  [15: 0]  amplitude,        // 通道1幅度控制，16位，范围0~65535，幅值为负时波形反相
     input   signed  [15: 0]  offset,           // 通道1偏置控制，
     input           [47: 0]  freq_ctrl_word,   // 通道1频率控制字，48位，范围0~2^48-1
     input           [47: 0]  phase_ctrl_word,  // 通道1相位控制字，48位，范围0~2^48-1
@@ -55,15 +55,13 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
     end
 end
 
-wire signed [16:0] int_amplitude = {1'b0, amplitude};  // 将幅度扩展为有符号数
-
 // 使用 reg 的目的是为了防止组合逻辑过长导致的时序不收敛
 reg signed [31:0] mult_out;
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
         mult_out <= 32'd0;
     end else begin
-        mult_out <= wave_mux * int_amplitude;
+        mult_out <= wave_mux * amplitude;
     end
 end
 

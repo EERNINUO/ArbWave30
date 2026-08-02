@@ -68,11 +68,11 @@ module ArbWave30 (
 
     // 波形生成模块
     wire                   ch1_enable;
-    wire           [15:0]  ch1_amplitude;
+    wire   signed  [15:0]  ch1_amplitude;
     wire   signed  [15:0]  ch1_offset;
     wire           [47:0]  ch1_freq_ctrl_word;
     wire           [15:0]  ch1_phase_ctrl_word;
-    wire           [15:0]  ch1_data;
+    wire   signed  [15:0]  ch1_data;
 
     wave_generation ch1_wave_generation(
                         .sys_clk             	(sys_clk              ),
