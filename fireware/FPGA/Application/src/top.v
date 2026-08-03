@@ -22,7 +22,7 @@ module ArbWave30 (
         input                ctrl_spi_mosi,
         output               ctrl_spi_miso,
 
-        input                fpga_int,
+        output               fpga_int,
         input                ctrl_gpio2,
 
         // DAC data interface

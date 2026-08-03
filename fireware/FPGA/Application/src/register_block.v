@@ -241,6 +241,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         address_error <= 1'b0;
     end 
     else begin
+        address_error <= 1'b0; // 默认地址合法
         case (addr)
             7'h00: data_out <= sys_id_l;               // SYS_ID_L (只读)
             7'h01: data_out <= sys_id_h;               // SYS_ID_H (只读)
