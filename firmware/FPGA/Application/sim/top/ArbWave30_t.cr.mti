@@ -1,4 +1,11 @@
-C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/dac_interface/SPI_master.v {1 {vlog -work work -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/dac_interface/SPI_master.v
+C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/spi_slave.v {1 {vlog -work work -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/spi_slave.v
+Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module spi_slave
+
+Top level modules:
+	spi_slave
+
+} {} {}} C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/dac_interface/SPI_master.v {1 {vlog -work work -vopt -stats=none C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/dac_interface/SPI_master.v
 Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
 -- Compiling module SPI_master
 
