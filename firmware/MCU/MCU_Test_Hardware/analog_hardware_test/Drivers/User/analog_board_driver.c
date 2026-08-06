@@ -11,11 +11,34 @@
  */
 
 // Assisted-by: GitHub Copilot - CRC 校验函数
+
 #include "analog_board_driver.h"
 
 // 外部变量声明
 // 我一直觉得这种到处extern的写法很讨厌，但是CubeMX生成的代码就是这样，很难受
 extern SPI_HandleTypeDef hspi1; // 声明SPI句柄 
+
+// 数据帧结构体定义
+typedef struct __packed community_frame {
+	uint8_t address;
+	uint16_t data;
+	uint8_t crc;
+	uint8_t ack;
+} community_frame_t;
+
+#define spi_cs(x) \
+do { \
+	if (x) HAL_GPIO_WritePin(spi_cs_port, spi_cs_pin, GPIO_PIN_SET); \
+	else HAL_GPIO_WritePin(spi_cs_port, spi_cs_pin, GPIO_PIN_RESET); \
+} while(0)
+
+#define alaog_board_rst(x) \
+do { \
+	if (x) HAL_GPIO_WritePin(analog_board_rst_port, analog_board_rst_pin, GPIO_PIN_SET); \
+	else HAL_GPIO_WritePin(analog_board_rst_port, analog_board_rst_pin, GPIO_PIN_RESET); \
+} while(0)
+
+#define int_read() HAL_GPIO_ReadPin(interrupt_port, interrupt_pin)
 
 /**
  * @brief  CRC8计算函数
@@ -42,7 +65,7 @@ uint8_t crc8(uint8_t *data, uint8_t length)
 // 这里用阻塞写法只是测试程序懒得写异步了，application中肯定会用异步方式的
 void wait_analog_board_ready(void)
 {
-	while (HAL_GPIO_ReadPin(interrupt_port, interrupt_pin) == GPIO_PIN_SET) {
+	while (int_read() == GPIO_PIN_SET) {
 		// 等待模拟板准备好
 	}
 }
@@ -55,7 +78,7 @@ void wait_analog_board_ready(void)
  */
 uint8_t send_command(uint8_t address, uint16_t command)
 {
-	struct community_frame frame;
+	community_frame_t frame;
 	frame.address = address;
 	frame.data = command;
 	// 计算 CRC 时要排除CRC和ACK字段
@@ -72,7 +95,7 @@ uint8_t send_command(uint8_t address, uint16_t command)
 
 uint8_t read_data(uint8_t address, uint16_t data)
 {
-	struct community_frame frame;
+	community_frame_t frame;
 	frame.address = address;
 	frame.data = 0;
 	// 计算 CRC 时要排除CRC和ACK字段
