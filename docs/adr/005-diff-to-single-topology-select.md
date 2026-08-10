@@ -92,3 +92,4 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 
 ## 相关文档
 - [硬件架构文档](/docs/硬件架构文档.md)
+- [硬件设计文档（模拟板）](/docs/硬件设计文档/硬件设计文档(模拟板).md)
