@@ -65,7 +65,7 @@ uint8_t crc8(uint8_t *data, uint8_t length)
 // 这里用阻塞写法只是测试程序懒得写异步了，application中肯定会用异步方式的
 void wait_analog_board_ready(void)
 {
-	while (int_read() == GPIO_PIN_SET) {
+	while (int_read() != GPIO_PIN_RESET) {
 		// 等待模拟板准备好
 	}
 }

@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "analog_board_driver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,7 +36,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define FREQ_CTRL_WORD_1MHz 1876499844737
+#define FREQ_CTRL_WORD_10MHz 18764998447377
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -95,13 +96,40 @@ int main(void)
   MX_RTC_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  wait_analog_board_ready();
 
+  HAL_Delay(1000);
+  // 1MHz 频率控制字
+  send_command(0x11, FREQ_CTRL_WORD_1MHz & 0xffff); 
+  send_command(0x12, (FREQ_CTRL_WORD_1MHz >> 16) & 0xffff); 
+  send_command(0x13, (FREQ_CTRL_WORD_1MHz >> 32) & 0xffff); 
+
+  // 幅度控制字
+  send_command(0x14, 0x7fff); 
+  // 打开通道1
+  send_command(0x10, 0x8000);
+  // 影子寄存器更新
+  send_command(0x02, 0x0008);
+
+  HAL_Delay(2000);
+  // 10MHz 频率控制字
+  send_command(0x11, FREQ_CTRL_WORD_10MHz & 0xffff);
+  send_command(0x12, (FREQ_CTRL_WORD_10MHz >> 16) & 0xffff);
+  send_command(0x13, (FREQ_CTRL_WORD_10MHz >> 32) & 0xffff);
+  // 影子寄存器更新
+  send_command(0x02, 0x0008);
+  
+  /* USER CODE END 2 */
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    HAL_GPIO_TogglePin(Debug_LED_GPIO_Port, Debug_LED_Pin);
+    HAL_Delay(500 - 1);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
