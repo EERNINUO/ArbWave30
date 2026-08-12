@@ -130,6 +130,8 @@ begin
 
     send_byte(crc(8'h00, {1'b0, reg_addr, write_data[7:0], write_data[15:8]})); // 发送 CRC
 
+    # 2400; // 实际SPI从发送到读取是有时间的，这里需要等待一段时间
+
     receive_byte(ack_received);// 接收 ACK
 
     # 2;
@@ -155,6 +157,8 @@ begin
     receive_byte(data_h);
     
     receive_byte(crc_received);  // 接收 CRC
+
+    # 2400; // 实际SPI从发送到读取是有时间的，这里需要等待一段时间
 
     receive_byte(ack_received);  // 接收 ACK
     ctrl_spi_cs = 1'b1;
@@ -182,7 +186,7 @@ initial begin
     #100;
     ext_rst = 1'b1;
 
-    wait (fpga_int == 1'b1);
+    wait (fpga_int == 1'b0);
 
     // 频率控制字
     spi_write(7'h11, freq_ctrl_word_10MHz[15:0]); 

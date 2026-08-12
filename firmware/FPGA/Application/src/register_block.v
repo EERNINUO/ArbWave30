@@ -136,12 +136,12 @@ assign write_en_rise = write_en & ~write_en_dly;
 // SPI 寄存器写入
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
-        sys_ctrl_reg <= 8'h0000;
+        sys_ctrl_reg        <= 8'h0000;
         ch1_ctrl_shadow     <= 16'h0000;
         ch1_freq_l_shadow   <= 16'h0000;
         ch1_freq_m_shadow   <= 16'h0000;
         ch1_freq_h_shadow   <= 16'h0000;
-        ch1_ampl_shadow      <= 16'h0000;
+        ch1_ampl_shadow     <= 16'h0000;
         ch1_offset_shadow   <= 16'h0000;
         ch1_phase_shadow    <= 16'h0000;
         ch1_duty_shadow     <= 16'h0000;
@@ -149,7 +149,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch2_freq_l_shadow   <= 16'h0000;
         ch2_freq_m_shadow   <= 16'h0000;
         ch2_freq_h_shadow   <= 16'h0000;
-        ch2_ampl_shadow      <= 16'h0000;
+        ch2_ampl_shadow     <= 16'h0000;
         ch2_offset_shadow   <= 16'h0000;
         ch2_phase_shadow    <= 16'h0000;
         ch2_duty_shadow     <= 16'h0000;
@@ -201,7 +201,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch1_freq_l   <= 16'h0000;
         ch1_freq_m   <= 16'h0000;
         ch1_freq_h   <= 16'h0000;
-        ch1_ampl      <= 16'h0000;
+        ch1_ampl     <= 16'h0000;
         ch1_offset   <= 16'h0000;
         ch1_phase    <= 16'h0000;
         ch1_duty     <= 16'h0000;

@@ -83,13 +83,13 @@ module sys_ctrl(
 //============================
 // FPGA 中断信号
 //============================
-    always @(posedge sys_clk or negedge sys_rst_n) begin
-        if (!sys_rst_n) begin
-            fpga_int <= 1'b0;
-        end
-        else begin
-            fpga_int <= 1'b1;
-        end
+always @(posedge sys_clk or negedge sys_rst_n) begin
+    if (!sys_rst_n) begin
+        fpga_int <= 1'b1;
     end
+    else begin
+        fpga_int <= 1'b0;
+    end
+end
 
 endmodule
