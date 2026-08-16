@@ -10,8 +10,8 @@
  * ...
  */
 
-#ifndef ANALOG_BOARD_DRIVE_H
-#define ANALOG_BOARD_DRIVE_H
+#ifndef ANALOG_BOARD_DRIVER_H
+#define ANALOG_BOARD_DRIVER_H
 
 #include <stdbool.h>
 #include "stm32f4xx.h"
@@ -75,18 +75,18 @@
 
 // 系统控制寄存器位定义
 
-#define SYS_CTRL_UPDATE         0x0008 
-#define SYS_CTRL_DAC_CMD_WRITE  0x0004 
-#define SYS_CTRL_CLOCK_SRC      0x0002 
-#define SYS_CTRL_SOFT_RST       0x0001 
+#define SYS_CTRL_UPDATE         3 
+#define SYS_CTRL_DAC_CMD_WRITE  2 
+#define SYS_CTRL_CLOCK_SRC      1 
+#define SYS_CTRL_SOFT_RST       0 
 
 // 通道控制寄存器位定义
-#define CH_CTRL_ENABLE          0x8000 
-#define CH_CTRL_WAVEFORM        0x0000  
+#define CH_CTRL_ENABLE          15 
+#define CH_CTRL_WAVEFORM        0  
 #define CH_CTRL_WAVEFORM_MASK   0x3F     // 低6位
 
 // 寄存器地址计算宏
-#define REG_BASE_ADDR(channel) ((channel == 1) ? CHANNEL1_BASE : CHANNEL2_BASE)
+#define REG_CH_BASE_ADDR(channel) ((channel == 1) ? CHANNEL1_BASE : CHANNEL2_BASE)
 #define REG_ADDR(base, offset) ((base) + (offset))
 
 // 波形枚举
@@ -97,6 +97,11 @@ typedef enum {
     WAVE_SAWTOOTH= 0x03,
     WAVE_NOISE   = 0x04
 } WaveType_t;
+
+// 系统状态枚举
+typedef enum {
+    PLL_LOCK = 0x01,
+} SysStatus_t;
 
 // 模拟板配置结构体
 // 这两个结构体只是镜像数据，向模拟板写入数据必须通过 setXXX 函数，操作这两个结构体不会影响模拟板
@@ -117,6 +122,11 @@ typedef struct{
 } AnalogBoardConfig_t;
 
 void analogBoard_waitReady(void);
+uint8_t analogBoard_readSysId(char *sys_id);
+uint8_t analogBoard_setClockSource(bool extern_clock);
+uint8_t analogBoard_softReset(void);
+void analogBoard_hardReset(void);
+uint8_t analogBoard_readSysStatus(uint16_t *sys_status);
 uint8_t analogBoard_setEnable(uint8_t channel, bool enable);
 uint8_t analogBoard_setWave(uint8_t channel, WaveType_t waveType);
 uint8_t analogBoard_setFreq(uint8_t channel, uint64_t freq_uHz);

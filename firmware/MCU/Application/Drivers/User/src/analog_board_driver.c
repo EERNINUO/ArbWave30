@@ -13,7 +13,7 @@
 // Assisted-by: GitHub Copilot - CRC 校验函数
 
 #include "analog_board_driver.h"
-#include <math.h>
+#include <stdlib.h>
 
 // 外部变量声明
 // 我一直觉得这种到处extern的写法很讨厌，但是CubeMX生成的代码就是这样，很难受
@@ -33,7 +33,7 @@ do { \
 	else HAL_GPIO_WritePin(SPI_CS_Port, SPI_CS_Pin, GPIO_PIN_RESET); \
 } while(0)
 
-#define alaog_board_rst(x) \
+#define analog_board_rst(x) \
 do { \
 	if (x) HAL_GPIO_WritePin(ANALOG_BOARD_RST_Port, ANALOG_BOARD_RST_Pin, GPIO_PIN_SET); \
 	else HAL_GPIO_WritePin(ANALOG_BOARD_RST_Port, ANALOG_BOARD_RST_Pin, GPIO_PIN_RESET); \
@@ -95,7 +95,7 @@ void analogBoard_waitReady(void)
 }
 
 /* ---------------------------------------- 
- *  模拟板寄存器操作函数
+ *  寄存器操作函数
  * --------------------------------------*/
 
 /**
@@ -121,8 +121,16 @@ uint8_t analogBoard_sendData(uint8_t address, uint16_t command)
 	return frame.ack; // 返回ACK响应
 }
 
+/**
+ * @brief  从模拟板读取数据
+ * @param  address: 模拟板地址
+ * @param  data: 指向数据存储位置的指针
+ * @retval ACK响应
+ */
 uint8_t analogBoard_readData(uint8_t address, uint16_t *data)
 {
+	assert_param(data != NULL);
+
 	community_frame_t frame;
 	frame.address = address;
 	frame.data = 0;
@@ -150,7 +158,107 @@ uint8_t analogBoard_readData(uint8_t address, uint16_t *data)
 }
 
 /* ---------------------------------------- 
- *  模拟板功能函数
+ *  系统功能函数
+ * --------------------------------------*/
+
+/**
+ * @brief  读取系统ID
+ * @param  sys_id: 指向存储系统ID的指针，大小为4字节
+ * @retval ACK响应
+**/
+uint8_t analogBoard_readSysId(char *sys_id)
+{
+	uint8_t ack = 0;
+	uint16_t *data = (uint16_t *)sys_id;
+
+	if ((ack = analogBoard_readData(REG_ADDR(SYSTEM_BASE, SYS_ID_L),  &data[1])) != ACK_OK)
+		goto error_handler;
+	if ((ack = analogBoard_readData(REG_ADDR(SYSTEM_BASE, SYS_ID_H), &data[0])) != ACK_OK)
+		goto error_handler;
+	
+	// 大小端转换
+	data[0] = __builtin_bswap16(data[0]); 
+	data[1] = __builtin_bswap16(data[1]);
+
+	return ACK_OK;
+
+error_handler:
+	// 错误处理
+	return ack;
+}
+
+/**
+ * @brief  设置时钟源
+ * @param  extern_clock: 是否使用外部时钟
+ * @retval ACK响应
+*/
+uint8_t analogBoard_setClockSource(bool extern_clock)
+{
+	uint8_t ack = 0;
+	uint16_t sys_ctrl = extern_clock << SYS_CTRL_CLOCK_SRC;
+
+	if ((ack = analogBoard_sendData(REG_ADDR(SYSTEM_BASE, SYS_CTRL), sys_ctrl)) != ACK_OK)
+		goto error_handler;
+
+	analogBoardConfig.extern_clock = extern_clock;
+
+	return ACK_OK;
+
+error_handler:
+	// 错误处理
+	return ack;
+}
+
+/**
+ * @brief  模拟板软复位（其实功能和模拟板硬复位一样，但既然模拟板留了，那就实现一下，指不定什么时候用得到）
+ * @retval ACK响应
+ */
+uint8_t analogBoard_softReset(void)
+{
+	uint8_t ack = 0;
+	uint16_t sys_ctrl = analogBoardConfig.extern_clock << SYS_CTRL_CLOCK_SRC | 1 << SYS_CTRL_SOFT_RST;
+
+	if ((ack = analogBoard_sendData(REG_ADDR(SYSTEM_BASE, SYS_CTRL), sys_ctrl)) != ACK_OK)
+		goto error_handler;
+
+	return ACK_OK;
+
+error_handler:
+	// 错误处理
+	return ack;
+}
+
+/**
+ * @brief  模拟板硬复位（通过拉低RST引脚实现，建议使用这个函数进行复位）
+ */
+void analogBoard_hardReset(void)
+{
+    analog_board_rst(0);
+    HAL_Delay(100);
+	analog_board_rst(1);
+}
+
+/**
+ * @brief  读取系统状态
+ * @param  sys_status: 指向存储系统状态的指针
+ * @retval ACK响应
+ */
+uint8_t analogBoard_readSysStatus(uint16_t *sys_status)
+{
+	uint8_t ack = 0;
+
+	if ((ack = analogBoard_readData(REG_ADDR(SYSTEM_BASE, SYS_STATUS), sys_status)) != ACK_OK)
+		goto error_handler;
+
+	return ACK_OK;
+
+error_handler:
+	// 错误处理
+	return ack;
+}
+
+/* ---------------------------------------- 
+ *  通道功能函数
  * --------------------------------------*/
 
 /**
@@ -162,13 +270,13 @@ uint8_t analogBoard_readData(uint8_t address, uint16_t *data)
 uint8_t analogBoard_setEnable(uint8_t channel, bool enable)
 {
 	uint8_t ack = 0;
-	uint8_t reg_base_addr = REG_BASE_ADDR(channel);
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
 
 	ChConfig_t *cfg = (channel == 1) ? &analogBoardConfig.ch1 : &analogBoardConfig.ch2;
-	uint16_t ch_ctrl = (enable) << 15 | (cfg->waveType & CH_CTRL_WAVEFORM_MASK); // 构建通道控制寄存器值
+	uint16_t ch_ctrl = (enable) << CH_CTRL_ENABLE | (cfg->waveType & CH_CTRL_WAVEFORM_MASK); // 构建通道控制寄存器值
 
 	// 发送使能状态
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_CTRL, ch_ctrl)) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_CTRL), ch_ctrl)) != ACK_OK)
 		goto error_handler;
 
 	// 更新配置结构体中的使能状态值
@@ -190,13 +298,13 @@ error_handler:
 uint8_t analogBoard_setWave(uint8_t channel, WaveType_t waveType)
 {
 	uint8_t ack = 0;
-	uint8_t reg_base_addr = REG_BASE_ADDR(channel);
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
 
 	ChConfig_t *cfg = (channel == 1) ? &analogBoardConfig.ch1 : &analogBoardConfig.ch2;
-	uint16_t ch_ctrl = (cfg->enable) << 15 | (waveType & CH_CTRL_WAVEFORM_MASK); // 构建通道控制寄存器值
+	uint16_t ch_ctrl = (cfg->enable) << CH_CTRL_ENABLE | (waveType & CH_CTRL_WAVEFORM_MASK); // 构建通道控制寄存器值
 
 	// 发送波形类型
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_CTRL, ch_ctrl)) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_CTRL), ch_ctrl)) != ACK_OK)
 		goto error_handler;
 
 	// 更新配置结构体中的波形类型值
@@ -225,15 +333,15 @@ uint8_t analogBoard_setFreq(uint8_t channel, uint64_t freq_uHz)
 	}
 
 	uint8_t ack = 0;
-	uint8_t reg_base_addr = REG_BASE_ADDR(channel);
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
 	uint64_t freq_ctrl_word = freq_uHz * ((uint64_t)1 << FREQ_CTRL_WORD_LENGTH) / (ANALOG_BOARD_FREQ * 1000000ull); // 计算频率控制字
 
 	// 发送频率控制字
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_FREQ_L, (uint16_t)(freq_ctrl_word & 0xFFFF))) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_FREQ_L), (uint16_t)(freq_ctrl_word & 0xFFFF))) != ACK_OK)
 		goto error_handler;
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_FREQ_M, (uint16_t)((freq_ctrl_word >> 16) & 0xFFFF))) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_FREQ_M), (uint16_t)((freq_ctrl_word >> 16) & 0xFFFF))) != ACK_OK)
 		goto error_handler;
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_FREQ_H, (uint16_t)((freq_ctrl_word >> 32) & 0xFFFF))) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_FREQ_H), (uint16_t)((freq_ctrl_word >> 32) & 0xFFFF))) != ACK_OK)
 		goto error_handler;
 	
 	// 更新配置结构体中的频率值
@@ -274,11 +382,11 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
     }
 
 	uint8_t ack = 0;
-	uint8_t reg_base_addr = REG_BASE_ADDR(channel);
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
 	int16_t amplitude_ctrl_word = (int32_t)amplitude_mV * 0x7FFF / 10000; // 计算幅度控制字，强制类型转换是为了防止溢出
 	
 	// 发送幅度控制字
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_AMPL, *(uint16_t *)(&amplitude_ctrl_word))) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_AMPL), *(uint16_t *)(&amplitude_ctrl_word))) != ACK_OK)
 		goto error_handler;
 
 	// 更新配置结构体中的幅度值	
@@ -316,18 +424,18 @@ uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV)
     }
 
 	uint8_t ack = 0;
-	uint8_t reg_base_addr = REG_BASE_ADDR(channel);
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
 	int16_t offset_ctrl_word = (int32_t)offset_mV * 0x7FFF / 10000; // 计算偏移量控制字，强制类型转换是为了防止溢出
 
 	// 发送偏移量控制字
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_OFFSET, offset_ctrl_word)) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_OFFSET), offset_ctrl_word)) != ACK_OK)
 		goto error_handler;
 
 	// 更新配置结构体中的偏移量值
 	cfg->offset_mV = offset_mV;
 
 	// 影子寄存器更新
-	if ((ack = analogBoard_sendData(SYSTEM_BASE + SYS_CTRL, SYS_CTRL_UPDATE)) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(SYSTEM_BASE, SYS_CTRL), SYS_CTRL_UPDATE)) != ACK_OK)
 		goto error_handler;	
 	
 	return ACK_OK;
@@ -352,11 +460,11 @@ uint8_t analogBoard_setPhase(uint8_t channel, uint16_t phase)
 	}
 
 	uint8_t ack = 0;
-	uint8_t reg_base_addr = REG_BASE_ADDR(channel);
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
 	int16_t phase_ctrl_word = (int32_t)phase * 0x7FFF / 36000; // 计算相位控制字，强制类型转换是为了防止溢出
 
 	// 发送相位控制字
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_PHASE, phase_ctrl_word)) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_PHASE), phase_ctrl_word)) != ACK_OK)
 		goto error_handler;
 
 	// 更新配置结构体中的相位值
@@ -366,7 +474,7 @@ uint8_t analogBoard_setPhase(uint8_t channel, uint16_t phase)
 		analogBoardConfig.ch2.phase = phase;
 
 	// 影子寄存器更新
-	if ((ack = analogBoard_sendData(SYSTEM_BASE + SYS_CTRL, SYS_CTRL_UPDATE)) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(SYSTEM_BASE, SYS_CTRL), SYS_CTRL_UPDATE)) != ACK_OK)
 		goto error_handler;
 
 	return ACK_OK;
@@ -391,11 +499,11 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
 	}
 
 	uint8_t ack = 0;
-	uint8_t reg_base_addr = REG_BASE_ADDR(channel);
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
 	uint16_t duty_ctrl_word = (int32_t)duty * 0xFF / 10000; // 计算占空比控制字，强制类型转换是为了防止溢出
 
 	// 发送占空比
-	if ((ack = analogBoard_sendData(reg_base_addr + CHx_DUTY, duty_ctrl_word)) != ACK_OK)
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_DUTY), duty_ctrl_word)) != ACK_OK)
 		goto error_handler;
 
 	// 更新配置结构体中的占空比值
