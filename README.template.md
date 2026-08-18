@@ -62,7 +62,7 @@
 
 ## 🚦 项目状态
 
-> **当前阶段：MVP 硬件验证完成，FPGA 代码开发中**
+> **当前阶段：MVP 硬件、FPGA 核心程序验证完成，MCU 程序开发中**
 
 ### ✅ 已完成
 - [x] PCB 设计与打样（4层板，信号完整性设计）
@@ -74,6 +74,7 @@
 - [x] 相位控制模块
 - [x] 偏置控制模块
 - [x] SPI Slave 通信接口与寄存器组
+- [x] 模拟板驱动库（MCU 端）
 
 ### 🏗️ 开发中（预计 8 月底完成）
 - [ ] 其他波形 DDS：三角波 / 锯齿波 / 方波 / 噪声（公式生成，无需 LUT）
@@ -141,18 +142,33 @@ ArbWave30/
 ## 📡 SCPI 命令示例 
 
 ```python
-# 实际使用时，请将资源字符串替换为你的设备地址（可通过 pyvisa 的 ResourceManager().list_resources() 获取）
 import pyvisa
-rm = pyvisa.ResourceManager()
-inst = rm.open_resource('USB0::0x1234::0x4321::AWG001::INSTR')
+
+# 1. 指定纯 Python 后端（无需安装 NI-VISA 驱动）
+rm = pyvisa.ResourceManager('@py')
+
+# 2. 列出所有资源，找到你的 COM 口（通常是 'ASRL3::INSTR' 类似格式）
+# print(rm.list_resources())
+
+# 3. 打开串口资源，并配置终止符
+inst = rm.open_resource('ASRL3::INSTR')  # 请替换为实际的 ASRL 端口号
+inst.baud_rate = 115200
+inst.read_termination = '\n'   # 非常重要：库默认是 '\n'，但最好显式声明
+inst.write_termination = '\n'  # 发送时自动追加换行符
+
+# 4. 现在你可以像用 USBTMC 仪器一样使用 query
 print(inst.query('*IDN?'))
-inst.write('SOURce1:FUNCtion SIN')
-inst.write('SOURce1:FREQuency 10e6')
-inst.write('SOURce1:VOLTage 5')
-inst.write('OUTPut1 ON')
+inst.write('SOUR:FREQ 1000')
+inst.write('SOUR:STAT ON')
+
+# 5. 查询
+freq = inst.query('SOUR:FREQ?')
+print(f"Freq: {freq}")
+
+inst.close()
 ```
 
-完整命令集参见 [docs/SCPI_reference.md](docs/SCPI_reference.md)(🚧 开发中)。
+完整命令集参见 [docs/SCPI_reference.md](docs/用户手册/SCPI 参考手册.md)。
 
 ## 🧪 自动化测试
 测试脚本位于 `scripts/`（编写中），计划使用 PyVISA 与设备通信。待硬件就绪后，运行 `python scripts/test_waveform.py` 可进行基本功能测试。  
