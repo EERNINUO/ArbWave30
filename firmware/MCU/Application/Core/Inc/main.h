@@ -61,8 +61,8 @@ void Error_Handler(void);
 #define SPI1_CS_GPIO_Port GPIOA
 #define FPGA_NRST_Pin GPIO_PIN_0
 #define FPGA_NRST_GPIO_Port GPIOB
-#define GPIO1_Pin GPIO_PIN_1
-#define GPIO1_GPIO_Port GPIOB
+#define FPGA_INT_Pin GPIO_PIN_1
+#define FPGA_INT_GPIO_Port GPIOB
 #define GPIO2_Pin GPIO_PIN_2
 #define GPIO2_GPIO_Port GPIOB
 #define Debug_LED_Pin GPIO_PIN_14
