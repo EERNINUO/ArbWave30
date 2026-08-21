@@ -69,7 +69,7 @@ void Error_Handler(void);
 #define Debug_LED_GPIO_Port GPIOB
 #define Buzzer_Pin GPIO_PIN_15
 #define Buzzer_GPIO_Port GPIOB
-#define VBUS_Check_Pin GPIO_PIN_9
+#define VBUS_Check_Pin GPIO_PIN_10
 #define VBUS_Check_GPIO_Port GPIOA
 #define ROM_WP_Pin GPIO_PIN_5
 #define ROM_WP_GPIO_Port GPIOB
