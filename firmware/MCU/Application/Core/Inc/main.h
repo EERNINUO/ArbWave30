@@ -75,7 +75,8 @@ void Error_Handler(void);
 #define ROM_WP_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-
+// VBUS_Check 边沿事件标志，由 EXTI9_5 触发，发送给 scpi_task
+#define VBUS_EVENT_FLAG   (1UL << 0)
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

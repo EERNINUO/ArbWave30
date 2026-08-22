@@ -22,6 +22,7 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "cmsis_os.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,7 +52,8 @@
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+// scpi_task 线程句柄
+extern osThreadId_t scpi_TaskHandle;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -205,5 +207,15 @@ void OTG_FS_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
+/**
+ * @brief  EXTI line 回调 (由 HAL_GPIO_EXTI_IRQHandler 调用).
+ * @note   VBUS_Check (PA9): 高电平 = USB电缆连接, 低电平 = 断开连接.
+ *         仅在此处发送通知; 启用/禁用决策由 scpi_task (带防抖)做出.
+ */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin == VBUS_Check_Pin) {
+    osThreadFlagsSet(scpi_TaskHandle, VBUS_EVENT_FLAG);
+  }
+}
 /* USER CODE END 1 */

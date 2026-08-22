@@ -25,7 +25,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdbool.h>
+#include "usbd_core.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,7 +46,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+extern USBD_HandleTypeDef hUsbDeviceFS;
 /* USER CODE END Variables */
 /* Definitions for scpi_Task */
 osThreadId_t scpi_TaskHandle;
@@ -124,12 +125,38 @@ void MX_FREERTOS_Init(void) {
 void start_scpiTask(void *argument)
 {
   /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN start_scpiTask */
+  // 当在 CubeMX 中 Generate 后，上面会有一条 `MX_USB_DEVICE_Init()` 调用，请手动删掉它
+
+  uint32_t flags;                       // 用于存储从 osThreadFlagsWait 获取的标志位
+
+  static bool usb_started = false;      // 记录 USB 是否已经启动
+  static bool usb_initialized = false;  // 记录 USB 是否已经初始化
   /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
+  for(;;) {
+    // 从 EXTI9_5 获取 VBUS 边沿事件（检测 USB 线缆插入/拔出） -> 短延迟进行去抖动
+    flags = osThreadFlagsWait(VBUS_EVENT_FLAG, osFlagsWaitAny, 0U);
+    if ((flags & VBUS_EVENT_FLAG) != 0U) {
+      osDelay(20);  // 去抖动延时
+      
+      // 启用/禁用 USB
+      if (HAL_GPIO_ReadPin(VBUS_Check_GPIO_Port, VBUS_Check_Pin) == GPIO_PIN_SET) {
+        if (!usb_started) {
+          if (usb_initialized) {
+            USBD_Start(&hUsbDeviceFS);      // 重新连接
+          } else {
+            MX_USB_DEVICE_Init();           // 第一次连接，初始化 USB
+            usb_initialized = true;
+          }
+          usb_started = true;
+        }
+      } else {
+        if (usb_started) {
+          USBD_Stop(&hUsbDeviceFS);         // 断开连接
+          usb_started = false;
+        }
+      }
+    }
   }
   /* USER CODE END start_scpiTask */
 }
