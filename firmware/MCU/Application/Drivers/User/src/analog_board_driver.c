@@ -83,6 +83,7 @@ typedef struct __packed community_frame {
 // 这两个结构体只是镜像数据，向模拟板写入数据必须通过 setXXX 函数，操作这两个结构体不会影响模拟板
 typedef struct{
     bool enable;            // 通道使能
+	bool highImpedance_enable;    // 高阻态使能
     WaveType_t waveType;    // 波形类型
     uint64_t freq_uHz;      // 频率，单位 uHz
     int16_t amplitude_mV;   // 幅度，单位 mV
@@ -103,6 +104,7 @@ AnalogBoardConfig_t analogBoardConfig = {
 	.extern_clock = false,
 	.ch1 = {
 		.enable = false,
+		.highImpedance_enable = true,
 		.waveType = WAVE_SINE,
 		.duty = 5000,
 		.freq_uHz = 0,
@@ -112,6 +114,7 @@ AnalogBoardConfig_t analogBoardConfig = {
 	},
 	.ch2 = {
 		.enable = false,
+		.highImpedance_enable = true,
 		.waveType = WAVE_SINE,
 		.duty = 5000,
 		.freq_uHz = 0,
@@ -434,15 +437,26 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
     ChConfig_t *cfg = (channel == 1) ? &analogBoardConfig.ch1 : &analogBoardConfig.ch2;
     int16_t offset_mV = cfg->offset_mV;
 
+	int16_t real_amplitude_mV, real_offset_mV;
+    if (cfg -> highImpedance_enable == true) {
+        real_amplitude_mV = amplitude_mV;
+		real_offset_mV = offset_mV;
+    } else {
+		real_amplitude_mV = amplitude_mV * 2;
+		real_offset_mV = offset_mV * 2;
+	}
+
+
     // 限幅逻辑
-    if (abs(amplitude_mV) + abs(offset_mV) > VOLT_MAX) {
-        int16_t limit = VOLT_MAX - abs(offset_mV); 
-        amplitude_mV = (amplitude_mV >= 0) ? limit : -limit;
+    if (abs(real_amplitude_mV) + abs(real_offset_mV) > VOLT_MAX) {
+        int16_t limit = VOLT_MAX - abs(real_offset_mV); 
+        real_amplitude_mV = (real_amplitude_mV >= 0) ? limit : -limit;
+		amplitude_mV = cfg -> highImpedance_enable ? real_amplitude_mV : real_amplitude_mV / 2;
     }
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	int16_t amplitude_ctrl_word = (int32_t)amplitude_mV * 0x7FFF / 10000; // 计算幅度控制字，强制类型转换是为了防止溢出
+	int16_t amplitude_ctrl_word = (int32_t)real_amplitude_mV * 0x7FFF / 10000; // 计算幅度控制字，强制类型转换是为了防止溢出
 	
 	// 发送幅度控制字
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_AMPL), *(uint16_t *)(&amplitude_ctrl_word))) != ACK_OK)
@@ -476,15 +490,25 @@ uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV)
     ChConfig_t *cfg = (channel == 1) ? &analogBoardConfig.ch1 : &analogBoardConfig.ch2;
     int16_t amplitude_mV = cfg->amplitude_mV;
 
+	int16_t real_amplitude_mV, real_offset_mV;
+    if (cfg -> highImpedance_enable == true) {
+        real_amplitude_mV = amplitude_mV;
+		real_offset_mV = offset_mV;
+    } else {
+		real_amplitude_mV = amplitude_mV * 2;
+		real_offset_mV = offset_mV * 2;
+	}
+
     // 限幅逻辑
-    if (abs(offset_mV) + abs(amplitude_mV) > VOLT_MAX) {
-        int16_t limit = VOLT_MAX - abs(amplitude_mV); 
-        offset_mV = (offset_mV >= 0) ? limit : -limit;
+    if (abs(real_offset_mV) + abs(real_amplitude_mV) > VOLT_MAX) {
+        int16_t limit = VOLT_MAX - abs(real_amplitude_mV); 
+        real_offset_mV = (real_offset_mV >= 0) ? limit : -limit;
+		offset_mV = cfg -> highImpedance_enable ? real_offset_mV : real_offset_mV / 2;
     }
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	int16_t offset_ctrl_word = (int32_t)offset_mV * 0x7FFF / 10000; // 计算偏移量控制字，强制类型转换是为了防止溢出
+	int16_t offset_ctrl_word = (int32_t)real_offset_mV * 0x7FFF / 10000; // 计算偏移量控制字，强制类型转换是为了防止溢出
 
 	// 发送偏移量控制字
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_OFFSET), offset_ctrl_word)) != ACK_OK)
