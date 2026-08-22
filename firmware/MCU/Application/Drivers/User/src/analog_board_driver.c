@@ -19,13 +19,43 @@
 // 我一直觉得这种到处extern的写法很讨厌，但是CubeMX生成的代码就是这样，很难受
 extern SPI_HandleTypeDef hspi1; // 声明SPI句柄 
 
-// 数据帧结构体定义
-typedef struct __packed community_frame {
-	uint8_t address;
-	uint16_t data;
-	uint8_t crc;
-	uint8_t ack;
-} community_frame_t;
+// 模拟板寄存器基地址定义
+#define SYSTEM_BASE 0x00
+#define CHANNEL1_BASE 0x10
+#define CHANNEL2_BASE 0x20
+#define DACMAP_BASE 0x30
+
+// 模拟板系统控制寄存器地址偏移量
+#define SYS_ID_L 0x00
+#define SYS_ID_H 0x01
+#define SYS_CTRL 0x02
+#define SYS_STATUS 0x03
+
+// 模拟板通道控制寄存器地址偏移量
+#define CHx_CTRL 0x00
+#define CHx_FREQ_L 0x01
+#define CHx_FREQ_M 0x02
+#define CHx_FREQ_H 0x03
+#define CHx_AMPL 0x04
+#define CHx_OFFSET 0x05
+#define CHx_PHASE 0x06
+#define CHx_DUTY 0x07
+
+// 系统控制寄存器位定义
+
+#define SYS_CTRL_UPDATE         3 
+#define SYS_CTRL_DAC_CMD_WRITE  2 
+#define SYS_CTRL_CLOCK_SRC      1 
+#define SYS_CTRL_SOFT_RST       0 
+
+// 通道控制寄存器位定义
+#define CH_CTRL_ENABLE          15 
+#define CH_CTRL_WAVEFORM        0  
+#define CH_CTRL_WAVEFORM_MASK   0x3F     // 低6位
+
+// 寄存器地址计算宏
+#define REG_CH_BASE_ADDR(channel) ((channel == 1) ? CHANNEL1_BASE : CHANNEL2_BASE)
+#define REG_ADDR(base, offset) ((base) + (offset))
 
 #define spi_cs(x) \
 do { \
@@ -40,6 +70,33 @@ do { \
 } while(0)
 
 #define int_read() HAL_GPIO_ReadPin(INTERRUPT_Port, INTERRUPT_Pin)
+
+// 数据帧结构体定义
+typedef struct __packed community_frame {
+	uint8_t address;
+	uint16_t data;
+	uint8_t crc;
+	uint8_t ack;
+} community_frame_t;
+
+// 模拟板配置结构体
+// 这两个结构体只是镜像数据，向模拟板写入数据必须通过 setXXX 函数，操作这两个结构体不会影响模拟板
+typedef struct{
+    bool enable;            // 通道使能
+    WaveType_t waveType;    // 波形类型
+    uint64_t freq_uHz;      // 频率，单位 uHz
+    int16_t amplitude_mV;   // 幅度，单位 mV
+    int16_t offset_mV;      // 偏移量，单位 mV
+    uint16_t phase;          // 相位，单位 0.01度（0.01°）（0~36000，对应 0.00°~360.00°）
+    uint16_t duty;          // 占空比/对称度，单位 0.01%，仅对三角波和方波有效（0~10000，对应 0~100.00）
+} ChConfig_t;
+
+typedef struct{
+    bool extern_clock;      // 外部时钟使能
+    ChConfig_t ch1;
+    ChConfig_t ch2;
+} AnalogBoardConfig_t;
+
 
 // 模拟板配置结构体定义
 AnalogBoardConfig_t analogBoardConfig = {
@@ -261,6 +318,8 @@ error_handler:
  *  通道功能函数
  * --------------------------------------*/
 
+// 参数设置函数
+
 /**
  * @brief  设置通道使能状态
  * @param  channel: 通道号，1或2
@@ -448,7 +507,7 @@ error_handler:
 /**
  * @brief  设置相位
  * @param  channel: 通道号，1或2
- * @param  phase: 相位，单位 度（°）（0~36000，对应 0.00°~360.00°）
+ * @param  phase: 相位，单位 0.01度（0.01°）（0~36000，对应 0.00°~360.00°）
  * @retval ACK响应
  */
 uint8_t analogBoard_setPhase(uint8_t channel, uint16_t phase)
@@ -487,7 +546,7 @@ error_handler:
 /**
  * @brief  设置占空比/对称度，仅对三角波和方波有效
  * @param  channel: 通道号，1或2
- * @param  duty: 占空比/对称度，单位 %，仅对三角波和方波有效（0~10000，对应 0~100.00）
+ * @param  duty: 占空比/对称度，单位 0.01%，仅对三角波和方波有效（0~10000，对应 0~100.00）
  * @retval ACK响应
  */
 uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
@@ -520,4 +579,78 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
 error_handler:
 	// 错误处理
 	return ack;
+}
+
+// 参数读取函数
+// 这些函数都是通过读取 MCU 中的镜像结构体来实现的，不需要与 FPGA 通信，不存在 ACK 响应，因此直接返回读取的数据即可
+
+/**
+ * @brief  获取使能状态
+ * @param  channel: 通道号，1或2
+ * @retval true: 使能
+ *         false: 禁用
+ */
+bool analogBoard_getEnable(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.enable : analogBoardConfig.ch2.enable;
+}
+
+/**
+ * @brief  获取波形类型
+ * @param  channel: 通道号，1或2
+ * @retval 波形类型
+ */
+WaveType_t analogBoard_getWave(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.waveType : analogBoardConfig.ch2.waveType;
+}
+
+/**
+ * @brief  获取频率
+ * @param  channel: 通道号，1或2
+ * @retval 频率，单位 uHz
+ */
+uint64_t analogBoard_getFreq(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.freq_uHz : analogBoardConfig.ch2.freq_uHz;
+}
+
+/**
+ * @brief  获取幅度
+ * @param  channel: 通道号，1或2
+ * @retval 幅度，单位 mV
+ */
+int16_t analogBoard_getAmplitude(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.amplitude_mV : analogBoardConfig.ch2.amplitude_mV;
+}
+
+/**
+ * @brief  获取偏移量
+ * @param  channel: 通道号，1或2
+ * @retval 偏移量，单位 mV
+ */
+int16_t analogBoard_getOffset(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.offset_mV : analogBoardConfig.ch2.offset_mV;
+}
+
+/**
+ * @brief  获取相位
+ * @param  channel: 通道号，1或2
+ * @retval 相位，单位 0.01度（0.01°）
+ */
+uint16_t analogBoard_getPhase(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.phase : analogBoardConfig.ch2.phase;
+}
+
+/**
+ * @brief  获取占空比/对称度，仅对三角波和方波有效
+ * @param  channel: 通道号，1或2
+ * @retval 占空比/对称度，单位 0.01%
+ */
+uint16_t analogBoard_getDuty(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.duty : analogBoardConfig.ch2.duty;
 }
