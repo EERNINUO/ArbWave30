@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
 #include "usbd_core.h"
+#include "scpi/scpi.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -125,9 +126,9 @@ void MX_FREERTOS_Init(void) {
 void start_scpiTask(void *argument)
 {
   /* init code for USB_DEVICE */
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN start_scpiTask */
   // 当在 CubeMX 中 Generate 后，上面会有一条 `MX_USB_DEVICE_Init()` 调用，请手动删掉它
-
   uint32_t flags;                       // 用于存储从 osThreadFlagsWait 获取的标志位
 
   static bool usb_started = false;      // 记录 USB 是否已经启动

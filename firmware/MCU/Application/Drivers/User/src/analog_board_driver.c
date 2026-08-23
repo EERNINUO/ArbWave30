@@ -14,6 +14,7 @@
 
 #include "analog_board_driver.h"
 #include <stdlib.h>
+#include "cmsis_os.h"
 
 // 外部变量声明
 // 我一直觉得这种到处extern的写法很讨厌，但是CubeMX生成的代码就是这样，很难受
@@ -100,7 +101,7 @@ typedef struct{
 
 
 // 模拟板配置结构体定义
-AnalogBoardConfig_t analogBoardConfig = {
+static AnalogBoardConfig_t analogBoardConfig = {
 	.extern_clock = false,
 	.ch1 = {
 		.enable = false,
@@ -270,11 +271,44 @@ error_handler:
 }
 
 /**
+ * @brief  镜像结构体复位
+ * @retval 无
+ */
+void analogBoard_mirrorReset(void)
+{
+	analogBoardConfig = (AnalogBoardConfig_t){
+		.extern_clock = false,
+		.ch1 = {
+			.enable = false,
+			.highImpedance_enable = true,
+			.waveType = WAVE_SINE,
+			.duty = 5000,
+			.freq_uHz = 0,
+			.amplitude_mV = 0,
+			.offset_mV = 0,
+			.phase = 0,
+		},
+		.ch2 = {
+			.enable = false,
+			.highImpedance_enable = true,
+			.waveType = WAVE_SINE,
+			.duty = 5000,
+			.freq_uHz = 0,
+			.amplitude_mV = 0,
+			.offset_mV = 0,
+			.phase = 0,
+		}
+	};
+}
+
+/**
  * @brief  模拟板软复位（其实功能和模拟板硬复位一样，但既然模拟板留了，那就实现一下，指不定什么时候用得到）
  * @retval ACK响应
  */
 uint8_t analogBoard_softReset(void)
 {
+	analogBoard_mirrorReset();
+
 	uint8_t ack = 0;
 	uint16_t sys_ctrl = analogBoardConfig.extern_clock << SYS_CTRL_CLOCK_SRC | 1 << SYS_CTRL_SOFT_RST;
 
@@ -293,8 +327,10 @@ error_handler:
  */
 void analogBoard_hardReset(void)
 {
+	analogBoard_mirrorReset();
+
     analog_board_rst(0);
-    HAL_Delay(100);
+    osDelay(100);
 	analog_board_rst(1);
 }
 
