@@ -19,7 +19,9 @@
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
-static char scpi_tx_buffer[SCPI_TX_BUFFER_SIZE]; // SCPI TX缓冲区   
+static char scpi_rx_buffer[SCPI_RX_BUFFER_SIZE]; // SCPI RX缓冲区
+static char scpi_tx_buffer[SCPI_TX_BUFFER_SIZE]; // SCPI TX缓冲区 
+static scpi_error_t scpi_error_queue[SCPI_ERROR_QUEUE_SIZE]; 		// SCPI 错误队列
 
 static size_t SCPI_Write(scpi_t * context, const char * data, size_t len)
 {
@@ -98,3 +100,30 @@ static scpi_interface_t scpi_interface =
 	ArbWave30_Reset     /* reset   */
 };
 
+static const scpi_command_t scpi_commands[] =
+{
+    // IEEE 488.2 公共命令
+    { "*IDN?",                      SCPI_CoreIdnQ,            0 },
+    { "*RST",                       ArbWave30_Reset,          0 },
+    { "*CLS",                       SCPI_CoreCls,             0 },
+
+    // SYSTem 命令
+    { "SYSTem:ERRor?",              SCPI_SystemErrorNextQ,    0 },
+    { "SYSTem:ERRor:NEXT?",         SCPI_SystemErrorNextQ,    0 },
+    { "SYSTem:VERSion?",            SCPI_SystemVersionQ,      0 },
+
+    SCPI_CMD_LIST_END
+};
+
+void ArbWave30_SCPI_Init(scpi_t * context)
+{
+	ArbWave30_Reset(context);
+
+    SCPI_Init(context,
+            scpi_commands,
+            &scpi_interface,
+            scpi_units_def,
+            "EERNINUO", "ArbWave30", "V1.0.0", "SN123456",
+            scpi_rx_buffer, sizeof(scpi_rx_buffer),
+            scpi_error_queue, (int16_t)(sizeof(scpi_error_queue) / sizeof(scpi_error_queue[0])));
+}

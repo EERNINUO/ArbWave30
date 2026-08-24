@@ -17,7 +17,9 @@
 
 #define SCPI_TX_BUFFER_SIZE   256
 #define SCPI_TX_TIMEOUT_MS    1000
+#define SCPI_RX_BUFFER_SIZE   256
+#define SCPI_ERROR_QUEUE_SIZE  8
 
-void ArbWave30_SCPI_Init(void);
+void ArbWave30_SCPI_Init(scpi_t * context);
 
 #endif /* __SCPI_DEF_H__ */

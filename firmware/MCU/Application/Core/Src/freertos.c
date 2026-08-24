@@ -27,7 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
 #include "usbd_core.h"
-#include "scpi/scpi.h"
+#include "scpi_def.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -136,6 +136,9 @@ void scpi_task(void *argument)
 
   static bool usb_started = false;      // 记录 USB 是否已经启动
   static bool usb_initialized = false;  // 记录 USB 是否已经初始化
+
+  ArbWave30_SCPI_Init(&scpi_context);
+
   /* Infinite loop */
   for(;;) {
     if (osMessageQueueGet(USB_ReceiveCharHandle, &ch, NULL, 50) == osOK) {
