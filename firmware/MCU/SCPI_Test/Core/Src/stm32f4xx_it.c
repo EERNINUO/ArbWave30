@@ -161,7 +161,6 @@ void DebugMon_Handler(void)
 /******************************************************************************/
 
 /**
-<<<<<<< HEAD
   * @brief This function handles EXTI line[9:5] interrupts.
   */
 void EXTI9_5_IRQHandler(void)
@@ -176,8 +175,6 @@ void EXTI9_5_IRQHandler(void)
 }
 
 /**
-=======
->>>>>>> 2bab34c32b447f8799128d6aa649086e3a1381e8
   * @brief This function handles TIM1 trigger and commutation interrupts and TIM11 global interrupt.
   */
 void TIM1_TRG_COM_TIM11_IRQHandler(void)

@@ -48,6 +48,9 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 extern USBD_HandleTypeDef hUsbDeviceFS;
+
+scpi_t scpi_context; // SCPI 上下文
+
 /* USER CODE END Variables */
 /* Definitions for scpi_Task */
 osThreadId_t scpi_TaskHandle;
@@ -67,7 +70,7 @@ const osMessageQueueAttr_t USB_ReceiveChar_attributes = {
 
 /* USER CODE END FunctionPrototypes */
 
-void start_scpiTask(void *argument);
+void scpi_task(void *argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -104,7 +107,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* creation of scpi_Task */
-  scpi_TaskHandle = osThreadNew(start_scpiTask, NULL, &scpi_Task_attributes);
+  scpi_TaskHandle = osThreadNew(scpi_task, NULL, &scpi_Task_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -116,25 +119,29 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_start_scpiTask */
+/* USER CODE BEGIN Header_scpi_task */
 /**
   * @brief  Function implementing the scpi_Task thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_start_scpiTask */
-void start_scpiTask(void *argument)
+/* USER CODE END Header_scpi_task */
+void scpi_task(void *argument)
 {
   /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
-  /* USER CODE BEGIN start_scpiTask */
+  /* USER CODE BEGIN scpi_task */
   // 当在 CubeMX 中 Generate 后，上面会有一条 `MX_USB_DEVICE_Init()` 调用，请手动删掉它
+  char ch;                              // 用于存储从 USB 接收到的字符
   uint32_t flags;                       // 用于存储从 osThreadFlagsWait 获取的标志位
 
   static bool usb_started = false;      // 记录 USB 是否已经启动
   static bool usb_initialized = false;  // 记录 USB 是否已经初始化
   /* Infinite loop */
   for(;;) {
+    if (osMessageQueueGet(USB_ReceiveCharHandle, &ch, NULL, 50) == osOK) {
+      SCPI_Input(&scpi_context, &ch, 1);
+    }
+
     // 从 EXTI9_5 获取 VBUS 边沿事件（检测 USB 线缆插入/拔出） -> 短延迟进行去抖动
     flags = osThreadFlagsWait(VBUS_EVENT_FLAG, osFlagsWaitAny, 0U);
     if ((flags & VBUS_EVENT_FLAG) != 0U) {
@@ -159,7 +166,7 @@ void start_scpiTask(void *argument)
       }
     }
   }
-  /* USER CODE END start_scpiTask */
+  /* USER CODE END scpi_task */
 }
 
 /* Private application code --------------------------------------------------*/

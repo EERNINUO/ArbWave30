@@ -22,7 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-
+#include "cmsis_os.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,7 +94,8 @@ uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
 uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
 
 /* USER CODE BEGIN PRIVATE_VARIABLES */
-
+// USB 接收队列句柄
+extern osMessageQueueId_t USB_ReceiveCharHandle;
 /* USER CODE END PRIVATE_VARIABLES */
 
 /**
@@ -261,6 +262,15 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
+  char ch;
+  uint32_t i;
+
+  // 将接收到的数据放入消息队列
+  for (i = 0U; i < *Len; i++) {
+    ch = (char)Buf[i];
+    (void)osMessageQueuePut(USB_ReceiveCharHandle, &ch, 0U, 0U);
+  }
+
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceFS);
   return (USBD_OK);

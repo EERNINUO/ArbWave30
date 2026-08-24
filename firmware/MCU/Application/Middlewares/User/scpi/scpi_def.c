@@ -10,10 +10,12 @@
  * ...
  */
 
+// Assisted-by: DeepSeek - SCPI_Write 函数实现参考
+
 #include "scpi_def.h"
 #include "analog_board_driver.h"
 #include "usbd_cdc_if.h"
-#include "analog_board_driver.h"
+#include "cmsis_os.h"
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
@@ -24,9 +26,13 @@ static size_t SCPI_Write(scpi_t * context, const char * data, size_t len)
 	USBD_CDC_HandleTypeDef *hcdc;
 	uint32_t timeout;
 
+	// 检查长度是否超过缓冲区大小，如果超过则截断
+	// 虽然截断响应数据在 SCPI 协议中属于异常行为，但在嵌入式场景中，宁可截断长字符串，也绝不能发生缓冲区溢出，否则会发生 HardFault
+	// 也可以直接返回 0 来通知 SCPI 库发送失败，未来实现
 	if (len > SCPI_TX_BUFFER_SIZE)  {
 		len = SCPI_TX_BUFFER_SIZE;
 	}
+	// 拷贝到自己的缓冲区是为了防止上一级函数在退出后 data 指针失效
 	memcpy(scpi_tx_buffer, data, len);
 
 	hcdc = (USBD_CDC_HandleTypeDef *)hUsbDeviceFS.pClassData;
