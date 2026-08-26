@@ -12,7 +12,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 # ADR-001: 选用高云GW2AR-18 LQFP144作为主控FPGA
 
 ## 状态
-已采纳 (2026-04-05)
+已采纳 （2026-04-05）
 
 ## 背景
 ArbWave30项目需要一个FPGA来实现：
@@ -54,7 +54,7 @@ ArbWave30项目需要一个FPGA来实现：
 - 单价：约45~55元
 
 ### 方案D：Xilinx Artix-7 XC7A35T BGA
-- 逻辑资源：33k LUTs(过剩)
+- 逻辑资源：33k LUTs（过剩）
 - 封装：BGA（难以手工焊接）
 - 集成资源丰富，但价格较高，且开发环境复杂
 - 教程和社区支持最多，经典入门FPGA
