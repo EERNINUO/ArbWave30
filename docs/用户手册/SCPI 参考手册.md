@@ -22,7 +22,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - **物理层**：USB 2.0（CDC 类虚拟串口）
 - **波特率**：115200 bps （该参数对虚拟串口无实质影响）
 - **数据位**：8，**停止位**：1，**校验位**：无
-- **结束符**：`\n` (换行，十六进制 0x0A)
+- **结束符**：`\n` （换行，十六进制 0x0A)
 
 ---
 
@@ -37,7 +37,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 | `|` | 逻辑“或”分隔符。 | `ON|OFF` |
 | `#` | 通道占位符。 | `SOURce#` 代表 `SOURce1` 或 `SOURce2` |
 | `< >` | 用户必须替换的实际数值。 | `<frequency>` |
-| `( )` | 命令的短格式（助记符），SCPI 引擎同时接受长格式和短格式。 | `FREQuency` (短格式: `FREQ`) |
+| `（ )` | 命令的短格式（助记符），SCPI 引擎同时接受长格式和短格式。 | `FREQuency` （短格式: `FREQ`) |
 
 **查询命令**：在命令末尾添加问号 `?` 可查询当前设定值，如 `FREQuency?`。
 
@@ -61,7 +61,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - 波形：正弦波
 - 幅值：0 Vpp
 - 偏置：0 V
-- 输出状态：关闭 (OFF)
+- 输出状态：关闭 （OFF)
 
 ### 3.3 `*CLS` —— 清除错误队列
 **功能**：清空系统错误/事件队列。
@@ -81,8 +81,8 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 
 **参数说明**：
 - `<frequency>`：浮点数，单位 Hz。
-- `MIN`：最小值，0 Hz (0 Hz)。
-- `MAX`：最大值，30,000,000 Hz (30 MHz)。
+- `MIN`：最小值，0 Hz （0 Hz)。
+- `MAX`：最大值，30,000,000 Hz （30 MHz)。
 
 **示例**：
 - `SOURce1:FREQuency 1000000` -> 设置通道 1 频率为 1 MHz。
@@ -98,10 +98,11 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 `[SOURce#:]FUNCtion?`
 
 **参数说明**：
-- `SINusoid` (短格式: `SIN`)：正弦波。
-- `SQUare` (短格式: `SQU`)：方波。
-- `TRIangle` (短格式: `TRI`)：三角波。
-- `SAWtooth` (短格式: `SAW`)：锯齿波（上升沿）。
+- `SINusoid` （短格式: `SIN`)：正弦波。
+- `SQUare` （短格式: `SQU`)：方波。
+- `TRIangle` （短格式: `TRI`)：三角波。
+- `NOISe` （短格式: `NOI`)：噪声波。
+- `DC` （短格式: `DC`)：直流电平。
 
 **示例**：
 - `SOURce2:FUNCtion SQU` -> 设置通道 2 输出方波。
@@ -154,7 +155,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 
 **参数说明**：
 - `50`：匹配 50Ω 系统，显示的幅度为实际负载上的电压（即设定值的一半）。
-- `HIGH`（或 `INF`）：高阻模式，显示的幅度为开路电压（设定值等于实际输出）。
+- `HIGH`：高阻模式，显示的幅度为开路电压（设定值等于实际输出）。
 
 ---
 
@@ -255,7 +256,7 @@ print(f"Freq: {freq}")
 inst.close()
 ```
 
-## 6. 版本记录
+## 9. 版本记录
 
 | 版本 | 日期 | 修改内容 | 修改人 |
 |------|------|----------|--------|

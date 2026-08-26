@@ -12,7 +12,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 # ADR-004: 滤波器拓扑结构选型
 
 ## 状态
-已采纳 (2026-05-09)
+已采纳 （2026-05-09）
 
 ## 背景
 AWG 输出 30MHz 正弦波、5MHz 方波。DAC 为 AD9747（150MSPS），需重构滤波器抑制采样镜像。
@@ -70,4 +70,4 @@ AWG 输出 30MHz 正弦波、5MHz 方波。DAC 为 AD9747（150MSPS），需重�
 - 负面影响：方波存在约 13%~18% 过冲，需要在后续设计中考虑优化方案。
 
 ## 相关链接
-- [重构滤波器调试笔记](/docs/设计笔记/重构滤波器调试笔记.md)
+- [重构滤波器调试笔记]（/docs/设计笔记/重构滤波器调试笔记.md)
