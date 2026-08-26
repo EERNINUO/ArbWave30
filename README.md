@@ -12,6 +12,9 @@
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
     <img alt="GitHub 仓库星标" src="https://img.shields.io/github/stars/EERNINUO/ArbWave30">
   </a>
+  <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
+    <img alt="GitHub 仓库分支" src="https://img.shields.io/github/forks/EERNINUO/ArbWave30">
+  </a>
   <br/>
   <a href="https://raw.githubusercontent.com/EERNINUO/ArbWave30/main/LICENSE" style="margin: 2px;">
     <img src="https://img.shields.io/badge/License-GPL--3.0-red" alt="许可证">
@@ -68,13 +71,13 @@
 - [x] 模拟前端调试通过 ✅ 已输出 **差分正弦波**（见下方截图）
 - [x] DAC 上电参数配置正常（SPI 接口通信稳定）
 - [x] 正弦 DDS 核（IP 核实现，48位相位累加器）
+- [x] 幅度控制模块
+- [x] 相位控制模块
+- [x] 偏置控制模块
+- [x] SPI Slave 通信接口与寄存器组
 
 ### 🏗️ 开发中（预计 8 月底完成）
 - [ ] 其他波形 DDS：三角波 / 锯齿波 / 方波 / 噪声（公式生成，无需 LUT）
-- [ ] 幅度控制模块
-- [ ] 相位控制模块
-- [ ] 偏置控制模块
-- [ ] SPI Slave 通信接口与寄存器组
 - [ ] 顶层模块集成与系统联调
 - [ ] 7阶椭圆滤波器重构与焊接（当前正在优化元件选型）
 - [ ] 差分转单端电路调试
@@ -127,7 +130,7 @@ ArbWave30/
 
 ## 🚀 快速开始
 
-> 项目处于 **最小可行产品（MVP）设计阶段**，正在编写 FPGA 代码，待 MVP 验证完成后，将提供：
+> 项目处于 **最小可行产品（MVP）验证阶段**，正在编写 MCU 代码，待 MVP 验证完成后，将提供：
 > - 打样 PCB 的 Gerber 文件及 BOM
 > - FPGA 比特流烧录方法（通过 JTAG  加载）
 > - 固件编译与升级步骤
