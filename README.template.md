@@ -90,8 +90,8 @@
 
 **差分正弦波输出（50MHz 示波器实测）：**
 
-![1MHz 差分正弦波]（/docs/pic/1MHz_差分正弦波.BMP)
-![100kHz 差分正弦波]（/docs/pic/100kHz_差分正弦波.BMP)
+![1MHz 差分正弦波](/docs/pic/1MHz_差分正弦波.BMP)
+![100kHz 差分正弦波](/docs/pic/100kHz_差分正弦波.BMP)
 
 > *注：当前使用 50MHz 带宽示波器，更高频率波形与精确 THD 测量待返校后用更高带宽仪器进行。*
 
@@ -170,7 +170,7 @@ print(f"Freq: {freq}")
 inst.close()
 ```
 
-完整命令集参见 [docs/SCPI_reference.md]（docs/用户手册/SCPI 参考手册.md)。
+完整命令集参见 [docs/SCPI_reference.md](docs/用户手册/SCPI 参考手册.md)。
 
 ## 🧪 自动化测试
 测试脚本位于 `scripts/`（编写中），计划使用 PyVISA 与设备通信。待硬件就绪后，运行 `python scripts/test_waveform.py` 可进行基本功能测试。  
