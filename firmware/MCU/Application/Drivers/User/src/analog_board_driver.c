@@ -421,7 +421,7 @@ error_handler:
  * @param  freq_uHz: 频率，单位 uHz
  * @retval ACK响应
  */
-uint8_t analogBoard_setFreq(uint8_t channel, uint64_t freq_uHz)
+uint8_t analogBoard_setFrequency(uint8_t channel, uint64_t freq_uHz)
 {
 	// 限制频率范围
 	if (freq_uHz > FREQ_MAX * 1000000ull) {
@@ -463,7 +463,7 @@ error_handler:
 /**
  * @brief  设置幅度
  * @param  channel: 通道号，1或2
- * @param  amplitude_mV: 幅度，单位 mV
+ * @param  amplitude_mV: 幅度（是幅度，不是 Vpp），单位 mV
  * @retval ACK响应
  */
 uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
@@ -484,8 +484,8 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
 
 
     // 限幅逻辑
-    if (abs(real_amplitude_mV) + abs(real_offset_mV) > VOLT_MAX) {
-        int16_t limit = VOLT_MAX - abs(real_offset_mV); 
+    if (abs(real_amplitude_mV) + abs(real_offset_mV) > (VOLT_MAX * 1000)) {
+        int16_t limit = (VOLT_MAX * 1000) - abs(real_offset_mV); 
         real_amplitude_mV = (real_amplitude_mV >= 0) ? limit : -limit;
 		amplitude_mV = cfg -> highImpedance_enable ? real_amplitude_mV : real_amplitude_mV / 2;
     }
@@ -536,8 +536,8 @@ uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV)
 	}
 
     // 限幅逻辑
-    if (abs(real_offset_mV) + abs(real_amplitude_mV) > VOLT_MAX) {
-        int16_t limit = VOLT_MAX - abs(real_amplitude_mV); 
+    if (abs(real_offset_mV) + abs(real_amplitude_mV) > (VOLT_MAX * 1000)) {
+        int16_t limit = (VOLT_MAX * 1000) - abs(real_amplitude_mV); 
         real_offset_mV = (real_offset_mV >= 0) ? limit : -limit;
 		offset_mV = cfg -> highImpedance_enable ? real_offset_mV : real_offset_mV / 2;
     }
@@ -572,10 +572,10 @@ error_handler:
  */
 uint8_t analogBoard_setPhase(uint8_t channel, uint16_t phase)
 {
-	if (phase > PHASE_MAX) {
-		phase = PHASE_MAX; // 限制相位范围
-	} else if (phase < PHASE_MIN) {
-		phase = PHASE_MIN;
+	if (phase > (PHASE_MAX * 100)) {
+		phase = (PHASE_MAX * 100); // 限制相位范围
+	} else if (phase < (PHASE_MIN * 100)) {
+		phase = (PHASE_MIN * 100);
 	}
 
 	uint8_t ack = 0;
@@ -611,10 +611,10 @@ error_handler:
  */
 uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
 {
-	if (duty > DUTY_MAX) {
-		duty = DUTY_MAX; // 限制占空比范围
-	} else if (duty < DUTY_MIN) {
-		duty = DUTY_MIN;
+	if (duty > (DUTY_MAX * 100)) {
+		duty = (DUTY_MAX * 100); // 限制占空比范围
+	} else if (duty < (DUTY_MIN * 100)) {
+		duty = (DUTY_MIN * 100);
 	}
 
 	uint8_t ack = 0;
@@ -670,7 +670,7 @@ WaveType_t analogBoard_getWave(uint8_t channel)
  * @param  channel: 通道号，1或2
  * @retval 频率，单位 uHz
  */
-uint64_t analogBoard_getFreq(uint8_t channel)
+uint64_t analogBoard_getFrequency(uint8_t channel)
 {
 	return (channel == 1) ? analogBoardConfig.ch1.freq_uHz : analogBoardConfig.ch2.freq_uHz;
 }

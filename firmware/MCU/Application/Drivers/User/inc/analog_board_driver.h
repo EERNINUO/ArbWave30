@@ -34,12 +34,12 @@
 // 参数范围
 #define FREQ_MIN 0 // 最小频率，单位 Hz
 #define FREQ_MAX 30000000 // 最大频率，单位 Hz
-#define VOLT_MIN -10000 // 最小输出电压，单位 mV
-#define VOLT_MAX 10000 // 最大输出电压，单位 mV
-#define PHASE_MIN 0 // 最小相位，单位 0.01度（0.01°）
-#define PHASE_MAX 36000 // 最大相位，单位 0.01度（0.01°）
-#define DUTY_MIN 0 // 最小占空比，单位 0.01%
-#define DUTY_MAX 10000 // 最大占空比，单位 0.01%
+#define VOLT_MIN -10 // 最小输出电压，单位 V
+#define VOLT_MAX 10 // 最大输出电压，单位 V
+#define PHASE_MIN 0 // 最小相位，单位 度（°）
+#define PHASE_MAX 360 // 最大相位，单位 度（°）
+#define DUTY_MIN 0 // 最小占空比，单位 %
+#define DUTY_MAX 100 // 最大占空比，单位 %
 
 // CRC8计算参数
 #define CRC_POLYNOMIAL 0x07
@@ -53,12 +53,11 @@
 
 // 波形枚举
 typedef enum {
-    WAVE_SINE    = 0x00,
-    WAVE_SQUARE  = 0x01,
-    WAVE_TRIANGLE= 0x02,
-    WAVE_SAWTOOTH= 0x03,
-    WAVE_NOISE   = 0x04,
-    WAVE_DC      = 0x05,
+    WAVE_SINE     = 0x00,
+    WAVE_SQUARE   = 0x01,
+    WAVE_TRIANGLE = 0x02,
+    WAVE_NOISE    = 0x03,
+    WAVE_DC       = 0x04,
 } WaveType_t;
 
 // 系统状态枚举
@@ -81,7 +80,7 @@ uint8_t analogBoard_readSysStatus(uint16_t *sys_status);
 // 参数设置函数
 uint8_t analogBoard_setEnable(uint8_t channel, bool enable);
 uint8_t analogBoard_setWave(uint8_t channel, WaveType_t waveType);
-uint8_t analogBoard_setFreq(uint8_t channel, uint64_t freq_uHz);
+uint8_t analogBoard_setFrequency(uint8_t channel, uint64_t freq_uHz);
 uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV);
 uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV);
 uint8_t analogBoard_setPhase(uint8_t channel, uint16_t phase);
@@ -91,7 +90,7 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty);
 // 这些函数都是通过读取 MCU 中的镜像结构体来实现的，不需要与 FPGA 通信，不存在 ACK 响应，因此直接返回读取的数据即可
 bool analogBoard_getEnable(uint8_t channel);
 WaveType_t analogBoard_getWave(uint8_t channel);
-uint64_t analogBoard_getFreq(uint8_t channel);
+uint64_t analogBoard_getFrequency(uint8_t channel);
 int16_t analogBoard_getAmplitude(uint8_t channel);
 int16_t analogBoard_getOffset(uint8_t channel);
 uint16_t analogBoard_getPhase(uint8_t channel);

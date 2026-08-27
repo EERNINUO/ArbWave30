@@ -15,6 +15,11 @@
 
 #include "scpi/scpi.h"
 
+#define AUTHOR "EERNINUO"
+#define MODEL "ArbWave30"
+#define VERSION "V0.1.0"
+#define SERIAL_NUMBER "TestSerialNumber" 
+
 #define SCPI_TX_BUFFER_SIZE   256
 #define SCPI_TX_TIMEOUT_MS    1000
 #define SCPI_RX_BUFFER_SIZE   256
