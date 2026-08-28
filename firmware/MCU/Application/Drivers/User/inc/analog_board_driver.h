@@ -78,6 +78,7 @@ void analogBoard_hardReset(void);
 uint8_t analogBoard_readSysStatus(uint16_t *sys_status);
 
 // 参数设置函数
+void analogBoard_setImpedance(uint8_t channel, bool impedance);
 uint8_t analogBoard_setEnable(uint8_t channel, bool enable);
 uint8_t analogBoard_setWave(uint8_t channel, WaveType_t waveType);
 uint8_t analogBoard_setFrequency(uint8_t channel, uint64_t freq_uHz);
@@ -88,6 +89,7 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty);
 
 // 参数读取函数
 // 这些函数都是通过读取 MCU 中的镜像结构体来实现的，不需要与 FPGA 通信，不存在 ACK 响应，因此直接返回读取的数据即可
+bool analogBoard_getImpedance(uint8_t channel);
 bool analogBoard_getEnable(uint8_t channel);
 WaveType_t analogBoard_getWave(uint8_t channel);
 uint64_t analogBoard_getFrequency(uint8_t channel);

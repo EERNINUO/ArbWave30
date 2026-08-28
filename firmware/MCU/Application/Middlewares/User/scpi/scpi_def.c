@@ -16,6 +16,7 @@
 #include "analog_board_driver.h"
 #include "usbd_cdc_if.h"
 #include "cmsis_os.h"
+#include <stdbool.h>
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
@@ -31,6 +32,10 @@ scpi_result_t ArbWave30_VoltageAmplitude(scpi_t * context);
 scpi_result_t ArbWave30_VoltageAmplitudeQ(scpi_t * context);
 scpi_result_t ArbWave30_VoltageOffset(scpi_t * context);
 scpi_result_t ArbWave30_VoltageOffsetQ(scpi_t * context);
+scpi_result_t ArbWave30_OutputState(scpi_t * context);
+scpi_result_t ArbWave30_OutputStateQ(scpi_t * context);
+scpi_result_t ArbWave30_OutputImpedance(scpi_t * context);
+scpi_result_t ArbWave30_OutputImpedanceQ(scpi_t * context);
 
 static size_t SCPI_Write(scpi_t * context, const char * data, size_t len)
 {
@@ -158,6 +163,18 @@ static const scpi_command_t scpi_commands[] = {
     { "SOURce:VOLTage?",            ArbWave30_VoltageAmplitudeQ,       0 },
     { "SOURce#:VOLTage",            ArbWave30_VoltageAmplitude,        0 },
     { "SOURce#:VOLTage?",           ArbWave30_VoltageAmplitudeQ,       0 },
+
+	/* OUTPut#:STATe */
+    { "OUTPut:STATe",               ArbWave30_OutputState,    0 },
+    { "OUTPut:STATe?",              ArbWave30_OutputStateQ,   0 },
+    { "OUTPut#:STATe",              ArbWave30_OutputState,    0 },
+    { "OUTPut#:STATe?",             ArbWave30_OutputStateQ,   0 },
+
+    /* OUTPut#:IMPedance */
+    { "OUTPut:IMPedance",           ArbWave30_OutputImpedance, 0 },
+	{ "OUTPut:IMPedance?",          ArbWave30_OutputImpedanceQ, 0 },
+    { "OUTPut#:IMPedance",          ArbWave30_OutputImpedance, 0 },
+    { "OUTPut#:IMPedance?",         ArbWave30_OutputImpedanceQ, 0 },
 
     SCPI_CMD_LIST_END
 };
@@ -455,5 +472,88 @@ scpi_result_t ArbWave30_VoltageAmplitudeQ(scpi_t *context)
 	}
 
 	SCPI_ResultFloat(context, (float)analogBoard_getAmplitude(ch)/1000.0);
+	return SCPI_RES_OK;
+}
+
+// OUTPut 子系统
+/**
+ * @brief  [OUTPut#:]STATe {ON|OFF}
+ */
+scpi_result_t ArbWave30_OutputState(scpi_t * context)
+{
+	int32_t ch;
+	scpi_bool_t on;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (!SCPI_ParamBool(context, &on, TRUE)){
+		return SCPI_RES_ERR;
+	}
+
+	if (analogBoard_setEnable(ch, on) != ACK_OK) {
+		SCPI_ErrorPush(context, SCPI_ERROR_HARDWARE_ERROR);
+		return SCPI_RES_ERR;
+	}
+
+	return SCPI_RES_OK;
+}
+
+/**
+ * @brief  [OUTPut#:]STATe?
+ */
+scpi_result_t ArbWave30_OutputStateQ(scpi_t * context)
+{
+	int32_t ch;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	SCPI_ResultBool(context, analogBoard_getEnable(ch));
+
+	return SCPI_RES_OK;
+}
+
+static const scpi_choice_def_t impedance_choices[] = {
+    { "50",   false },
+    { "HIGH", true  },
+    SCPI_CHOICE_LIST_END
+};
+
+/**
+ * @brief  [OUTPut#:]IMPedance {<impedance>|50|HIGH}
+ */
+scpi_result_t ArbWave30_OutputImpedance(scpi_t *context)
+{
+	int32_t ch;
+	int32_t imp;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (!SCPI_ParamChoice(context, impedance_choices, &imp, TRUE)) {
+		return SCPI_RES_ERR;
+	}
+
+	analogBoard_setImpedance(ch, imp);
+	return SCPI_RES_OK;
+}
+
+/**
+ * @brief  [OUTPut#:]IMPedance?
+ */
+scpi_result_t ArbWave30_OutputImpedanceQ(scpi_t * context)
+{
+	int32_t ch;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	SCPI_ResultBool(context, analogBoard_getImpedance(ch));
+
 	return SCPI_RES_OK;
 }

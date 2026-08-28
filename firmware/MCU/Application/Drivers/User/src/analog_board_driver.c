@@ -223,6 +223,24 @@ uint8_t analogBoard_readData(uint8_t address, uint16_t *data)
  * --------------------------------------*/
 
 /**
+ * @brief  影子寄存器更新
+ */
+uint8_t analogBoard_updateShadowReg(void)
+{
+	uint8_t ack = 0;
+	uint16_t sys_ctrl = analogBoardConfig.extern_clock << SYS_CTRL_CLOCK_SRC | 1 << SYS_CTRL_UPDATE;
+
+	if ((ack = analogBoard_sendData(REG_ADDR(SYSTEM_BASE, SYS_CTRL), sys_ctrl)) != ACK_OK)
+		goto error_handler;
+
+	return ACK_OK;
+
+error_handler:
+	// 错误处理
+	return ack;
+}
+
+/**
  * @brief  读取系统ID
  * @param  sys_id: 指向存储系统ID的指针，大小为4字节
  * @retval ACK响应
@@ -360,6 +378,17 @@ error_handler:
 // 参数设置函数
 
 /**
+ * @brief  设置通道高阻状态
+ * @param  channel: 通道号，1或2
+ * @param  enable: true表示高阻，false表示 50 Ω
+ */
+void analogBoard_setImpedance(uint8_t channel, bool impedance)
+{
+	ChConfig_t *cfg = (channel == 1) ? &analogBoardConfig.ch1 : &analogBoardConfig.ch2;
+	cfg->highImpedance_enable = impedance;
+}
+
+/**
  * @brief  设置通道使能状态
  * @param  channel: 通道号，1或2
  * @param  enable: 使能状态
@@ -442,15 +471,15 @@ uint8_t analogBoard_setFrequency(uint8_t channel, uint64_t freq_uHz)
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_FREQ_H), (uint16_t)((freq_ctrl_word >> 32) & 0xFFFF))) != ACK_OK)
 		goto error_handler;
 	
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
 	// 更新配置结构体中的频率值
 	if (channel == 1)
 		analogBoardConfig.ch1.freq_uHz = freq_uHz; 
 	else
 		analogBoardConfig.ch2.freq_uHz = freq_uHz; 
-
-	// 影子寄存器更新
-	if ((ack = analogBoard_sendData(SYSTEM_BASE + SYS_CTRL, SYS_CTRL_UPDATE)) != ACK_OK)
-		goto error_handler;
 
 	return ACK_OK;
 
@@ -498,12 +527,12 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_AMPL), *(uint16_t *)(&amplitude_ctrl_word))) != ACK_OK)
 		goto error_handler;
 
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
 	// 更新配置结构体中的幅度值	
 	cfg->amplitude_mV = amplitude_mV;
-
-	// 影子寄存器更新
-	if ((ack = analogBoard_sendData(SYSTEM_BASE + SYS_CTRL, SYS_CTRL_UPDATE)) != ACK_OK)
-		goto error_handler;
 
 	return ACK_OK;	
 
@@ -550,13 +579,13 @@ uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV)
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_OFFSET), offset_ctrl_word)) != ACK_OK)
 		goto error_handler;
 
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;	
+	
 	// 更新配置结构体中的偏移量值
 	cfg->offset_mV = offset_mV;
 
-	// 影子寄存器更新
-	if ((ack = analogBoard_sendData(REG_ADDR(SYSTEM_BASE, SYS_CTRL), SYS_CTRL_UPDATE)) != ACK_OK)
-		goto error_handler;	
-	
 	return ACK_OK;
 
 error_handler:
@@ -586,15 +615,15 @@ uint8_t analogBoard_setPhase(uint8_t channel, uint16_t phase)
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_PHASE), phase_ctrl_word)) != ACK_OK)
 		goto error_handler;
 
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
 	// 更新配置结构体中的相位值
 	if (channel == 1)
 		analogBoardConfig.ch1.phase = phase;
 	else
 		analogBoardConfig.ch2.phase = phase;
-
-	// 影子寄存器更新
-	if ((ack = analogBoard_sendData(REG_ADDR(SYSTEM_BASE, SYS_CTRL), SYS_CTRL_UPDATE)) != ACK_OK)
-		goto error_handler;
 
 	return ACK_OK;
 
@@ -625,15 +654,16 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_DUTY), duty_ctrl_word)) != ACK_OK)
 		goto error_handler;
 
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
 	// 更新配置结构体中的占空比值
 	if (channel == 1)
 		analogBoardConfig.ch1.duty = duty; 
 	else
 		analogBoardConfig.ch2.duty = duty; 
-	// 影子寄存器更新
-	if ((ack = analogBoard_sendData(SYSTEM_BASE + SYS_CTRL, SYS_CTRL_UPDATE)) != ACK_OK)
-		goto error_handler;
-
+		
 	return ACK_OK;
 
 error_handler:
@@ -643,6 +673,17 @@ error_handler:
 
 // 参数读取函数
 // 这些函数都是通过读取 MCU 中的镜像结构体来实现的，不需要与 FPGA 通信，不存在 ACK 响应，因此直接返回读取的数据即可
+
+/**
+ * @brief  获取高阻状态
+ * @param  channel: 通道号，1或2
+ * @retval true: 高阻
+ *         false: 50 Ω
+ */
+bool analogBoard_getImpedance(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.highImpedance_enable : analogBoardConfig.ch2.highImpedance_enable;
+}
 
 /**
  * @brief  获取使能状态
