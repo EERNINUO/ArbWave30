@@ -406,6 +406,10 @@ uint8_t analogBoard_setEnable(uint8_t channel, bool enable)
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_CTRL), ch_ctrl)) != ACK_OK)
 		goto error_handler;
 
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
 	// 更新配置结构体中的使能状态值
 	cfg->enable = enable;
 
@@ -432,6 +436,10 @@ uint8_t analogBoard_setWave(uint8_t channel, WaveType_t waveType)
 
 	// 发送波形类型
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_CTRL), ch_ctrl)) != ACK_OK)
+		goto error_handler;
+
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
 		goto error_handler;
 
 	// 更新配置结构体中的波形类型值
@@ -461,7 +469,7 @@ uint8_t analogBoard_setFrequency(uint8_t channel, uint64_t freq_uHz)
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	uint64_t freq_ctrl_word = freq_uHz * ((uint64_t)1 << FREQ_CTRL_WORD_LENGTH) / (ANALOG_BOARD_FREQ * 1000000ull); // 计算频率控制字
+	uint64_t freq_ctrl_word = freq_uHz / (ANALOG_BOARD_FREQ * 1000000.0) * (double)((uint64_t)1 << FREQ_CTRL_WORD_LENGTH); // 计算频率控制字
 
 	// 发送频率控制字
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_FREQ_L), (uint16_t)(freq_ctrl_word & 0xFFFF))) != ACK_OK)

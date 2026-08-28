@@ -197,7 +197,7 @@ void ArbWave30_SCPI_Init(scpi_t * context)
  */
 static scpi_bool_t ArbWave30_GetChannel(scpi_t *context, int32_t *channel)
 {
-	static int32_t numbers = 0;
+	static int32_t numbers = 1;
 
 	SCPI_CommandNumbers(context, &numbers, 1, 1);
 
