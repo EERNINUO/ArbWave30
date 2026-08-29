@@ -22,7 +22,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - **物理层**：USB 2.0（CDC 类虚拟串口）
 - **波特率**：115200 bps （该参数对虚拟串口无实质影响）
 - **数据位**：8，**停止位**：1，**校验位**：无
-- **结束符**：`\n` （换行，十六进制 0x0A)
+- **结束符**：`\n` （换行，十六进制 0x0A）
 
 ---
 
@@ -37,7 +37,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 | `|` | 逻辑“或”分隔符。 | `ON|OFF` |
 | `#` | 通道占位符。 | `SOURce#` 代表 `SOURce1` 或 `SOURce2` |
 | `< >` | 用户必须替换的实际数值。 | `<frequency>` |
-| `（ )` | 命令的短格式（助记符），SCPI 引擎同时接受长格式和短格式。 | `FREQuency` （短格式: `FREQ`) |
+| `() )` | 命令的短格式（助记符），SCPI 引擎同时接受长格式和短格式。 | `FREQuency` (短格式: `FREQ`) |
 
 **查询命令**：在命令末尾添加问号 `?` 可查询当前设定值，如 `FREQuency?`。
 
@@ -61,7 +61,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - 波形：正弦波
 - 幅值：0 Vpp
 - 偏置：0 V
-- 输出状态：关闭 （OFF)
+- 输出状态：关闭 （OFF）
 
 ### 3.3 `*CLS` —— 清除错误队列
 **功能**：清空系统错误/事件队列。
@@ -76,13 +76,13 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 **描述**：设置或查询指定通道的输出频率。
 
 **命令格式**：
-`[SOURce#:]FREQuency {<frequency>|MIN|MAX|DEFAULT}`
+`[SOURce#:]FREQuency {<frequency>|MIN|MAX}`
 `[SOURce#:]FREQuency? [MIN|MAX]`
 
 **参数说明**：
 - `<frequency>`：浮点数，单位 Hz。
-- `MIN`：最小值，0 Hz （0 Hz)。
-- `MAX`：最大值，30,000,000 Hz （30 MHz)。
+- `MIN`：最小值，0 Hz （0 Hz）。
+- `MAX`：最大值，30,000,000 Hz （30 MHz）。
 
 **示例**：
 - `SOURce1:FREQuency 1000000` -> 设置通道 1 频率为 1 MHz。
@@ -98,11 +98,11 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 `[SOURce#:]FUNCtion?`
 
 **参数说明**：
-- `SINusoid` （短格式: `SIN`)：正弦波。
-- `SQUare` （短格式: `SQU`)：方波。
-- `TRIangle` （短格式: `TRI`)：三角波。
-- `NOISe` （短格式: `NOI`)：噪声波。
-- `DC` （短格式: `DC`)：直流电平。
+- `SINusoid` (短格式: `SIN`)：正弦波。
+- `SQUare` (短格式: `SQU`)：方波。
+- `TRIangle` (短格式: `TRI`)：三角波。
+- `NOISe` (短格式: `NOI`)：噪声波。
+- `DC` (短格式: `DC`)：直流电平。
 
 **示例**：
 - `SOURce2:FUNCtion SQU` -> 设置通道 2 输出方波。
@@ -112,16 +112,34 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 **描述**：设置或查询输出幅度（峰峰值 Vpp）。
 
 **命令格式**：
-`[SOURce#:]VOLTage {<amplitude>|MIN|MAX|DEFAULT}`
-`[SOURce#:]VOLTage? [MIN|MAX]`
+`[SOURce#:]VOLTage[:AMPLitude] {<amplitude>|MIN|MAX}`
+`[SOURce#:]VOLTage[:AMPLitude]? [MIN|MAX]`
 
 **参数说明**：
-- `<amplitude>`：浮点数，单位 Vpp（高阻负载下）。在 50Ω 负载下，实际输出电压为此值的一半。
-- `MIN`：~0 Vpp。
-- `MAX`：~20 Vpp。
+- `<amplitude>`：浮点数，单位 V（高阻负载下）。
+- `MIN`：~-10 V[^1]。
+- `MAX`：~10 V[^1]。
 
 **示例**：
-- `SOURce1:VOLTage 2.5` -> 设置通道 1 输出 2.5 Vpp。
+- `SOURce1:VOLTage 2.5` -> 设置通道 1 输出 2.5 V。
+
+### 4.4 偏置设置 `[SOURce#:]VOLTage:OFFSet`
+
+**描述**：设置或查询输出幅度（峰峰值 Vpp）。
+
+**命令格式**：
+`[SOURce#:]VOLTage:OFFSet {<offset>|MIN|MAX}`
+`[SOURce#:]VOLTage:OFFSet? [MIN|MAX]`
+
+**参数说明**：
+- `<offset>`：浮点数，单位 V（高阻负载下）。
+- `MIN`：~-10 V[^1]。
+- `MAX`：~10 V[^1]。
+
+**示例**：
+- `SOURce1:VOLTage 2.5` -> 设置通道 1 输出偏置 2.5 V。
+
+[^1]: 返回值为电压最值，即 amplitude + offset 不能大于/小于该值。
 
 ---
 
@@ -144,7 +162,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 **示例**：
 - `OUTPut1:STATe ON` -> 打开通道 1。
 - `OUTPut2:STATe OFF` -> 关闭通道 2。
-- `OUTPut:STATe?` -> 注意：不带通道号时，查询返回当前选中通道（默认为通道 1）状态，建议始终指定通道号。
+- `OUTPut:STATe?` -> 注意：不带通道号时，查询返回当前选中通道（上一次操作的通道，上电默认为通道一）状态，建议始终指定通道号。
 
 ### 5.2 输出阻抗 `OUTPut#:IMPedance`
 
@@ -184,6 +202,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 | -113 | 未定义的命令头 | 该命令不支持，检查手册 |
 | -222 | 参数数据超出范围 | 频率值超过 30MHz 或小于 1mHz |
 | -224 | 非法参数值 | 波形类型或布尔值错误，如 `SQURE` |
+| -240 | 硬件错误 | 模拟板 ACK 错误 |
 
 ---
 ## 8. 编程示例（Python + PyVISA）
@@ -261,3 +280,4 @@ inst.close()
 | 版本 | 日期 | 修改内容 | 修改人 |
 |------|------|----------|--------|
 | V1.0 | 2026-08-17 | 初始架构 | EERNINUO |
+| V1.1 | 2026-08-18 | 添加命令 | EERNINUO |

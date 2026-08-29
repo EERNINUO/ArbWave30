@@ -18,7 +18,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 ArbWave30项目需要一个FPGA来实现：
 - 48位DDS相位累加器（频率分辨率1μHz）
 - 波形存储器（存储正弦、方波、三角、锯齿、阶梯波表，未来扩展任意波）
-- 14位并行接口驱动AD9767 DAC（125MSPS）
+- 16位并行接口驱动AD9747 DAC（150MSPS）
 - SPI从机接口，接收来自STM32的配置命令
 我们需要选择一个封装便于手工焊接、逻辑资源足够、且成本合理的FPGA。
 
