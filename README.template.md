@@ -117,7 +117,7 @@ ArbWave30/
 │    │    └── FPGA_Test_Hardware/ # FPGA 硬件测试代码   
 │    │         ├── FPGA_Clock_Test/ # 时钟测试代码   
 │    │         └── FPGA_Hardware_Test/ # FPGA 硬件测试代码   
-│    └── mcu/ # MCU 固件源代码（C/C++）   
+│    ├── mcu/ # MCU 固件源代码（C/C++）   
 │    │    ├── Application/ # 项目代码   
 │    │    ├── MCU_Test_Hardware/ # MCU 硬件测试代码   
 │    │    │    └── min_system_test/ # MCU 最小系统测试代码   
