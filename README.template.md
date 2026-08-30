@@ -62,7 +62,7 @@
 
 ## 🚦 项目状态
 
-> **当前阶段：MVP 硬件、FPGA 核心程序验证完成，MCU 程序开发中**
+> **当前阶段：MVP 硬件、MCU/FPGA 核心程序验证完成，正在进行软硬件联调**
 
 ### ✅ 已完成
 - [x] PCB 设计与打样（4层板，信号完整性设计）
@@ -74,11 +74,11 @@
 - [x] 偏置控制模块
 - [x] SPI Slave 通信接口与寄存器组
 - [x] 模拟板驱动库（MCU 端）
+- [x] SCPI 协议栈移植
+- [x] 7阶椭圆滤波器焊接调试
 
 ### 🏗️ 开发中（预计 8 月底完成）
 - [ ] 其他波形 DDS：三角波 / 锯齿波 / 方波 / 噪声（公式生成，无需 LUT）
-- [ ] SCPI 协议栈移植
-- [ ] 7阶椭圆滤波器焊接调试
 - [ ] 差分转单端电路焊接调试
 
 ### 📋 待办（MVP 之后）
@@ -88,7 +88,7 @@
 
 ### 📸 当前进展
 
-**差分正弦波输出（50MHz 示波器实测）：**
+**差分正弦波输出（DS100（50MHz） 示波器实测）：**
 
 ![1MHz 差分正弦波](/docs/pic/1MHz_差分正弦波.BMP)
 ![100kHz 差分正弦波](/docs/pic/100kHz_差分正弦波.BMP)
@@ -98,6 +98,7 @@
 ---
 
 ## 🧱 仓库结构
+```text
 ArbWave30/  
 ├── docs/ # 设计文档  
 │    ├── pic/ # 文档图片  
@@ -117,21 +118,22 @@ ArbWave30/
 │    │         ├── FPGA_Clock_Test/ # 时钟测试代码   
 │    │         └── FPGA_Hardware_Test/ # FPGA 硬件测试代码   
 │    └── mcu/ # MCU 固件源代码（C/C++）   
-│         ├── Application/ # 项目代码   
-│         ├── MCU_Test_Hardware/ # MCU 硬件测试代码   
-│         │    └── min_system_test/ # MCU 最小系统测试代码   
-│         └── SCPI_Test/ # SCPI-parser 移植测试工程   
+│    │    ├── Application/ # 项目代码   
+│    │    ├── MCU_Test_Hardware/ # MCU 硬件测试代码   
+│    │    │    └── min_system_test/ # MCU 最小系统测试代码   
+│    │    └── SCPI_Test/ # SCPI-parser 移植测试工程   
+│    └── Clock_Generator_Config/ # 时钟发生器配置     
 ├── simulink/ # LTspice 仿真文件  
 ├── datasheets/ # 组件数据手册，参考设计  
 ├── scripts/ # 自动化测试脚本（PyVISA）（🚧 开发中）  
 ├── LICENSE # GPL-3.0  
 └── README.md  
-
+```
 ---
 
 ## 🚀 快速开始
 
-> 项目处于 **最小可行产品（MVP）验证阶段**，正在编写 MCU 代码，待 MVP 验证完成后，将提供：
+> 项目处于 **最小可行产品（MVP）验证阶段**，正在进行软硬件联调，待 MVP 验证完成后，将提供：
 > - 打样 PCB 的 Gerber 文件及 BOM
 > - FPGA 比特流烧录方法（通过 JTAG 加载）
 > - 固件编译与升级步骤
@@ -170,7 +172,7 @@ print(f"Freq: {freq}")
 inst.close()
 ```
 
-完整命令集参见 [docs/SCPI_reference.md](docs/用户手册/SCPI 参考手册.md)。
+完整命令集参见 ![docs/SCPI_reference.md](</docs/用户手册/SCPI 参考手册.md>)。
 
 ## 🧪 自动化测试
 测试脚本位于 `scripts/`（编写中），计划使用 PyVISA 与设备通信。待硬件就绪后，运行 `python scripts/test_waveform.py` 可进行基本功能测试。  
@@ -218,5 +220,3 @@ Copyright © 2026 EERNINUO
 
 ## ⭐ Star History
 如果您觉得这个项目有帮助，请给一个 Star ⭐，谢谢！
-
-
