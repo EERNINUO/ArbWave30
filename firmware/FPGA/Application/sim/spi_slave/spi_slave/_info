@@ -1,0 +1,81 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim
+T_opt
+!s110 1785405402
+VPnXl:f6Vi3_:A@KAz:YzT2
+Z1 04 9 4 work spi_slave fast 0
+=1-f4c88a4e9fd5-6a6b1fda-69-e6c
+Z2 o-quiet -auto_acc_if_foreign -work work -L GW2A -Lf GW2A +acc
+Z3 tCvgOpt 0
+n@_opt
+Z4 OL;O;10.6d;65
+R0
+T_opt1
+!s110 1785466187
+V`=6Q=8Rjo0c[K;nK@W0M<0
+04 12 4 work spi_slave_tb fast 0
+=6-f4c88a4e9fd5-6a6c0d4a-3d5-13310
+R2
+R3
+n@_opt1
+R4
+T_opt2
+!s110 1785465452
+VA``Ok6YmkgJgbQ:FRQ_eh3
+R1
+=1-f4c88a4e9fd5-6a6c0a6c-1e1-b294
+o-quiet -auto_acc_if_foreign -work spi_slave
+R3
+n@_opt2
+R4
+R0
+vspi_slave
+Z5 !s110 1785466179
+!i10b 1
+!s100 W2c@j_N3LNIlX]?B=BNAI0
+IbCJiHCSh5UccmgBWi]dL:1
+Z6 VDg1SIo80bB@j0V0VzS_@n1
+Z7 dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/spi_slave
+w1785422677
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/spi_slave.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/spi_slave.v
+L0 13
+Z8 OL;L;10.6d;65
+r1
+!s85 0
+31
+Z9 !s108 1785466179.000000
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/spi_slave.v|
+!s90 -reportprogress|300|-work|spi_slave|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/spi_slave.v|
+!i113 0
+o-work spi_slave -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3
+vspi_slave_tb
+R5
+!i10b 1
+!s100 oMH[C=h]29I0ZOIdW>7521
+Ik7NfCU?V7<z3UX>DM8CW`0
+R6
+R7
+w1785466171
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/spi_slave/spi_slave_tb.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/spi_slave/spi_slave_tb.v
+L0 15
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/spi_slave/spi_slave_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/spi_slave/spi_slave_tb.v|
+!i113 0
+o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3

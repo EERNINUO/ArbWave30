@@ -1,0 +1,266 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/wave_generation
+T_opt
+!s110 1784384747
+V0IMB493Q@<_^ZXQ?SPGJX2
+04 9 4 work ArbWave30 fast 0
+=1-f4c88a4e9fd5-6a5b8cd9-da-6ec8
+Z1 o-quiet -auto_acc_if_foreign -work ArbWave30_t -L GW2A -Lf GW2A +acc
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;10.6d;65
+R0
+T_opt1
+!s110 1786069472
+V6`98:cMh3eVTMh<iz]R4E1
+04 12 4 work ArbWave30_tb fast 0
+=2-f4c88a4e9fd5-6a7541df-26f-b058
+R1
+R2
+n@_opt1
+R3
+vArbWave30
+Z4 !s110 1786069462
+!i10b 1
+!s100 Bb]oI25W9;e?]fYJ5V06R3
+I5ZM0F]c<861WLl2aoCn5c3
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/sim/top
+w1785670400
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/top.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/top.v
+Z7 L0 13
+Z8 OL;L;10.6d;65
+r1
+!s85 0
+31
+Z9 !s108 1786069462.000000
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/top.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/top.v|
+!i113 0
+Z10 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+n@arb@wave30
+vArbWave30_tb
+Z11 !s110 1786069461
+!i10b 1
+!s100 U3MT7OFAbf7aA]Z3Eh8dL3
+IFiChCNl:m;H@1OzG_`K860
+R5
+R6
+w1786069456
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/sim/top/ArbWave30_tb.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/sim/top/ArbWave30_tb.v
+L0 15
+R8
+r1
+!s85 0
+31
+Z12 !s108 1786069461.000000
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/sim/top/ArbWave30_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/sim/top/ArbWave30_tb.v|
+!i113 0
+R10
+R2
+n@arb@wave30_tb
+vdac_interface
+R4
+!i10b 1
+!s100 1G`a3_39CQ2j@dkTJ2TM[1
+IF]F5k=DcffhFjTPlbi7S42
+R5
+R6
+w1785230273
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/dac_interface/dac_interface.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/dac_interface/dac_interface.v
+R7
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/dac_interface/dac_interface.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/dac_interface/dac_interface.v|
+!i113 0
+R10
+R2
+vDDS_II_Top
+R4
+!i10b 1
+!s100 o189McRQSZ=8e;MbaZzd:3
+If7a?3Gj@?^mF?`EOjD=a=0
+R5
+R6
+w1783059393
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/wave_generation/dds_ii/dds_ii.vo
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/wave_generation/dds_ii/dds_ii.vo
+L0 8
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/wave_generation/dds_ii/dds_ii.vo|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/wave_generation/dds_ii/dds_ii.vo|
+!i113 0
+R10
+R2
+n@d@d@s_@i@i_@top
+vFIFO_HS_Top
+R4
+!i10b 1
+!s100 YQ7C^9ig_CF<az`V`?RJj3
+IC1:5zW5RgNFnm8lUeHmFb3
+R5
+R6
+w1784733773
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/dac_interface/fifo_hs/fifo_hs.vo
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/dac_interface/fifo_hs/fifo_hs.vo
+L0 8
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/dac_interface/fifo_hs/fifo_hs.vo|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/dac_interface/fifo_hs/fifo_hs.vo|
+!i113 0
+R10
+R2
+n@f@i@f@o_@h@s_@top
+vGowin_rPLL
+R4
+!i10b 1
+!s100 4fc8;kPG`eVN@e<cIg=OF2
+ICeXg1fPV<7E]A5_N2RT2<2
+R5
+R6
+w1782573467
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/sys_ctrl/gowin_rpll/gowin_rpll.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/sys_ctrl/gowin_rpll/gowin_rpll.v
+L0 11
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/sys_ctrl/gowin_rpll/gowin_rpll.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/sys_ctrl/gowin_rpll/gowin_rpll.v|
+!i113 0
+R10
+R2
+n@gowin_r@p@l@l
+vregister_block
+R11
+!i10b 1
+!s100 2ZC>ASH2mfQUPaSeAmjnX2
+IIQ8XB`a3e>Aj3Y1jDcIgD2
+R5
+R6
+w1785680839
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/register_block.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/register_block.v
+R7
+R8
+r1
+!s85 0
+31
+R12
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/register_block.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/register_block.v|
+!i113 0
+R10
+R2
+vSPI_master
+!s110 1785685205
+!i10b 1
+!s100 _`o]QUIG0Z82f:nH@Xdfg2
+I>kb>ngf?i;jVZ=2eoWMOE3
+R5
+dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/sim/top
+w1784626566
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/dac_interface/SPI_master.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/dac_interface/SPI_master.v
+R7
+R8
+r1
+!s85 0
+31
+!s108 1785685205.000000
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/dac_interface/SPI_master.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/FPGA/Application/src/dac_interface/SPI_master.v|
+!i113 0
+R10
+R2
+n@s@p@i_master
+vspi_slave
+R4
+!i10b 1
+!s100 hO^d75Y71D4NAmZYD9Igd2
+Ibh2e=G79CVcZ;Vb7bS]gg3
+R5
+R6
+w1785685182
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/spi_slave.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/spi_slave.v
+R7
+R8
+r1
+!s85 0
+31
+R12
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/spi_slave.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/spi_slave.v|
+!i113 0
+R10
+R2
+vsys_ctrl
+R4
+!i10b 1
+!s100 dJ?RFn3>F2=]ZKgnKNK4g2
+I^o5E9T7ziPL12G2dh:0Df1
+R5
+R6
+w1786067606
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/sys_ctrl/sys_ctrl.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/sys_ctrl/sys_ctrl.v
+R7
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/sys_ctrl/sys_ctrl.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/sys_ctrl/sys_ctrl.v|
+!i113 0
+R10
+R2
+vwave_generation
+R4
+!i10b 1
+!s100 h1PiNKRN[7CRbnXZS_QFC1
+InMC2E;me=DD;M57eEgLM51
+R5
+R6
+w1785668974
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/wave_generation/wave_generation.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/wave_generation/wave_generation.v
+R7
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/wave_generation/wave_generation.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/firmware/FPGA/Application/src/wave_generation/wave_generation.v|
+!i113 0
+R10
+R2

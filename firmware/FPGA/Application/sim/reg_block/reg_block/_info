@@ -1,0 +1,62 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/spi_slave
+T_opt
+!s110 1785512841
+Vl;JT7>C9T4=f_AF=f[7jZ1
+04 12 4 work reg_block_tb fast 0
+=1-f4c88a4e9fd5-6a6cc389-59-c09c
+o-quiet -auto_acc_if_foreign -work reg_block -L GW2A -Lf GW2A +acc
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.6d;65
+R0
+vreg_block_tb
+Z2 !s110 1785552361
+!i10b 1
+!s100 5PXZU5349]h932FjSePNQ1
+IE=L>oZYcIX^nTf9L=OMW@0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+Z4 dC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/reg_block
+w1785511311
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/reg_block/reg_block_tb.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/reg_block/reg_block_tb.v
+L0 15
+Z5 OL;L;10.6d;65
+r1
+!s85 0
+31
+Z6 !s108 1785552361.000000
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/reg_block/reg_block_tb.v|
+!s90 -reportprogress|300|-work|reg_block|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/sim/reg_block/reg_block_tb.v|
+!i113 0
+Z7 o-work reg_block -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vregister_block
+R2
+!i10b 1
+!s100 GKGaG?i;T`Y?759KNAb:D2
+I@;]<6mo99Gb9`G3BeQ8Da2
+R3
+R4
+w1785551968
+8C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/register_block.v
+FC:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/register_block.v
+L0 13
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/register_block.v|
+!s90 -reportprogress|300|-work|reg_block|-vopt|-stats=none|C:/Users/18902/Desktop/code/signal_source/FPGA/ArbWave30/fireware/Application/FPGA/src/register_block.v|
+!i113 0
+R7
+R1
