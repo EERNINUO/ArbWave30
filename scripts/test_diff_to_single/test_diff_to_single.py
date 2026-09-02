@@ -8,7 +8,7 @@
 # the Free Software Foundation, version 3 of the License.
 # ...
 
-# 测试单端滤波器响应
+# 测试滤波器及差分转单端电路的响应
 # 测试设备：Siglent SDS824HD
 # 该脚本仅供参考，不同示波器的指令集可能不同，请根据实际情况修改。
 
