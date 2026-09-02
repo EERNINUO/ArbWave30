@@ -41,8 +41,8 @@
 ### 硬件指标（V1.0）
 - 波形：正弦、方波、三角波、噪声波、直流
 - 正弦波最高 **30MHz**，方波最高 **5MHz**
-- 幅值范围（高阻）：20Vpp（DC\~10MHz），14Vpp（10\~20MHz），10Vpp（20\~30MHz）
-- 幅值分辨率：2mV（典型），偏移范围 ±5V
+- 电压范围（高阻）：20Vpp（DC\~10MHz），14Vpp（10\~20MHz），10Vpp（20\~30MHz）
+- 幅值分辨率：2mV（典型），偏移范围 ±10V
 - 总谐波失真（THD）：< -50dBc @10MHz 满幅（目标值）
 - 相位噪声：-100dBc/Hz @10kHz offset（30MHz 载波）（目标值，受限于测试条件，目前无法标定）
 - 输出阻抗：50Ω
@@ -51,7 +51,7 @@
 ### 控制与接口
 - USB 2.0（USB CDC 类），支持 SCPI-1999 命令集
 - SMA 输出，SMA 触发 I/O，SMA 外部时钟输入
-- 电源输入：24V DC，功耗 <20W
+- 电源输入：24V DC，功耗 <24W
 
 ### 软件与扩展路线
 - V1.0：单通道 + 基础波形 + 核心 SCPI
@@ -62,24 +62,23 @@
 
 ## 🚦 项目状态
 
-> **当前阶段：MVP 硬件、FPGA 核心程序验证完成，MCU 程序开发中**
+> **当前阶段：MVP 硬件、MCU/FPGA 核心程序验证完成，已能通过 SCPI 控制输出正弦波，正在进行模拟前端进一步调优**
 
 ### ✅ 已完成
 - [x] PCB 设计与打样（4层板，信号完整性设计）
-- [x] 模拟前端调试通过 ✅ 已输出 **差分正弦波**（见下方截图）
+- [x] 模拟前端调试通过 ✅ 已输出正弦波（见下方截图）
 - [x] DAC 上电参数配置正常（SPI 接口通信稳定）
 - [x] 正弦 DDS 核（IP 核实现，48位相位累加器）
 - [x] 幅度控制模块
 - [x] 相位控制模块
-- [x] 偏置控制模块
 - [x] SPI Slave 通信接口与寄存器组
 - [x] 模拟板驱动库（MCU 端）
+- [x] SCPI 协议栈移植
+- [x] 7阶椭圆滤波器焊接调试
 
-### 🏗️ 开发中（预计 8 月底完成）
-- [ ] 其他波形 DDS：三角波 / 锯齿波 / 方波 / 噪声（公式生成，无需 LUT）
-- [ ] SCPI 协议栈移植
-- [ ] 7阶椭圆滤波器焊接调试
-- [ ] 差分转单端电路焊接调试
+### 🏗️ 开发中
+- [ ] 其他波形 DDS：三角波 / 锯齿波 / 方波 / 噪声
+- [ ] 差分转单端电路调试优化
 
 ### 📋 待办（MVP 之后）
 - [ ] 模拟板完整版设计（加入 硬件幅度控制、直流偏置、外部触发、外部时钟输入）
@@ -88,16 +87,25 @@
 
 ### 📸 当前进展
 
-**差分正弦波输出（50MHz 示波器实测）：**
+**正弦波输出（SDS824X HD 示波器实测）：**
 
-![1MHz 差分正弦波](/docs/pic/1MHz_差分正弦波.BMP)
-![100kHz 差分正弦波](/docs/pic/100kHz_差分正弦波.BMP)
+**满幅输出波形：**
+![10MHz正弦波满幅输出波形](docs/pic/10MHz正弦波满幅输出波形.png)
+![30MHz正弦波满幅输出波形](docs/pic/30MHz正弦波满幅输出波形.png)
 
-> *注：当前使用 50MHz 带宽示波器，更高频率波形与精确 THD 测量待返校后用更高带宽仪器进行。*
+**10MHz正弦波FFT结果：**
+
+![10MHz正弦波FFT结果](docs/pic/10MHz正弦波FFT结果.png)
+
+> 经上图数据可计算出：
+>   THD = -49.7dBc @10MHz，
+>   SFDR = -50.08dBc @10MHz
+> > 注：SFDR 分为两种定义：1、含谐波；2、不含谐波。由于表中没有非谐波分量，故采用第一种定义。
 
 ---
 
 ## 🧱 仓库结构
+```text
 ArbWave30/  
 ├── docs/ # 设计文档  
 │    ├── pic/ # 文档图片  
@@ -116,22 +124,25 @@ ArbWave30/
 │    │    └── FPGA_Test_Hardware/ # FPGA 硬件测试代码   
 │    │         ├── FPGA_Clock_Test/ # 时钟测试代码   
 │    │         └── FPGA_Hardware_Test/ # FPGA 硬件测试代码   
-│    └── mcu/ # MCU 固件源代码（C/C++）   
-│         ├── Application/ # 项目代码   
-│         ├── MCU_Test_Hardware/ # MCU 硬件测试代码   
-│         │    └── min_system_test/ # MCU 最小系统测试代码   
-│         └── SCPI_Test/ # SCPI-parser 移植测试工程   
+│    ├── mcu/ # MCU 固件源代码（C/C++）   
+│    │    ├── Application/ # 项目代码   
+│    │    ├── MCU_Test_Hardware/ # MCU 硬件测试代码   
+│    │    │    └── min_system_test/ # MCU 最小系统测试代码   
+│    │    └── SCPI_Test/ # SCPI-parser 移植测试工程   
+│    └── Clock_Generator_Config/ # 时钟发生器配置     
 ├── simulink/ # LTspice 仿真文件  
 ├── datasheets/ # 组件数据手册，参考设计  
 ├── scripts/ # 自动化测试脚本（PyVISA）（🚧 开发中）  
+│    ├── test_filter/ # 滤波器测试脚本  
+│    └── test_diff_to_single # 差分转单端输出测试脚本   
 ├── LICENSE # GPL-3.0  
 └── README.md  
-
+```
 ---
 
 ## 🚀 快速开始
 
-> 项目处于 **最小可行产品（MVP）验证阶段**，正在编写 MCU 代码，待 MVP 验证完成后，将提供：
+> 项目处于 **最小可行产品（MVP）验证阶段**，正在进行软硬件联调，待 MVP 验证完成后，将提供：
 > - 打样 PCB 的 Gerber 文件及 BOM
 > - FPGA 比特流烧录方法（通过 JTAG 加载）
 > - 固件编译与升级步骤
@@ -154,7 +165,7 @@ rm = pyvisa.ResourceManager('@py')
 
 # 3. 打开串口资源，并配置终止符
 inst = rm.open_resource('ASRL3::INSTR')  # 请替换为实际的 ASRL 端口号
-inst.baud_rate = 115200
+inst.baud_rate = 115200        # 串口波特率，对于 USB CDC 类设备并不重要
 inst.read_termination = '\n'   # 非常重要：库默认是 '\n'，但最好显式声明
 inst.write_termination = '\n'  # 发送时自动追加换行符
 
@@ -170,10 +181,10 @@ print(f"Freq: {freq}")
 inst.close()
 ```
 
-完整命令集参见 [docs/SCPI_reference.md](docs/用户手册/SCPI 参考手册.md)。
+完整命令集参见 ![docs/SCPI_reference.md](</docs/用户手册/SCPI 参考手册.md>)。
 
 ## 🧪 自动化测试
-测试脚本位于 `scripts/`（编写中），计划使用 PyVISA 与设备通信。待硬件就绪后，运行 `python scripts/test_waveform.py` 可进行基本功能测试。  
+测试脚本位于 `scripts/`（持续更新中），使用 PyVISA 与设备通信。你可以运行对应的脚本进行自动化测试，或者根据你的需求，参考这些脚本自行编写测试用例。
 
 ## 📄 文档
 设计文档、测试报告和用户手册位于 `docs/`，持续更新中。
@@ -218,5 +229,3 @@ Copyright © 2026 EERNINUO
 
 ## ⭐ Star History
 如果您觉得这个项目有帮助，请给一个 Star ⭐，谢谢！
-
-
