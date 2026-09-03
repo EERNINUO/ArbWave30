@@ -31,7 +31,7 @@ module register_block(
     output               [15:0]  ch1_phase_ctrl_word,
     output       signed  [15:0]  ch1_ampl_ctrl_word,
     output       signed  [15:0]  ch1_dc_offset_word,
-    output               [9:0]   ch1_duty_ctrl_word,
+    output               [15:0]   ch1_duty_ctrl_word,
 
     output                       ch2_enable,
     output               [5:0]   ch2_waveform,
@@ -39,7 +39,7 @@ module register_block(
     output               [15:0]  ch2_phase_ctrl_word,
     output       signed  [15:0]  ch2_ampl_ctrl_word,
     output       signed  [15:0]  ch2_dc_offset_word,
-    output               [9:0]   ch2_duty_ctrl_word,
+    output               [15:0]   ch2_duty_ctrl_word,
     
     output  reg          [7:0]   dac_reg_addr,
     output  reg          [7:0]   dac_reg_data,
@@ -144,7 +144,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch1_ampl_shadow     <= 16'h0000;
         ch1_offset_shadow   <= 16'h0000;
         ch1_phase_shadow    <= 16'h0000;
-        ch1_duty_shadow     <= 16'h0000;
+        ch1_duty_shadow     <= 16'h8000;
         ch2_ctrl_shadow     <= 16'h0000;
         ch2_freq_l_shadow   <= 16'h0000;
         ch2_freq_m_shadow   <= 16'h0000;
@@ -152,7 +152,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch2_ampl_shadow     <= 16'h0000;
         ch2_offset_shadow   <= 16'h0000;
         ch2_phase_shadow    <= 16'h0000;
-        ch2_duty_shadow     <= 16'h0000;
+        ch2_duty_shadow     <= 16'h8000;
         dac_cache_0  <= 16'h0000;
         dac_cache_1  <= 16'h0000;
         dac_cache_2  <= 16'hf901;
@@ -204,7 +204,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch1_ampl     <= 16'h0000;
         ch1_offset   <= 16'h0000;
         ch1_phase    <= 16'h0000;
-        ch1_duty     <= 16'h0000;
+        ch1_duty     <= 16'h8000;
         ch2_ctrl     <= 16'h0000;
         ch2_freq_l   <= 16'h0000;
         ch2_freq_m   <= 16'h0000;
@@ -212,7 +212,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch2_ampl      <= 16'h0000;
         ch2_offset   <= 16'h0000;
         ch2_phase    <= 16'h0000;
-        ch2_duty     <= 16'h0000;
+        ch2_duty     <= 16'h8000;
     end else if (sys_ctrl_reg[UPDATE]) begin
         // 批量更新所有影子寄存器 → 主寄存器
         ch1_ctrl     <= ch1_ctrl_shadow;
@@ -288,7 +288,7 @@ assign ch1_freq_ctrl_word = {ch1_freq_h[15:0], ch1_freq_m[15:0], ch1_freq_l[15:0
 assign ch1_phase_ctrl_word = ch1_phase[15:0];
 assign ch1_ampl_ctrl_word = ch1_ampl[15:0];
 assign ch1_dc_offset_word = ch1_offset[15:0];
-assign ch1_duty_ctrl_word = ch1_duty[9:0];   // 低10位有效
+assign ch1_duty_ctrl_word = ch1_duty[15:0];   // 低10位有效
 
 // ---- 通道2 输出（主寄存器驱动） ----
 assign ch2_enable = ch2_ctrl[CHANNEL_ENABLE];
@@ -297,7 +297,7 @@ assign ch2_freq_ctrl_word = {ch2_freq_h[15:0], ch2_freq_m[15:0], ch2_freq_l[15:0
 assign ch2_phase_ctrl_word = ch2_phase[15:0];
 assign ch2_ampl_ctrl_word = ch2_ampl[15:0];
 assign ch2_dc_offset_word = ch2_offset[15:0];
-assign ch2_duty_ctrl_word = ch2_duty[9:0];
+assign ch2_duty_ctrl_word = ch2_duty[15:0];
 
 // ---- DAC 缓存输出（主缓存驱动） ----
 always @(posedge sys_clk or negedge sys_rst_n) begin

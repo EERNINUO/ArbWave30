@@ -14,23 +14,27 @@ module wave_generation(
     input                    sys_clk,              // 系统时钟
     input                    sys_rst_n,            // 系统复位，低有效
 
-    input                    enable,           // 通道1使能信号
-    input   signed  [15: 0]  amplitude,        // 通道1幅度控制，16位，范围0~65535，幅值为负时波形反相
-    input   signed  [15: 0]  offset,           // 通道1偏置控制，
-    input           [47: 0]  freq_ctrl_word,   // 通道1频率控制字，48位，范围0~2^48-1
-    input           [47: 0]  phase_ctrl_word,  // 通道1相位控制字，48位，范围0~2^48-1
+    input                    enable,           // 通道使能信号
+    input           [ 5: 0]  waveform,         // 波形类型选择，6位，范围0~63
+    input   signed  [15: 0]  amplitude,        // 通道幅度控制，16位，范围0~65535，幅值为负时波形反相
+    input   signed  [15: 0]  offset,           // 通道偏置控制，
+    input           [47: 0]  freq_ctrl_word,   // 通道频率控制字，48位，范围0~2^48-1
+    input           [47: 0]  phase_ctrl_word,  // 通道相位控制字，48位，范围0~2^48-1
+    input           [15: 0]  duty_ctrl_word,  // 通道占空比控制字，16位，范围0~65535
 
-    output  signed  [15: 0]  data_out          // 通道1输出数据，16位，范围0~65535
+    output  signed  [15: 0]  data_out          // 通道输出数据，16位，范围0~65535
 );
 
-localparam sine_wave = 4'd0;
-localparam square_wave = 4'd1;
-localparam triangle_wave = 4'd2;
-localparam sawtooth_wave = 4'd3;
-localparam noise = 4'd4;
+localparam sine_wave = 6'd0;
+localparam square_wave = 6'd1;
+localparam triangle_wave = 6'd2;
+localparam sawtooth_wave = 6'd3;
+localparam noise = 6'd4;
 
-wire                   channel_rst_n;  // 通道1复位信号，低有效
-wire  signed  [15: 0]  sine_out;  // 通道1正弦波输出，16位，范围-32768~32767
+wire                   channel_rst_n;  // 通道复位信号，低有效
+wire  signed  [15: 0]  sine_out;  // 通道正弦波输出，16位，范围-32768~32767
+
+wire signed  [47: 0]  phase_count;  // 通道相位计数器输出，48位，范围0~2^48-1
 
 assign channel_rst_n = sys_rst_n & enable;  // 复位信号，低有效 
 
@@ -41,17 +45,22 @@ DDS_II_Top u_dds_ii_ch1 (
     .phase_valid_i(channel_rst_n),              // 相位有效信号，始终为高电平
     .phase_inc_i(freq_ctrl_word),       // 频率控制字输入
     .phase_off_i(phase_ctrl_word),      // 相位控制字输入
-    .phase_out_o(),                         // 相位输出
+    .phase_out_o(phase_count),          // 相位输出
     .sine_o(sine_out),                  // 正弦波输出
     .data_valid_o()                         // 数据有效信号
 );
+
+wire [15:0] square_out = (phase_count[47:32] >= duty_ctrl_word) ? 16'd32767 : -16'd32768;
 
 reg signed [15: 0] wave_mux;
 always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
         wave_mux <= 16'd0;  // 复位时输出中间值（偏置为0）
     end else begin
-        wave_mux <= sine_out;
+        case(waveform)
+            sine_wave: wave_mux <= sine_out;
+            square_wave: wave_mux <= square_out;
+        endcase
     end
 end
 
