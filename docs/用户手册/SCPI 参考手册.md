@@ -89,23 +89,62 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - `SOUR:FREQ MAX` -> 设置当前选中通道频率为 30 MHz（短格式）。
 - `FREQuency?` -> 返回 `1000000.000000`。
 
-### 4.2 波形类型 `[SOURce#:]FUNCtion`
+### 4.2 波形类型与专属参数 `[SOURce#:]FUNCtion`
 
-**描述**：设置或查询波形形状。
+本组命令用于选择输出波形，并配置该波形的特有参数（如方波占空比）。
+
+#### 4.2.1 `[SOURce#:]FUNCtion` —— 波形形状选择
+
+**描述**：设置或查询当前通道的波形形状。
 
 **命令格式**：
-`[SOURce#:]FUNCtion {SINusoid|SQUare|TRIangle|SAWtooth|DC}`
+`[SOURce#:]FUNCtion {SINusoid|SQUare|TRIangle|NOIse|DC}`
 `[SOURce#:]FUNCtion?`
 
 **参数说明**：
-- `SINusoid` (短格式: `SIN`)：正弦波。
-- `SQUare` (短格式: `SQU`)：方波。
-- `TRIangle` (短格式: `TRI`)：三角波。
-- `NOISe` (短格式: `NOI`)：噪声波。
-- `DC` (短格式: `DC`)：直流电平。
+
+| 参数 | 短格式 | 说明 |
+| :--- | :--- | :--- |
+| `SINusoid` | `SIN` | 正弦波（默认） |
+| `SQUare` | `SQU` | 方波（占空比可调，见 4.2.2） |
+| `TRIangle` | `TRI` | 三角波 |
+| `NOIse` | `NOI` | 噪声波 |
+| `DC` | `DC` | 直流电平 |
 
 **示例**：
-- `SOURce2:FUNCtion SQU` -> 设置通道 2 输出方波。
+- `SOUR:FUNC SIN` -> 选择正弦波。
+- `SOUR:FUNC?` -> 返回当前波形类型（如 `"SIN"`）。
+
+#### 4.2.2 `[SOURce#:]FUNCtion:SQUare:DCYCle` —— 方波占空比
+
+**描述**：设置或查询方波的高电平时间占整个周期的百分比。**仅在波形为 `SQUare` 时有效**。
+
+**命令格式**： 
+`[SOURce#:]FUNCtion:SQUare:DCYCle {<percent>|MINimum|MAXimum}`
+`[SOURce#:]FUNCtion:SQUare:DCYCle? [MINimum|MAXimum]`
+
+**参数**：
+- `<percent>`：浮点数，单位 %。
+- 范围：1.00 % ~ 99.99 %（受限于硬件上升时间，极值可能无法达到理想方波）。
+- 默认值：50.00 %。
+
+**示例**：
+- `SOUR:FUNC:SQU:DCYC 30` -> 设置占空比为 30%。
+- `SOUR:FUNC:SQU:DCYC?` -> 返回 `"30.00"`。
+
+**错误处理**：
+- 若当前波形不是方波（例如正弦波），执行此命令将返回错误 `-221,"Settings conflict"`。
+
+#### 4.2.3 `[SOURce#:]FUNCtion:TRIangle:SYMMetry` —— 三角波/锯齿波对称度
+
+**描述**：设置或查询三角波的对称度。
+
+- 50% 为标准三角波。
+- 0% 或 100% 退化为锯齿波（上升沿或下降沿极陡）。
+
+**命令格式**：
+`[SOURce#:]FUNCtion:TRIangle:SYMMetry {<percent>|MINimum|MAXimum}`
+`[SOURce#:]FUNCtion:TRIangle:SYMMetry?`
 
 ### 4.3 幅度设置 `[SOURce#:]VOLTage`
 
@@ -140,8 +179,6 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - `SOURce1:VOLTage 2.5` -> 设置通道 1 输出偏置 2.5 V。
 
 [^1]: 返回值为电压最值，即 amplitude + offset 不能大于/小于该值。
-
----
 
 ## 5. `OUTPut` 子系统（物理输出控制）
 
