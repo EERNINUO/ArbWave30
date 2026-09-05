@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
-    <img alt="仓库状态" src="https://img.shields.io/badge/status-MVP 设计中-blue">
+    <img alt="仓库状态" src="https://img.shields.io/badge/status-MVP 调优中-blue">
   </a>
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
     <img alt="GitHub 仓库星标" src="https://img.shields.io/github/stars/EERNINUO/ArbWave30">
@@ -62,28 +62,30 @@
 
 ## 🚦 项目状态
 
-> **当前阶段：MVP 硬件、MCU/FPGA 核心程序验证完成，已能通过 SCPI 控制输出正弦波，正在进行模拟前端进一步调优**
+> **当前阶段：MVP 硬件、MCU/FPGA 核心程序验证完成，已能通过 SCPI 控制输出，正在进行模拟前端进一步调优**
 
 ### ✅ 已完成
 - [x] PCB 设计与打样（4层板，信号完整性设计）
-- [x] 模拟前端调试通过 ✅ 已输出正弦波（见下方截图）
+- [x] 模拟前端调试通过 
 - [x] DAC 上电参数配置正常（SPI 接口通信稳定）
 - [x] 正弦 DDS 核（IP 核实现，48位相位累加器）
-- [x] 方波/直流生成
+- [x] 方波/直流/三角波/噪声波生成
 - [x] 幅度控制模块
 - [x] 相位控制模块
 - [x] SPI Slave 通信接口与寄存器组
 - [x] 模拟板驱动库（MCU 端）
 - [x] SCPI 协议栈移植
 - [x] 7阶椭圆滤波器焊接调试
+- [x] 输出性能粗略标定（THD、SFDR）
 
 ### 🏗️ 开发中
 - [ ] 软件幅度校准
-- [ ] 其他波形 DDS：三角波 / 噪声
+- [ ] 谐波性能优化
 
 ### 📋 待办（MVP 之后）
+- [ ] 滤波器性能优化（重构滤波器，调整群延时，减少快速边沿的过冲/振铃）
 - [ ] 模拟板完整版设计（加入 硬件幅度控制、直流偏置、外部触发、外部时钟输入）
-- [ ] 输出性能标定（THD、SFDR）
+- [ ] 输出性能精确标定（需要专业频谱仪，目前无法进行）
 - [ ] 上位机控制软件
 
 ### 📸 当前进展
@@ -96,7 +98,7 @@
 
 **方波满幅输出波形：**
 ![5MHz方波满幅输出波形](docs/pic/5MHz方波满幅输出波形.png)
-> 当前版本方波有约 14.5% 的过冲，为滤波器群延时特性所致，后续将通过优化通道设计解决，详见[重构滤波器调试笔记](docs/设计笔记/重构滤波器调试笔记.md)。
+> 当前版本方波有约 13.5% 的过冲，为滤波器群延时特性所致，后续将通过优化通道设计解决，详见[重构滤波器调试笔记](docs/设计笔记/重构滤波器调试笔记.md)。
 
 **10MHz正弦波FFT结果：**
 
@@ -189,7 +191,7 @@ print(f"Freq: {freq}")
 inst.close()
 ```
 
-完整命令集参见 ![docs/SCPI_reference.md](</docs/用户手册/SCPI 参考手册.md>)。
+完整命令集参见 [docs/SCPI_reference.md](</docs/用户手册/SCPI 参考手册.md>)。
 
 ## 🧪 自动化测试
 测试脚本位于 `scripts/`（持续更新中），使用 PyVISA 与设备通信。你可以运行对应的脚本进行自动化测试，或者根据你的需求，参考这些脚本自行编写测试用例。
