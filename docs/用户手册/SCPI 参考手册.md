@@ -83,6 +83,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - `<frequency>`：浮点数，单位 Hz。
 - `MIN`：最小值，0 Hz （0 Hz）。
 - `MAX`：最大值，30,000,000 Hz （30 MHz）。
+- 默认值：0 Hz。
 
 **示例**：
 - `SOURce1:FREQuency 1000000` -> 设置通道 1 频率为 1 MHz。
@@ -104,7 +105,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 **参数说明**：
 
 | 参数 | 短格式 | 说明 |
-| :--- | :--- | :--- |
+| --- | --- | --- |
 | `SINusoid` | `SIN` | 正弦波（默认） |
 | `SQUare` | `SQU` | 方波（占空比可调，见 4.2.2） |
 | `TRIangle` | `TRI` | 三角波 |
@@ -125,7 +126,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 
 **参数**：
 - `<percent>`：浮点数，单位 %。
-- 范围：1.00 % ~ 99.99 %（受限于硬件上升时间，极值可能无法达到理想方波）。
+- 范围：0.01 % ~ 99.99 %（受限于硬件上升时间，极值可能无法达到理想的100%）。
 - 默认值：50.00 %。
 
 **示例**：
@@ -135,16 +136,69 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 **错误处理**：
 - 若当前波形不是方波（例如正弦波），执行此命令将返回错误 `-221,"Settings conflict"`。
 
-#### 4.2.3 `[SOURce#:]FUNCtion:TRIangle:SYMMetry` —— 三角波/锯齿波对称度
+#### 4.2.3 `[SOURce#:]FUNCtion:TRIangle:SYMMetry` —— 三角波对称度
 
-**描述**：设置或查询三角波的对称度。
-
-- 50% 为标准三角波。
-- 0% 或 100% 退化为锯齿波（上升沿或下降沿极陡）。
+**描述**：设置或查询三角波的对称度。**仅在波形为 `TRIangle` 时有效**。
 
 **命令格式**：
 `[SOURce#:]FUNCtion:TRIangle:SYMMetry {<percent>|MINimum|MAXimum}`
 `[SOURce#:]FUNCtion:TRIangle:SYMMetry?`
+
+**参数**：
+- `<percent>`：浮点数，单位 %。
+- 范围：0.01 % ~ 99.99 %（受限于硬件上升时间，极值可能无法达到理想的100%）。
+- 默认值：50.00 %。
+
+**示例**：
+- `SOUR:FUNC:TRI:SYMM 75` -> 设置对称度为 75%。
+- `SOUR:FUNC:TRI:SYMM?` -> 返回 `"75.00"`。
+
+**错误处理**：
+- 若当前波形不是三角波，执行此命令将返回错误 `-221,"Settings conflict"`。
+
+### 4.2.4 `[SOURce[#]]:FUNCtion:NOISe:MEAN` —— 设置/查询噪声平均值
+
+**描述**：设置或查询噪声信号的平均值（直流分量）。**仅在波形为 `NOISe` 时有效**。
+
+**命令格式**： 
+`[SOURce#:]FUNCtion:NOISe:MEAN {<mean>|MINimum|MAXimum}`
+`[SOURce#:]FUNCtion:NOISe:MEAN? [MINimum|MAXimum]`
+
+**参数**：
+- `<mean>`：浮点数，表示噪声信号的平均值（直流分量），单位 V。
+- 范围：
+  - `MIN`：最小值，-10 V。
+  - `MAX`：最大值，+10 V。
+- 默认值：0 V。
+
+**示例**：
+- `SOUR:FUNC:NOIS:MEAN 0.5` -> 设置噪声平均值为 +0.5V。
+- `SOUR:FUNC:NOIS:MEAN?` -> 返回 `"0.50"`。
+
+**错误处理**：
+- 若当前波形不是噪声波，执行此命令将返回错误 `-221,"Settings conflict"`。
+
+### 4.2.5 `[SOURce[#]]:FUNCtion:NOISe:SDEViation` —— 设置/查询噪声标准差
+
+**描述**：设置或查询噪声信号的标准差（衡量噪声的幅度）。**仅在波形为 `NOISe` 时有效**。
+
+**命令格式**：
+`[SOURce[#]]:FUNCtion:NOISe:SDEViation {<sdev>|MINimum|MAXimum}`
+`[SOURce[#]]:FUNCtion:NOISe:SDEViation?`
+
+**参数**：
+- `<sdev>`：浮点数，表示噪声信号的标准差（衡量噪声的幅度），单位 V。
+- 范围：
+  - `MIN`：最小值，0 V 。
+  - `MAX`：最大值，5.770 V 。
+- 默认值：0 V。
+
+**示例**：
+- `SOUR:FUNC:NOIS:SDEV 2.5` -> 设置噪声标准差为 2.5V。
+- `SOUR:FUNC:NOIS:SDEV?` -> 返回 `"2.50"`。
+
+**错误处理**：
+- 若当前波形不是噪声波，执行此命令将返回错误 `-221,"Settings conflict"`。
 
 ### 4.3 幅度设置 `[SOURce#:]VOLTage`
 
@@ -156,15 +210,15 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 
 **参数说明**：
 - `<amplitude>`：浮点数，单位 V（高阻负载下）。
-- `MIN`：~-10 V[^1]。
-- `MAX`：~10 V[^1]。
+- `MIN`：~-10 V。
+- `MAX`：~10 V。
 
 **示例**：
 - `SOURce1:VOLTage 2.5` -> 设置通道 1 输出 2.5 V。
 
 ### 4.4 偏置设置 `[SOURce#:]VOLTage:OFFSet`
 
-**描述**：设置或查询输出幅度（峰峰值 Vpp）。
+**描述**：设置或查询输出偏置。
 
 **命令格式**：
 `[SOURce#:]VOLTage:OFFSet {<offset>|MIN|MAX}`
@@ -172,13 +226,11 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 
 **参数说明**：
 - `<offset>`：浮点数，单位 V（高阻负载下）。
-- `MIN`：~-10 V[^1]。
-- `MAX`：~10 V[^1]。
+- `MIN`：~-10 V。
+- `MAX`：~10 V。
 
 **示例**：
-- `SOURce1:VOLTage 2.5` -> 设置通道 1 输出偏置 2.5 V。
-
-[^1]: 返回值为电压最值，即 amplitude + offset 不能大于/小于该值。
+- `SOURce1:VOLTage:OFFSet 2.5` -> 设置通道 1 输出偏置 2.5 V。
 
 ## 5. `OUTPut` 子系统（物理输出控制）
 
