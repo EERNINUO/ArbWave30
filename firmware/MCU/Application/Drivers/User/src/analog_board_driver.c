@@ -41,6 +41,10 @@ extern SPI_HandleTypeDef hspi1; // 声明SPI句柄
 #define CHx_OFFSET 0x05
 #define CHx_PHASE 0x06
 #define CHx_DUTY 0x07
+#define CHx_SLOPE_UP_L 0x08
+#define CHx_SLOPE_UP_H 0x09
+#define CHx_SLOPE_DOWN_L 0x0A
+#define CHx_SLOPE_DOWN_H 0x0B
 
 // 系统控制寄存器位定义
 
@@ -672,6 +676,53 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
 	else
 		analogBoardConfig.ch2.duty = duty; 
 		
+	return ACK_OK;
+
+error_handler:
+	// 错误处理
+	return ack;
+}
+
+/**
+ * @brief  设置对称度，仅对三角波有效
+ * @param  channel: 通道号，1或2
+ * @param  Symmetry: 对称度，单位 0.01%（0~10000，对应 0~100.00）
+ * @retval ACK响应
+ */
+uint8_t analogBoard_setSymmetry(uint8_t channel, uint16_t Symmetry)
+{
+	if (Symmetry > (SYMMETRY_MAX * 100)) {
+		Symmetry = (SYMMETRY_MAX * 100); // 限制对称度范围
+	} else if (Symmetry < (SYMMETRY_MIN * 100)) {
+		Symmetry = (SYMMETRY_MIN * 100);
+	}
+
+	uint8_t ack = 0;
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
+	uint16_t symmetry_ctrl_word = (int32_t)Symmetry * 0xFF / 10000; // 计算对称度控制字
+	uint32_t slope_up_ctrl_word = (65535 << 16) / symmetry_ctrl_word; // 计算上升沿控制字
+	uint32_t slope_down_ctrl_word = (65535 << 16) / (65535 - symmetry_ctrl_word); // 计算下降沿控制字
+
+	// 发送对称度控制字
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_DUTY), symmetry_ctrl_word)) != ACK_OK)
+		goto error_handler;
+
+	// 发送上升沿控制字
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_SLOPE_UP_L), (uint16_t)(slope_up_ctrl_word & 0xFFFF))) != ACK_OK)
+		goto error_handler;
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_SLOPE_UP_H), (uint16_t)((slope_up_ctrl_word >> 16) & 0xFFFF))) != ACK_OK)
+		goto error_handler;
+
+	// 发送下降沿控制字
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_SLOPE_DOWN_L), (uint16_t)(slope_down_ctrl_word & 0xFFFF))) != ACK_OK)
+		goto error_handler;
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_SLOPE_DOWN_H), (uint16_t)((slope_down_ctrl_word >> 16) & 0xFFFF))) != ACK_OK)
+		goto error_handler;
+
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
 	return ACK_OK;
 
 error_handler:
