@@ -814,3 +814,8 @@ uint16_t analogBoard_getDuty(uint8_t channel)
 {
 	return (channel == 1) ? analogBoardConfig.ch1.duty : analogBoardConfig.ch2.duty;
 }
+
+uint16_t analogBoard_getSymmetry(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.duty : analogBoardConfig.ch2.duty;
+}

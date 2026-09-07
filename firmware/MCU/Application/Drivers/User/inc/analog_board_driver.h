@@ -39,7 +39,7 @@
 #define PHASE_MIN 0 // 最小相位，单位 度（°）
 #define PHASE_MAX 360 // 最大相位，单位 度（°）
 #define DUTY_MIN 0 // 最小占空比，单位 %
-#define DUTY_MAX 100 // 最大占空比，单位 %
+#define DUTY_MAX 99.99 // 最大占空比，单位 %
 #define SYMMETRY_MIN DUTY_MIN // 最小对称度，单位 %
 #define SYMMETRY_MAX DUTY_MAX // 最大对称度，单位 %
 
@@ -88,7 +88,7 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV);
 uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV);
 uint8_t analogBoard_setPhase(uint8_t channel, uint16_t phase);
 uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty);
-
+uint8_t analogBoard_setSymmetry(uint8_t channel, uint16_t symmetry);
 // 参数读取函数
 // 这些函数都是通过读取 MCU 中的镜像结构体来实现的，不需要与 FPGA 通信，不存在 ACK 响应，因此直接返回读取的数据即可
 bool analogBoard_getImpedance(uint8_t channel);
@@ -99,5 +99,6 @@ int16_t analogBoard_getAmplitude(uint8_t channel);
 int16_t analogBoard_getOffset(uint8_t channel);
 uint16_t analogBoard_getPhase(uint8_t channel);
 uint16_t analogBoard_getDuty(uint8_t channel);
+uint16_t analogBoard_getSymmetry(uint8_t channel);
 
 #endif // ANALOG_BOADR_DRIVE_H

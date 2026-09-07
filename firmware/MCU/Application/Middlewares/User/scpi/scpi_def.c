@@ -28,6 +28,10 @@ scpi_result_t ArbWave30_Frequency(scpi_t * context);
 scpi_result_t ArbWave30_FrequencyQ(scpi_t * context);
 scpi_result_t ArbWave30_Function(scpi_t * context);
 scpi_result_t ArbWave30_FunctionQ(scpi_t * context);
+scpi_result_t ArbWave30_Duty(scpi_t * context);
+scpi_result_t ArbWave30_DutyQ(scpi_t * context);
+scpi_result_t ArbWave30_Symmetry(scpi_t * context);
+scpi_result_t ArbWave30_SymmetryQ(scpi_t * context);
 scpi_result_t ArbWave30_VoltageAmplitude(scpi_t * context);
 scpi_result_t ArbWave30_VoltageAmplitudeQ(scpi_t * context);
 scpi_result_t ArbWave30_VoltageOffset(scpi_t * context);
@@ -140,6 +144,14 @@ static const scpi_command_t scpi_commands[] = {
     { "SOURce:FUNCtion?",           ArbWave30_FunctionQ,      0 },
     { "SOURce#:FUNCtion",           ArbWave30_Function,       0 },
     { "SOURce#:FUNCtion?",          ArbWave30_FunctionQ,      0 },
+
+    // [SOURce#:]FUNCtion:SQUare:DCYCle
+    { "SOURce#:FUNCtion:SQUare:DCYCle", ArbWave30_Duty,   	  0 },
+    { "SOURce#:FUNCtion:SQUare:DCYCle?", ArbWave30_DutyQ, 	  0 },
+
+    // [SOURce#:]FUNCtion:TRIangle:SYMMetry
+    { "SOURce#:FUNCtion:TRIangle:SYMMetry", ArbWave30_Symmetry,   0 },
+    { "SOURce#:FUNCtion:TRIangle:SYMMetry?", ArbWave30_SymmetryQ, 0 },
 
 	// [SOURce#:]VOLTage:OFFSet
 	{ "VOLTage:OFFSet",             ArbWave30_VoltageOffset,  0 },
@@ -356,6 +368,119 @@ scpi_result_t ArbWave30_FunctionQ(scpi_t *context)
 		SCPI_ResultMnemonic(context, name);
 	}
 
+	return SCPI_RES_OK;
+}
+
+scpi_result_t ArbWave30_Duty(scpi_t *context)
+{
+	int32_t ch;
+	double duty;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (!ArbWave30_ParamNumber(context, &duty, DUTY_MIN, DUTY_MAX)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (analogBoard_getWave(ch) != WAVE_SQUARE) {
+		SCPI_ErrorPush(context, SCPI_ERROR_SETTINGS_CONFLICT);
+		return SCPI_RES_ERR;
+	}
+
+	if (analogBoard_setDuty(ch, (uint16_t)(duty * 100)) != ACK_OK) {
+		SCPI_ErrorPush(context, SCPI_ERROR_HARDWARE_ERROR);
+		return SCPI_RES_ERR;
+	}
+
+	return SCPI_RES_OK;
+}
+
+scpi_result_t ArbWave30_DutyQ(scpi_t *context)
+{
+	int32_t ch;
+	scpi_number_t param;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (SCPI_ParamNumber(context, scpi_special_numbers_def, &param, FALSE)) {
+		if (param.special) {
+			if (param.content.tag == SCPI_NUM_MIN) {
+				SCPI_ResultFloat(context, (float)DUTY_MIN);
+				return SCPI_RES_OK;
+			} else if (param.content.tag == SCPI_NUM_MAX) {
+				SCPI_ResultFloat(context, (float)DUTY_MAX);
+				return SCPI_RES_OK;
+			} else {
+				SCPI_ErrorPush(context, SCPI_ERROR_ILLEGAL_PARAMETER_VALUE);
+				return SCPI_RES_ERR;
+			}
+		} else {
+			SCPI_ErrorPush(context, SCPI_ERROR_PARAMETER_NOT_ALLOWED);
+			return SCPI_RES_ERR;
+		}
+	}
+
+	SCPI_ResultFloat(context, (float)analogBoard_getDuty(ch)/100.0);
+	return SCPI_RES_OK;
+}
+
+scpi_result_t ArbWave30_Symmetry(scpi_t *context)
+{
+	int32_t ch;
+	double sym;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (!ArbWave30_ParamNumber(context, &sym, SYMMETRY_MIN, SYMMETRY_MAX)) {
+	    return SCPI_RES_ERR;
+	}
+
+	if (analogBoard_getWave(ch) != WAVE_TRIANGLE) {
+		SCPI_ErrorPush(context, SCPI_ERROR_SETTINGS_CONFLICT);
+		return SCPI_RES_ERR;
+	}
+
+	if (analogBoard_setSymmetry(ch, (uint16_t)(sym * 100)) != ACK_OK) {
+		SCPI_ErrorPush(context, SCPI_ERROR_HARDWARE_ERROR);
+		return SCPI_RES_ERR;
+	}
+	return SCPI_RES_OK;
+}
+
+scpi_result_t ArbWave30_SymmetryQ(scpi_t *context)
+{
+	int32_t ch;
+	scpi_number_t param;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (SCPI_ParamNumber(context, scpi_special_numbers_def, &param, FALSE)) {
+		if (param.special) {
+			if (param.content.tag == SCPI_NUM_MIN) {
+				SCPI_ResultFloat(context, (float)SYMMETRY_MIN);
+				return SCPI_RES_OK;
+			} else if (param.content.tag == SCPI_NUM_MAX) {
+				SCPI_ResultFloat(context, (float)SYMMETRY_MAX);
+				return SCPI_RES_OK;
+			} else {
+				SCPI_ErrorPush(context, SCPI_ERROR_ILLEGAL_PARAMETER_VALUE);
+				return SCPI_RES_ERR;
+			}
+		} else {
+			SCPI_ErrorPush(context, SCPI_ERROR_PARAMETER_NOT_ALLOWED);
+			return SCPI_RES_ERR;
+		}
+	}
+
+	SCPI_ResultFloat(context, (float)analogBoard_getSymmetry(ch)/100.0);
 	return SCPI_RES_OK;
 }
 
