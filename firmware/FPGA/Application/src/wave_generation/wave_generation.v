@@ -62,11 +62,12 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
 end
 
 // 生成方波输出
-wire [15:0] square_out = (phase_count >= duty_ctrl_word) ? 16'd32767 : -16'd32768;
+wire [15:0] square_out = (phase_count <= duty_ctrl_word) ? 16'd32767 : -16'd32768;
 
 // 生成三角波输出
-reg [31:0] triangle_out;
+reg [47:0] triangle_out;
 reg [15:0] triangle_phase;
+reg [31:0] slope_ctrl_word;
 
 always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
@@ -82,11 +83,19 @@ end
 
 always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
-        triangle_out <= 32'd0;
+        slope_ctrl_word <= 32'd0;
     end else if (phase_count < duty_ctrl_word) begin
-        triangle_out <= triangle_phase * slope_up_ctrl_word;
+        slope_ctrl_word <= slope_up_ctrl_word;
     end else begin
-        triangle_out <= triangle_phase * slope_down_ctrl_word;
+        slope_ctrl_word <= slope_down_ctrl_word;
+    end
+end
+
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        triangle_out <= 48'd0;
+    end else begin
+        triangle_out <= triangle_phase * slope_ctrl_word;
     end
 end
 
@@ -98,7 +107,7 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
         case(waveform)
             sine_wave: wave_mux <= sine_out;
             square_wave: wave_mux <= square_out;
-            triangle_wave: wave_mux <= triangle_out[31:16] - 16'd32768; // 三角波输出为 Q16.16 格式，截取高 16 位 [31:16]，减去 32768 以使其范围为 -32768~32767
+            triangle_wave: wave_mux <= triangle_out[31:16] - 16'd32768;  // 三角波输出范围为-32768~32767
             dc: wave_mux <= 16'd0; 
         endcase
     end

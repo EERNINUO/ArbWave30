@@ -33,7 +33,7 @@ module dac_interface #(
 wire [15:0] ch1_fifo_out;
 
 FIFO_HS_Top u_FIFO_HS_Top(
-	.Data(ch1_data_in), //input [15:0] Data
+	.Data(-ch1_data_in), //input [15:0] Data，因为 CH1 外部电路反向连接，所以输入数据取反
 	.WrClk(sys_clk), //input WrClk
 	.RdClk(data_clk), //input RdClk
 	.WrEn(sys_rst_n), //input WrEn

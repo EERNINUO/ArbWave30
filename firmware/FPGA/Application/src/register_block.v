@@ -249,7 +249,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch2_freq_l   <= 16'h0000;
         ch2_freq_m   <= 16'h0000;
         ch2_freq_h   <= 16'h0000;
-        ch2_ampl      <= 16'h0000;
+        ch2_ampl     <= 16'h0000;
         ch2_offset   <= 16'h0000;
         ch2_phase    <= 16'h0000;
         ch2_duty     <= 16'h8000;
@@ -286,15 +286,18 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
     end
 end
 
+reg  [6:0]  addr_dly;
 // 读取寄存器
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
         data_out <= 16'h0000;
         address_error <= 1'b0;
+        addr_dly <= 7'h00;
     end 
     else begin
+        addr_dly <= addr;
         address_error <= 1'b0; // 默认地址合法
-        case (addr)
+        case (addr_dly)
             7'h00: data_out <= sys_id_l;               // SYS_ID_L (只读)
             7'h01: data_out <= sys_id_h;               // SYS_ID_H (只读)
             7'h02: data_out <= sys_ctrl_reg;
@@ -307,6 +310,10 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             7'h15: data_out <= ch1_offset;
             7'h16: data_out <= ch1_phase;
             7'h17: data_out <= ch1_duty;
+            7'h18: data_out <= ch1_slope_up_l;
+            7'h19: data_out <= ch1_slope_up_h;
+            7'h1a: data_out <= ch1_slope_down_l;
+            7'h1b: data_out <= ch1_slope_down_h;
             7'h20: data_out <= ch2_ctrl;
             7'h21: data_out <= ch2_freq_l;
             7'h22: data_out <= ch2_freq_m;
@@ -315,6 +322,10 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             7'h25: data_out <= ch2_offset;
             7'h26: data_out <= ch2_phase;
             7'h27: data_out <= ch2_duty;
+            7'h28: data_out <= ch2_slope_up_l;
+            7'h29: data_out <= ch2_slope_up_h;
+            7'h2a: data_out <= ch2_slope_down_l;
+            7'h2b: data_out <= ch2_slope_down_h;
             7'h30: data_out <= dac_cache_0;
             7'h31: data_out <= dac_cache_1;
             7'h32: data_out <= dac_cache_2;
@@ -338,7 +349,7 @@ assign ch1_enable = ch1_ctrl[CHANNEL_ENABLE];
 assign ch1_waveform = ch1_ctrl[WAVEFORM_MSB:WAVEFORM_LSB];
 assign ch1_freq_ctrl_word = {ch1_freq_h[15:0], ch1_freq_m[15:0], ch1_freq_l[15:0]};
 assign ch1_phase_ctrl_word = ch1_phase[15:0];
-assign ch1_ampl_ctrl_word = ch1_ampl[15:0];
+assign ch1_ampl_ctrl_word = $signed(ch1_ampl[15:0]);
 assign ch1_dc_offset_word = ch1_offset[15:0];
 assign ch1_duty_ctrl_word = ch1_duty[15:0];   // 低10位有效
 assign ch1_slope_up_ctrl_word = {ch1_slope_up_h[15:0], ch1_slope_up_l[15:0]};
@@ -349,7 +360,7 @@ assign ch2_enable = ch2_ctrl[CHANNEL_ENABLE];
 assign ch2_waveform = ch2_ctrl[WAVEFORM_MSB:WAVEFORM_LSB];
 assign ch2_freq_ctrl_word = {ch2_freq_h[15:0], ch2_freq_m[15:0], ch2_freq_l[15:0]};
 assign ch2_phase_ctrl_word = ch2_phase[15:0];
-assign ch2_ampl_ctrl_word = ch2_ampl[15:0];
+assign ch2_ampl_ctrl_word = $signed(ch2_ampl[15:0]);
 assign ch2_dc_offset_word = ch2_offset[15:0];
 assign ch2_duty_ctrl_word = ch2_duty[15:0];
 assign ch2_slope_up_ctrl_word = {ch2_slope_up_h[15:0], ch2_slope_up_l[15:0]};
