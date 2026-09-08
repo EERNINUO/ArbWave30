@@ -660,7 +660,7 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	uint16_t duty_ctrl_word = (int32_t)duty * 0xFF / 10000; // 计算占空比控制字，强制类型转换是为了防止溢出
+	uint16_t duty_ctrl_word = ((int32_t)duty * 0xFFFF + 5000) / 10000; // 计算占空比控制字，强制类型转换是为了防止溢出, 加5000是为了四舍五入
 
 	// 发送占空比
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_DUTY), duty_ctrl_word)) != ACK_OK)
@@ -699,9 +699,9 @@ uint8_t analogBoard_setSymmetry(uint8_t channel, uint16_t Symmetry)
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	uint16_t symmetry_ctrl_word = (int32_t)Symmetry * 0xFF / 10000; // 计算对称度控制字
-	uint32_t slope_up_ctrl_word = (65535 << 16) / symmetry_ctrl_word; // 计算上升沿控制字
-	uint32_t slope_down_ctrl_word = (65535 << 16) / (65535 - symmetry_ctrl_word); // 计算下降沿控制字
+	uint16_t symmetry_ctrl_word = ((uint32_t)Symmetry * 0xFFFF + 5000) / 10000; // 计算对称度控制字, 这里加5000是为了四舍五入
+	uint32_t slope_up_ctrl_word = (65535UL << 16) / symmetry_ctrl_word; // 计算上升沿控制字
+	uint32_t slope_down_ctrl_word = (65535UL << 16) / (65535U - symmetry_ctrl_word); // 计算下降沿控制字
 
 	// 发送对称度控制字
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_DUTY), symmetry_ctrl_word)) != ACK_OK)
@@ -722,6 +722,12 @@ uint8_t analogBoard_setSymmetry(uint8_t channel, uint16_t Symmetry)
 	// 影子寄存器更新
 	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
 		goto error_handler;
+
+		// 更新配置结构体中的占空比值
+	if (channel == 1)
+		analogBoardConfig.ch1.duty = Symmetry; 
+	else
+		analogBoardConfig.ch2.duty = Symmetry; 	// 更新配置结构体中的占空比值
 
 	return ACK_OK;
 

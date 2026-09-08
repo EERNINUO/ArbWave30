@@ -38,7 +38,7 @@
 #define VOLT_MAX 10 // 最大输出电压，单位 V
 #define PHASE_MIN 0 // 最小相位，单位 度（°）
 #define PHASE_MAX 360 // 最大相位，单位 度（°）
-#define DUTY_MIN 0 // 最小占空比，单位 %
+#define DUTY_MIN 0.01 // 最小占空比，单位 %
 #define DUTY_MAX 99.99 // 最大占空比，单位 %
 #define SYMMETRY_MIN DUTY_MIN // 最小对称度，单位 %
 #define SYMMETRY_MAX DUTY_MAX // 最大对称度，单位 %
