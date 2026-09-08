@@ -62,7 +62,14 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
 end
 
 // 生成方波输出
-wire [15:0] square_out = (phase_count <= duty_ctrl_word) ? 16'd32767 : -16'd32768;
+reg [15:0] square_out;
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        square_out <= 16'd0;
+    end else begin
+        square_out <= (phase_count > duty_ctrl_word) ? -16'd32768 : 16'd32767;
+    end
+end
 
 // 生成三角波输出
 reg [47:0] triangle_out;
