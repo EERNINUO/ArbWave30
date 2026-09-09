@@ -32,6 +32,10 @@ scpi_result_t ArbWave30_Duty(scpi_t * context);
 scpi_result_t ArbWave30_DutyQ(scpi_t * context);
 scpi_result_t ArbWave30_Symmetry(scpi_t * context);
 scpi_result_t ArbWave30_SymmetryQ(scpi_t * context);
+scpi_result_t ArbWave30_NoiseStdDev(scpi_t * context);
+scpi_result_t ArbWave30_NoiseStdDevQ(scpi_t * context);
+scpi_result_t ArbWave30_NoiseMean(scpi_t * context);
+scpi_result_t ArbWave30_NoiseMeanQ(scpi_t * context);
 scpi_result_t ArbWave30_VoltageAmplitude(scpi_t * context);
 scpi_result_t ArbWave30_VoltageAmplitudeQ(scpi_t * context);
 scpi_result_t ArbWave30_VoltageOffset(scpi_t * context);
@@ -152,6 +156,14 @@ static const scpi_command_t scpi_commands[] = {
     // [SOURce#:]FUNCtion:TRIangle:SYMMetry
     { "SOURce#:FUNCtion:TRIangle:SYMMetry", ArbWave30_Symmetry,   0 },
     { "SOURce#:FUNCtion:TRIangle:SYMMetry?", ArbWave30_SymmetryQ, 0 },
+
+	// [SOURce#:]FUNCtion:NOISe:SDEViation
+	{ "SOURce#:FUNCtion:NOISe:SDEViation", ArbWave30_NoiseStdDev,   0 },
+	{ "SOURce#:FUNCtion:NOISe:SDEViation?", ArbWave30_NoiseStdDevQ, 0 },
+
+	// [SOURce#:]FUNCtion:NOISe:MEAN
+	{ "SOURce#:FUNCtion:NOISe:MEAN", ArbWave30_NoiseMean,   0 },
+	{ "SOURce#:FUNCtion:NOISe:MEAN?", ArbWave30_NoiseMeanQ, 0 },
 
 	// [SOURce#:]VOLTage:OFFSet
 	{ "VOLTage:OFFSet",             ArbWave30_VoltageOffset,  0 },
@@ -481,6 +493,120 @@ scpi_result_t ArbWave30_SymmetryQ(scpi_t *context)
 	}
 
 	SCPI_ResultFloat(context, (float)analogBoard_getSymmetry(ch)/100.0);
+	return SCPI_RES_OK;
+}
+
+scpi_result_t ArbWave30_NoiseMean(scpi_t *context)
+{
+	int32_t ch;
+	double mean;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (!ArbWave30_ParamNumber(context, &mean, NOISE_MEAN_MIN, NOISE_MEAN_MAX)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (analogBoard_getWave(ch) != WAVE_NOISE) {
+		SCPI_ErrorPush(context, SCPI_ERROR_SETTINGS_CONFLICT);
+		return SCPI_RES_ERR;
+	}
+	
+	if (analogBoard_setOffset(ch, (int16_t)(mean * 1000)) != ACK_OK) {
+		SCPI_ErrorPush(context, SCPI_ERROR_HARDWARE_ERROR);
+		return SCPI_RES_ERR;
+	}
+
+	return SCPI_RES_OK;
+}
+
+scpi_result_t ArbWave30_NoiseMeanQ(scpi_t *context)
+{
+	int32_t ch;
+	scpi_number_t param;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (SCPI_ParamNumber(context, scpi_special_numbers_def, &param, FALSE)) {
+		if (param.special) {
+			if (param.content.tag == SCPI_NUM_MIN) {
+				SCPI_ResultFloat(context, (float)NOISE_MEAN_MIN);
+				return SCPI_RES_OK;
+			} else if (param.content.tag == SCPI_NUM_MAX) {
+				SCPI_ResultFloat(context, (float)NOISE_MEAN_MAX);
+				return SCPI_RES_OK;
+			}
+		} else {
+			SCPI_ErrorPush(context, SCPI_ERROR_PARAMETER_NOT_ALLOWED);
+			return SCPI_RES_ERR;
+		}
+	}
+
+	SCPI_ResultFloat(context, (float)analogBoard_getOffset(ch)/1000.0);
+	return SCPI_RES_OK;
+}
+
+scpi_result_t ArbWave30_NoiseStdDev(scpi_t *context)
+{
+	int32_t ch;
+	double stdDev;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (!ArbWave30_ParamNumber(context, &stdDev, NOISE_STDDEV_MIN, NOISE_STDDEV_MAX)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (analogBoard_getWave(ch) != WAVE_NOISE) {
+		SCPI_ErrorPush(context, SCPI_ERROR_SETTINGS_CONFLICT);
+		return SCPI_RES_ERR;
+	}
+
+	// 平均噪声幅值 = 均方根值 * sqrt(3)
+	int16_t amplitude = (int16_t)(stdDev * 1000 * 1.732);
+
+	if (analogBoard_setNoiseMean(ch, amplitude) != ACK_OK) {
+		SCPI_ErrorPush(context, SCPI_ERROR_HARDWARE_ERROR);
+		return SCPI_RES_ERR;
+	}
+	return SCPI_RES_OK;
+}
+
+scpi_result_t ArbWave30_NoiseStdDevQ(scpi_t *context)
+{
+		int32_t ch;
+	scpi_number_t param;
+
+	if (!ArbWave30_GetChannel(context, &ch)) {
+		return SCPI_RES_ERR;
+	}
+
+	if (SCPI_ParamNumber(context, scpi_special_numbers_def, &param, FALSE)) {
+		if (param.special) {
+			if (param.content.tag == SCPI_NUM_MIN) {
+				SCPI_ResultFloat(context, (float)NOISE_STDDEV_MIN);
+				return SCPI_RES_OK;
+			} else if (param.content.tag == SCPI_NUM_MAX) {
+				SCPI_ResultFloat(context, (float)NOISE_STDDEV_MAX);
+				return SCPI_RES_OK;
+			} else {
+				SCPI_ErrorPush(context, SCPI_ERROR_ILLEGAL_PARAMETER_VALUE);
+				return SCPI_RES_ERR;
+			}
+		} else {
+			SCPI_ErrorPush(context, SCPI_ERROR_PARAMETER_NOT_ALLOWED);
+			return SCPI_RES_ERR;
+		}
+	}
+
+	// 平均噪声幅值 = 均方根值 * sqrt(3)
+	SCPI_ResultFloat(context, (float)analogBoard_getAmplitude(ch) / (1000.0 * 1.732));
 	return SCPI_RES_OK;
 }
 
