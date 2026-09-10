@@ -247,15 +247,15 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             end
             if (spi_clk_posedge_dly && spi_cnt == 4'h7) begin
                 addr <= spi_address[6:0];
+            end
+        end
+        SPI_DATA: begin
+            if (spi_cnt == 4'h0) begin
                 // 数据传输开始，准备发送数据
                 if (spi_address[WR_bit] == 1'b1) begin
                     // 读操作，准备发送数据
                     tx_data <= {data_in[7:0], data_in[15:8]}; // 交换字节顺序
                 end
-            end
-        end
-        SPI_DATA: begin
-            if (spi_cnt == 4'h0) begin
                 if (address_error) begin
                     ack[ADDR_ERR_bit] <= 1'b1;
                 end
