@@ -31,7 +31,9 @@ module register_block(
     output               [15:0]  ch1_phase_ctrl_word,
     output       signed  [15:0]  ch1_ampl_ctrl_word,
     output       signed  [15:0]  ch1_dc_offset_word,
-    output               [9:0]   ch1_duty_ctrl_word,
+    output               [15:0]  ch1_duty_ctrl_word,
+    output               [31:0]  ch1_slope_up_ctrl_word,
+    output               [31:0]  ch1_slope_down_ctrl_word,
 
     output                       ch2_enable,
     output               [5:0]   ch2_waveform,
@@ -39,7 +41,9 @@ module register_block(
     output               [15:0]  ch2_phase_ctrl_word,
     output       signed  [15:0]  ch2_ampl_ctrl_word,
     output       signed  [15:0]  ch2_dc_offset_word,
-    output               [9:0]   ch2_duty_ctrl_word,
+    output               [15:0]  ch2_duty_ctrl_word,
+    output               [31:0]  ch2_slope_up_ctrl_word,
+    output               [31:0]  ch2_slope_down_ctrl_word,
     
     output  reg          [7:0]   dac_reg_addr,
     output  reg          [7:0]   dac_reg_data,
@@ -77,6 +81,10 @@ reg [15:0] ch1_ampl_shadow;          // 0x14
 reg [15:0] ch1_offset_shadow;        // 0x15
 reg [15:0] ch1_phase_shadow;         // 0x16
 reg [15:0] ch1_duty_shadow;          // 0x17
+reg [15:0] ch1_slope_up_l_shadow;    // 0x18
+reg [15:0] ch1_slope_up_h_shadow;    // 0x19
+reg [15:0] ch1_slope_down_l_shadow;  // 0x1a
+reg [15:0] ch1_slope_down_h_shadow;  // 0x1b
 
 // 通道2影子
 reg [15:0] ch2_ctrl_shadow;          // 0x20
@@ -87,6 +95,10 @@ reg [15:0] ch2_ampl_shadow;          // 0x24
 reg [15:0] ch2_offset_shadow;        // 0x25
 reg [15:0] ch2_phase_shadow;         // 0x26
 reg [15:0] ch2_duty_shadow;          // 0x27
+reg [15:0] ch2_slope_down_l_shadow;  // 0x28
+reg [15:0] ch2_slope_down_h_shadow;  // 0x29
+reg [15:0] ch2_slope_up_l_shadow;    // 0x2a
+reg [15:0] ch2_slope_up_h_shadow;    // 0x2b
 
 // ============================================
 // 3. 主寄存器组（影子加载后生效，DDS内核直接使用）
@@ -99,7 +111,11 @@ reg [15:0] ch1_freq_h;
 reg [15:0] ch1_ampl;          
 reg [15:0] ch1_offset;        
 reg [15:0] ch1_phase;         
-reg [15:0] ch1_duty;          
+reg [15:0] ch1_duty;      
+reg [15:0] ch1_slope_up_l;      
+reg [15:0] ch1_slope_up_h;      
+reg [15:0] ch1_slope_down_l;
+reg [15:0] ch1_slope_down_h;
 
 // 通道2主寄存器
 reg [15:0] ch2_ctrl;          
@@ -110,6 +126,10 @@ reg [15:0] ch2_ampl;
 reg [15:0] ch2_offset;        
 reg [15:0] ch2_phase;         
 reg [15:0] ch2_duty;          
+reg [15:0] ch2_slope_up_l;
+reg [15:0] ch2_slope_up_h;
+reg [15:0] ch2_slope_down_l;
+reg [15:0] ch2_slope_down_h;
 
 // ============================================
 // 4. DAC缓存寄存器（0x30~0x35，供AD9747 SPI控制器使用）
@@ -144,7 +164,11 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch1_ampl_shadow     <= 16'h0000;
         ch1_offset_shadow   <= 16'h0000;
         ch1_phase_shadow    <= 16'h0000;
-        ch1_duty_shadow     <= 16'h0000;
+        ch1_duty_shadow     <= 16'h8000;
+        ch1_slope_up_l_shadow   <= 16'h0000;
+        ch1_slope_up_h_shadow   <= 16'h0002;
+        ch1_slope_down_l_shadow <= 16'h0000;
+        ch1_slope_down_h_shadow <= 16'h0002;
         ch2_ctrl_shadow     <= 16'h0000;
         ch2_freq_l_shadow   <= 16'h0000;
         ch2_freq_m_shadow   <= 16'h0000;
@@ -152,7 +176,11 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch2_ampl_shadow     <= 16'h0000;
         ch2_offset_shadow   <= 16'h0000;
         ch2_phase_shadow    <= 16'h0000;
-        ch2_duty_shadow     <= 16'h0000;
+        ch2_duty_shadow     <= 16'h8000;
+        ch2_slope_up_l_shadow   <= 16'h0000;
+        ch2_slope_up_h_shadow   <= 16'h0002;
+        ch2_slope_down_l_shadow <= 16'h0000;
+        ch2_slope_down_h_shadow <= 16'h0002;
         dac_cache_0  <= 16'h0000;
         dac_cache_1  <= 16'h0000;
         dac_cache_2  <= 16'hf901;
@@ -170,6 +198,10 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             7'h15: ch1_offset_shadow <= data_in;
             7'h16: ch1_phase_shadow <= data_in;
             7'h17: ch1_duty_shadow <= data_in;
+            7'h18: ch1_slope_up_l_shadow <= data_in;
+            7'h19: ch1_slope_up_h_shadow <= data_in;
+            7'h1a: ch1_slope_down_l_shadow <= data_in;
+            7'h1b: ch1_slope_down_h_shadow <= data_in;
             7'h20: ch2_ctrl_shadow <= data_in;
             7'h21: ch2_freq_l_shadow <= data_in;
             7'h22: ch2_freq_m_shadow <= data_in;
@@ -178,6 +210,10 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             7'h25: ch2_offset_shadow <= data_in;
             7'h26: ch2_phase_shadow <= data_in;
             7'h27: ch2_duty_shadow <= data_in;
+            7'h28: ch2_slope_up_l_shadow <= data_in;
+            7'h29: ch2_slope_up_h_shadow <= data_in;
+            7'h2a: ch2_slope_down_l_shadow <= data_in;
+            7'h2b: ch2_slope_down_h_shadow <= data_in;
             // DAC 缓存区域
             7'h30: dac_cache_0 <= data_in;
             7'h31: dac_cache_1 <= data_in;
@@ -204,15 +240,23 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch1_ampl     <= 16'h0000;
         ch1_offset   <= 16'h0000;
         ch1_phase    <= 16'h0000;
-        ch1_duty     <= 16'h0000;
+        ch1_duty     <= 16'h8000;
+        ch1_slope_up_l   <= 16'h0000;
+        ch1_slope_up_h   <= 16'h0002;
+        ch1_slope_down_l <= 16'h0000;
+        ch1_slope_down_h <= 16'h0002;
         ch2_ctrl     <= 16'h0000;
         ch2_freq_l   <= 16'h0000;
         ch2_freq_m   <= 16'h0000;
         ch2_freq_h   <= 16'h0000;
-        ch2_ampl      <= 16'h0000;
+        ch2_ampl     <= 16'h0000;
         ch2_offset   <= 16'h0000;
         ch2_phase    <= 16'h0000;
-        ch2_duty     <= 16'h0000;
+        ch2_duty     <= 16'h8000;
+        ch2_slope_up_l   <= 16'h0000;
+        ch2_slope_up_h   <= 16'h0002;
+        ch2_slope_down_l <= 16'h0000;
+        ch2_slope_down_h <= 16'h0002;
     end else if (sys_ctrl_reg[UPDATE]) begin
         // 批量更新所有影子寄存器 → 主寄存器
         ch1_ctrl     <= ch1_ctrl_shadow;
@@ -223,6 +267,10 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch1_offset   <= ch1_offset_shadow;
         ch1_phase    <= ch1_phase_shadow;
         ch1_duty     <= ch1_duty_shadow;
+        ch1_slope_up_l   <= ch1_slope_up_l_shadow;
+        ch1_slope_up_h   <= ch1_slope_up_h_shadow;
+        ch1_slope_down_l <= ch1_slope_down_l_shadow;
+        ch1_slope_down_h <= ch1_slope_down_h_shadow;
         ch2_ctrl     <= ch2_ctrl_shadow;
         ch2_freq_l   <= ch2_freq_l_shadow;
         ch2_freq_m   <= ch2_freq_m_shadow;
@@ -231,18 +279,25 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
         ch2_offset   <= ch2_offset_shadow;
         ch2_phase    <= ch2_phase_shadow;
         ch2_duty     <= ch2_duty_shadow;
+        ch2_slope_up_l   <= ch2_slope_up_l_shadow;
+        ch2_slope_up_h   <= ch2_slope_up_h_shadow;
+        ch2_slope_down_l <= ch2_slope_down_l_shadow;
+        ch2_slope_down_h <= ch2_slope_down_h_shadow;
     end
 end
 
+reg  [6:0]  addr_dly;
 // 读取寄存器
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
         data_out <= 16'h0000;
         address_error <= 1'b0;
+        addr_dly <= 7'h00;
     end 
     else begin
+        addr_dly <= addr;
         address_error <= 1'b0; // 默认地址合法
-        case (addr)
+        case (addr_dly)
             7'h00: data_out <= sys_id_l;               // SYS_ID_L (只读)
             7'h01: data_out <= sys_id_h;               // SYS_ID_H (只读)
             7'h02: data_out <= sys_ctrl_reg;
@@ -255,6 +310,10 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             7'h15: data_out <= ch1_offset;
             7'h16: data_out <= ch1_phase;
             7'h17: data_out <= ch1_duty;
+            7'h18: data_out <= ch1_slope_up_l;
+            7'h19: data_out <= ch1_slope_up_h;
+            7'h1a: data_out <= ch1_slope_down_l;
+            7'h1b: data_out <= ch1_slope_down_h;
             7'h20: data_out <= ch2_ctrl;
             7'h21: data_out <= ch2_freq_l;
             7'h22: data_out <= ch2_freq_m;
@@ -263,6 +322,10 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             7'h25: data_out <= ch2_offset;
             7'h26: data_out <= ch2_phase;
             7'h27: data_out <= ch2_duty;
+            7'h28: data_out <= ch2_slope_up_l;
+            7'h29: data_out <= ch2_slope_up_h;
+            7'h2a: data_out <= ch2_slope_down_l;
+            7'h2b: data_out <= ch2_slope_down_h;
             7'h30: data_out <= dac_cache_0;
             7'h31: data_out <= dac_cache_1;
             7'h32: data_out <= dac_cache_2;
@@ -286,18 +349,22 @@ assign ch1_enable = ch1_ctrl[CHANNEL_ENABLE];
 assign ch1_waveform = ch1_ctrl[WAVEFORM_MSB:WAVEFORM_LSB];
 assign ch1_freq_ctrl_word = {ch1_freq_h[15:0], ch1_freq_m[15:0], ch1_freq_l[15:0]};
 assign ch1_phase_ctrl_word = ch1_phase[15:0];
-assign ch1_ampl_ctrl_word = ch1_ampl[15:0];
+assign ch1_ampl_ctrl_word = $signed(ch1_ampl[15:0]);
 assign ch1_dc_offset_word = ch1_offset[15:0];
-assign ch1_duty_ctrl_word = ch1_duty[9:0];   // 低10位有效
+assign ch1_duty_ctrl_word = ch1_duty[15:0];   // 低10位有效
+assign ch1_slope_up_ctrl_word = {ch1_slope_up_h[15:0], ch1_slope_up_l[15:0]};
+assign ch1_slope_down_ctrl_word = {ch1_slope_down_h[15:0], ch1_slope_down_l[15:0]};
 
 // ---- 通道2 输出（主寄存器驱动） ----
 assign ch2_enable = ch2_ctrl[CHANNEL_ENABLE];
 assign ch2_waveform = ch2_ctrl[WAVEFORM_MSB:WAVEFORM_LSB];
 assign ch2_freq_ctrl_word = {ch2_freq_h[15:0], ch2_freq_m[15:0], ch2_freq_l[15:0]};
 assign ch2_phase_ctrl_word = ch2_phase[15:0];
-assign ch2_ampl_ctrl_word = ch2_ampl[15:0];
+assign ch2_ampl_ctrl_word = $signed(ch2_ampl[15:0]);
 assign ch2_dc_offset_word = ch2_offset[15:0];
-assign ch2_duty_ctrl_word = ch2_duty[9:0];
+assign ch2_duty_ctrl_word = ch2_duty[15:0];
+assign ch2_slope_up_ctrl_word = {ch2_slope_up_h[15:0], ch2_slope_up_l[15:0]};
+assign ch2_slope_down_ctrl_word = {ch2_slope_down_h[15:0], ch2_slope_down_l[15:0]};
 
 // ---- DAC 缓存输出（主缓存驱动） ----
 always @(posedge sys_clk or negedge sys_rst_n) begin

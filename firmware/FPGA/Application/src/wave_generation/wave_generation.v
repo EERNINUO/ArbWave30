@@ -14,23 +14,29 @@ module wave_generation(
     input                    sys_clk,              // 系统时钟
     input                    sys_rst_n,            // 系统复位，低有效
 
-    input                    enable,           // 通道1使能信号
-    input   signed  [15: 0]  amplitude,        // 通道1幅度控制，16位，范围0~65535，幅值为负时波形反相
-    input   signed  [15: 0]  offset,           // 通道1偏置控制，
-    input           [47: 0]  freq_ctrl_word,   // 通道1频率控制字，48位，范围0~2^48-1
-    input           [47: 0]  phase_ctrl_word,  // 通道1相位控制字，48位，范围0~2^48-1
+    input                    enable,           // 通道使能信号
+    input           [ 5: 0]  waveform,         // 波形类型选择，6位，范围0~63
+    input   signed  [15: 0]  amplitude,        // 通道幅度控制，16位，范围0~65535，幅值为负时波形反相
+    input   signed  [15: 0]  offset,           // 通道偏置控制，
+    input           [47: 0]  freq_ctrl_word,   // 通道频率控制字，48位，范围0~2^48-1
+    input           [47: 0]  phase_ctrl_word,  // 通道相位控制字，48位，范围0~2^48-1
+    input           [15: 0]  duty_ctrl_word,  // 通道占空比控制字，16位，范围0~65535
+    input           [31: 0]  slope_up_ctrl_word,  // 通道上升沿斜率控制字，16位，范围0~65535
+    input           [31: 0]  slope_down_ctrl_word,  // 通道下降沿斜率控制字，16位，范围0~65535
 
-    output  signed  [15: 0]  data_out          // 通道1输出数据，16位，范围0~65535
+    output  signed  [15: 0]  data_out          // 通道输出数据，16位，范围0~65535
 );
 
-localparam sine_wave = 4'd0;
-localparam square_wave = 4'd1;
-localparam triangle_wave = 4'd2;
-localparam sawtooth_wave = 4'd3;
-localparam noise = 4'd4;
+localparam sine_wave = 6'd0;
+localparam square_wave = 6'd1;
+localparam triangle_wave = 6'd2;
+localparam noise = 6'd3;
+localparam dc = 6'd4;
 
-wire                   channel_rst_n;  // 通道1复位信号，低有效
-wire  signed  [15: 0]  sine_out;  // 通道1正弦波输出，16位，范围-32768~32767
+wire                   channel_rst_n;  // 通道复位信号，低有效
+wire  signed  [15: 0]  sine_out;  // 通道正弦波输出，16位，范围-32768~32767
+
+wire  signed  [47: 0]  phase_count_out;  // 通道相位计数器输出，48位，范围0~2^48-1
 
 assign channel_rst_n = sys_rst_n & enable;  // 复位信号，低有效 
 
@@ -41,17 +47,116 @@ DDS_II_Top u_dds_ii_ch1 (
     .phase_valid_i(channel_rst_n),              // 相位有效信号，始终为高电平
     .phase_inc_i(freq_ctrl_word),       // 频率控制字输入
     .phase_off_i(phase_ctrl_word),      // 相位控制字输入
-    .phase_out_o(),                         // 相位输出
+    .phase_out_o(phase_count_out),          // 相位输出
     .sine_o(sine_out),                  // 正弦波输出
     .data_valid_o()                         // 数据有效信号
 );
 
+reg [15:0] phase_count;
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        phase_count <= 16'd0;
+    end else begin
+        phase_count <= phase_count_out[47:32];
+    end
+end
+
+// 给占空比打一拍，避免逻辑过长
+reg [15:0] duty_ctrl_word_reg; 
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        duty_ctrl_word_reg <= 16'd0;
+    end else begin
+        duty_ctrl_word_reg <= duty_ctrl_word;
+    end
+end
+
+// 生成方波输出
+reg [15:0] square_out;
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        square_out <= 16'd0;
+    end else begin
+        square_out <= (phase_count > duty_ctrl_word_reg) ? -16'd32768 : 16'd32767;
+    end
+end
+
+// 生成三角波输出
+reg [47:0] triangle_out;
+reg [15:0] triangle_phase;
+reg [31:0] slope_ctrl_word;
+
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        triangle_phase <= 16'd0;
+    end else begin
+        if (phase_count < duty_ctrl_word_reg) begin
+            triangle_phase <= phase_count;
+        end else begin
+            triangle_phase <= 16'd65535 - phase_count;
+        end
+    end
+end
+
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        slope_ctrl_word <= 32'd0;
+    end else if (phase_count < duty_ctrl_word_reg) begin
+        slope_ctrl_word <= slope_up_ctrl_word;
+    end else begin
+        slope_ctrl_word <= slope_down_ctrl_word;
+    end
+end
+
+//输出打拍，避免逻辑过长（原来的输出寄存器会被优化掉，导致路径变成长组合路径）
+reg [15:0] triangle_phase_reg;
+reg [31:0] slope_ctrl_word_reg;
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        triangle_phase_reg <= 16'd0;
+        slope_ctrl_word_reg <= 32'd0;
+    end else begin
+        triangle_phase_reg <= triangle_phase;
+        slope_ctrl_word_reg <= slope_ctrl_word;
+    end
+end
+
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        triangle_out <= 48'd0;
+    end else begin
+        triangle_out <= triangle_phase_reg * slope_ctrl_word_reg;
+    end
+end
+
+// 噪声生成逻辑（平均噪声）
+reg [31:0] lfsr;
+reg [15:0] noise_out;
+wire feedback = lfsr[31] ^ lfsr[21] ^ lfsr[1] ^ lfsr[0]; // 32位LFSR反馈多项式
+
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        lfsr <= 32'hDEADBEEF; // 初始值不能为0，否则会锁死在0状态
+        noise_out <= 16'd0;
+    end else begin
+        lfsr <= {lfsr[30:0], feedback};
+        noise_out <= lfsr[15:0] ^ lfsr[31:16]; // 取LFSR的高16位和低16位异或作为噪声输出
+    end
+end
+
+// 波形选择 mux
 reg signed [15: 0] wave_mux;
 always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
         wave_mux <= 16'd0;  // 复位时输出中间值（偏置为0）
     end else begin
-        wave_mux <= sine_out;
+        case(waveform)
+            sine_wave: wave_mux <= sine_out;
+            square_wave: wave_mux <= square_out;
+            triangle_wave: wave_mux <= triangle_out[31:16] - 16'd32768;  // 三角波输出范围为-32768~32767
+            noise: wave_mux <= noise_out;
+            dc: wave_mux <= 16'd0; 
+        endcase
     end
 end
 

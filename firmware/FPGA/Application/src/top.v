@@ -68,21 +68,29 @@ module ArbWave30 (
 
     // 波形生成模块
     wire                   ch1_enable;
+    wire   signed  [5:0]  ch1_waveform;
     wire   signed  [15:0]  ch1_amplitude;
     wire   signed  [15:0]  ch1_offset;
     wire           [47:0]  ch1_freq_ctrl_word;
     wire           [15:0]  ch1_phase_ctrl_word;
+    wire           [15:0]  ch1_duty_ctrl_word;
+    wire           [31:0]  ch1_slope_up_ctrl_word;
+    wire           [31:0]  ch1_slope_down_ctrl_word;
     wire   signed  [15:0]  ch1_data;
 
     wave_generation ch1_wave_generation(
-                        .sys_clk             	(sys_clk              ),
-                        .sys_rst_n           	(sys_rst_n            ),
+                        .sys_clk            (sys_clk              ),
+                        .sys_rst_n          (sys_rst_n            ),
                         .enable          	(ch1_enable           ),
+                        .waveform           (ch1_waveform            ),
                         .amplitude       	(ch1_amplitude        ),
                         .offset          	(ch1_offset           ),
                         .freq_ctrl_word  	(ch1_freq_ctrl_word   ),
                         .phase_ctrl_word 	({ch1_phase_ctrl_word, 32'h00000000}  ),
-                        .data_out        	(ch1_data       )
+                        .duty_ctrl_word  	(ch1_duty_ctrl_word   ),
+                        .data_out        	(ch1_data       ),
+                        .slope_up_ctrl_word (ch1_slope_up_ctrl_word),
+                        .slope_down_ctrl_word (ch1_slope_down_ctrl_word   )
                     );
 
     dac_interface u_dac_interface (
@@ -140,12 +148,14 @@ module ArbWave30 (
         .pll_lock            	(pll_lock             ),
 
         .ch1_enable          	(ch1_enable           ),
-        .ch1_waveform        	(         ),
+        .ch1_waveform        	(ch1_waveform         ),
         .ch1_freq_ctrl_word  	(ch1_freq_ctrl_word   ),
         .ch1_phase_ctrl_word 	(ch1_phase_ctrl_word  ),
-        .ch1_ampl_ctrl_word   	(ch1_amplitude    ),
-        .ch1_dc_offset_word  	(ch1_offset   ),
-        .ch1_duty_ctrl_word  	(),
+        .ch1_ampl_ctrl_word   	(ch1_amplitude        ),
+        .ch1_dc_offset_word  	(ch1_offset           ),
+        .ch1_duty_ctrl_word  	(ch1_duty_ctrl_word   ),
+        .ch1_slope_up_ctrl_word (ch1_slope_up_ctrl_word),
+        .ch1_slope_down_ctrl_word (ch1_slope_down_ctrl_word),
 
         .ch2_enable          	(),
         .ch2_waveform        	(),
@@ -154,6 +164,8 @@ module ArbWave30 (
         .ch2_ampl_ctrl_word   	(),
         .ch2_dc_offset_word  	(),
         .ch2_duty_ctrl_word  	(),
+        .ch2_slope_up_ctrl_word (),
+        .ch2_slope_down_ctrl_word (),
         .dac_reg_addr        	(),
         .dac_reg_data        	(),
         .dac_reg_write       	()
