@@ -108,6 +108,7 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
     end
 end
 
+//输出打拍，避免逻辑过长（原来的输出寄存器会被优化掉，导致路径变成长组合路径）
 reg [15:0] triangle_phase_reg;
 reg [31:0] slope_ctrl_word_reg;
 always @(posedge sys_clk or negedge channel_rst_n) begin
@@ -128,6 +129,22 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
     end
 end
 
+// 噪声生成逻辑（平均噪声）
+reg [31:0] lfsr;
+reg [15:0] noise_out;
+wire feedback = lfsr[31] ^ lfsr[21] ^ lfsr[1] ^ lfsr[0]; // 32位LFSR反馈多项式
+
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        lfsr <= 32'hDEADBEEF; // 初始值不能为0，否则会锁死在0状态
+        noise_out <= 16'd0;
+    end else begin
+        lfsr <= {lfsr[30:0], feedback};
+        noise_out <= lfsr[15:0] ^ lfsr[31:16]; // 取LFSR的高16位和低16位异或作为噪声输出
+    end
+end
+
+// 波形选择 mux
 reg signed [15: 0] wave_mux;
 always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
@@ -137,6 +154,7 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
             sine_wave: wave_mux <= sine_out;
             square_wave: wave_mux <= square_out;
             triangle_wave: wave_mux <= triangle_out[31:16] - 16'd32768;  // 三角波输出范围为-32768~32767
+            noise: wave_mux <= noise_out;
             dc: wave_mux <= 16'd0; 
         endcase
     end
