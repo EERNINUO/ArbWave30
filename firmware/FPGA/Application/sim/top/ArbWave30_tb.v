@@ -209,18 +209,8 @@ initial begin
     spi_write(7'h13, freq_ctrl_word_100kHz[47:32]); 
     # 4000;
 
-    spi_write(7'h17, 16'h3333);
-    # 4000;
-    spi_write(7'h18, 16'h0000);
-    # 4000;
-    spi_write(7'h19, 16'h0005);
-    # 4000;
-    spi_write(7'h1a, 16'h4000);
-    # 4000;
-    spi_write(7'h1b, 16'h0001);
-
     // 打开通道1
-    spi_write(7'h10, 16'h8002);
+    spi_write(7'h10, 16'h8003);
     # 4000;
 
     // 影子寄存器更新
