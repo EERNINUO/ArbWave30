@@ -36,7 +36,7 @@ localparam dc = 6'd4;
 wire                   channel_rst_n;  // 通道复位信号，低有效
 wire  signed  [15: 0]  sine_out;  // 通道正弦波输出，16位，范围-32768~32767
 
-wire signed  [47: 0]  phase_count_out;  // 通道相位计数器输出，48位，范围0~2^48-1
+wire  signed  [47: 0]  phase_count_out;  // 通道相位计数器输出，48位，范围0~2^48-1
 
 assign channel_rst_n = sys_rst_n & enable;  // 复位信号，低有效 
 
@@ -61,13 +61,23 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
     end
 end
 
+// 给占空比打一拍，避免逻辑过长
+reg [15:0] duty_ctrl_word_reg; 
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        duty_ctrl_word_reg <= 16'd0;
+    end else begin
+        duty_ctrl_word_reg <= duty_ctrl_word;
+    end
+end
+
 // 生成方波输出
 reg [15:0] square_out;
 always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
         square_out <= 16'd0;
     end else begin
-        square_out <= (phase_count > duty_ctrl_word) ? -16'd32768 : 16'd32767;
+        square_out <= (phase_count > duty_ctrl_word_reg) ? -16'd32768 : 16'd32767;
     end
 end
 
@@ -80,7 +90,7 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
         triangle_phase <= 16'd0;
     end else begin
-        if (phase_count < duty_ctrl_word) begin
+        if (phase_count < duty_ctrl_word_reg) begin
             triangle_phase <= phase_count;
         end else begin
             triangle_phase <= 16'd65535 - phase_count;
@@ -91,10 +101,22 @@ end
 always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
         slope_ctrl_word <= 32'd0;
-    end else if (phase_count < duty_ctrl_word) begin
+    end else if (phase_count < duty_ctrl_word_reg) begin
         slope_ctrl_word <= slope_up_ctrl_word;
     end else begin
         slope_ctrl_word <= slope_down_ctrl_word;
+    end
+end
+
+reg [15:0] triangle_phase_reg;
+reg [31:0] slope_ctrl_word_reg;
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) begin
+        triangle_phase_reg <= 16'd0;
+        slope_ctrl_word_reg <= 32'd0;
+    end else begin
+        triangle_phase_reg <= triangle_phase;
+        slope_ctrl_word_reg <= slope_ctrl_word;
     end
 end
 
@@ -102,7 +124,7 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
     if (!channel_rst_n) begin
         triangle_out <= 48'd0;
     end else begin
-        triangle_out <= triangle_phase * slope_ctrl_word;
+        triangle_out <= triangle_phase_reg * slope_ctrl_word_reg;
     end
 end
 
