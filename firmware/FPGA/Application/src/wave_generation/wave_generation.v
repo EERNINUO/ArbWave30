@@ -98,14 +98,18 @@ always @(posedge sys_clk or negedge channel_rst_n) begin
     end
 end
 
+// 第 1 级：先做比较（16 位比较器，逻辑较浅）
+reg phase_ge_duty;
 always @(posedge sys_clk or negedge channel_rst_n) begin
-    if (!channel_rst_n) begin
-        slope_ctrl_word <= 32'd0;
-    end else if (phase_count < duty_ctrl_word_reg) begin
-        slope_ctrl_word <= slope_up_ctrl_word;
-    end else begin
-        slope_ctrl_word <= slope_down_ctrl_word;
-    end
+    if (!channel_rst_n) phase_ge_duty <= 1'b0;
+    else phase_ge_duty <= (phase_count >= duty_ctrl_word_reg);
+end
+
+// 第 2 级：用寄存后的比较结果做 MUX 选择
+always @(posedge sys_clk or negedge channel_rst_n) begin
+    if (!channel_rst_n) slope_ctrl_word <= 32'd0;
+    else if (phase_ge_duty) slope_ctrl_word <= slope_down_ctrl_word;
+    else slope_ctrl_word <= slope_up_ctrl_word;
 end
 
 //输出打拍，避免逻辑过长（原来的输出寄存器会被优化掉，导致路径变成长组合路径）

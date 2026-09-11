@@ -287,6 +287,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
 end
 
 reg  [6:0]  addr_dly;
+reg  [6:0]  addr_dly2;
 // 读取寄存器
 always @(posedge sys_clk or negedge sys_rst_n) begin
     if (!sys_rst_n) begin
@@ -296,8 +297,9 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
     end 
     else begin
         addr_dly <= addr;
+        addr_dly2 <= addr_dly;
         address_error <= 1'b0; // 默认地址合法
-        case (addr_dly)
+        case (addr_dly2)
             7'h00: data_out <= sys_id_l;               // SYS_ID_L (只读)
             7'h01: data_out <= sys_id_h;               // SYS_ID_H (只读)
             7'h02: data_out <= sys_ctrl_reg;

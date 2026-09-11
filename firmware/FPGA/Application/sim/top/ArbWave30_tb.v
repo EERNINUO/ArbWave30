@@ -174,6 +174,7 @@ endtask
 //============================
 localparam freq_ctrl_word_1MHz = 48'd1_876_499_844_737;
 localparam freq_ctrl_word_10MHz = 48'd18_764_998_447_377;
+localparam freq_ctrl_word_30MHz = 48'd56_294_995_342_131;
 localparam freq_ctrl_word_100kHz = 48'd187_649_984_473;
 
 initial begin
@@ -190,27 +191,19 @@ initial begin
     wait (fpga_int == 1'b0);
 
     // 频率控制字
-    spi_write(7'h11, freq_ctrl_word_10MHz[15:0]); 
+    spi_write(7'h11, freq_ctrl_word_30MHz[15:0]); 
     # 4000;
-    spi_write(7'h12, freq_ctrl_word_10MHz[31:16]); 
+    spi_write(7'h12, freq_ctrl_word_30MHz[31:16]); 
     # 4000;
-    spi_write(7'h13, freq_ctrl_word_10MHz[47:32]); 
+    spi_write(7'h13, freq_ctrl_word_30MHz[47:32]); 
     # 4000;
 
     // 幅度控制字
     spi_write(7'h14, 16'h7fff); 
     # 4000;
 
-    // 频率控制字
-    spi_write(7'h11, freq_ctrl_word_100kHz[15:0]); 
-    # 4000;
-    spi_write(7'h12, freq_ctrl_word_100kHz[31:16]); 
-    # 4000;
-    spi_write(7'h13, freq_ctrl_word_100kHz[47:32]); 
-    # 4000;
-
     // 打开通道1
-    spi_write(7'h10, 16'h8003);
+    spi_write(7'h10, 16'h8000);
     # 4000;
 
     // 影子寄存器更新
