@@ -571,7 +571,7 @@ scpi_result_t ArbWave30_NoiseStdDev(scpi_t *context)
 	// 平均噪声幅值 = 均方根值 * sqrt(3)
 	int16_t amplitude = (int16_t)(stdDev * 1000 * 1.732);
 
-	if (analogBoard_setNoiseMean(ch, amplitude) != ACK_OK) {
+	if (analogBoard_setAmplitude(ch, amplitude) != ACK_OK) {
 		SCPI_ErrorPush(context, SCPI_ERROR_HARDWARE_ERROR);
 		return SCPI_RES_ERR;
 	}

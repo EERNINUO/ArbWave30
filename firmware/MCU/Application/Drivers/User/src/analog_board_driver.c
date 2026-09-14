@@ -15,6 +15,7 @@
 #include "analog_board_driver.h"
 #include <stdlib.h>
 #include "cmsis_os.h"
+#include "calibration.h"
 
 // 外部变量声明
 // 我一直觉得这种到处extern的写法很讨厌，但是CubeMX生成的代码就是这样，很难受
@@ -523,13 +524,14 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
 		real_offset_mV = offset_mV * 2;
 	}
 
-
     // 限幅逻辑
     if (abs(real_amplitude_mV) + abs(real_offset_mV) > (VOLT_MAX * 1000)) {
         int16_t limit = (VOLT_MAX * 1000) - abs(real_offset_mV); 
         real_amplitude_mV = (real_amplitude_mV >= 0) ? limit : -limit;
 		amplitude_mV = cfg -> highImpedance_enable ? real_amplitude_mV : real_amplitude_mV / 2;
     }
+
+	real_amplitude_mV = calibration(channel, analogBoard_getFrequency(channel), real_amplitude_mV);
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
@@ -582,6 +584,8 @@ uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV)
         real_offset_mV = (real_offset_mV >= 0) ? limit : -limit;
 		offset_mV = cfg -> highImpedance_enable ? real_offset_mV : real_offset_mV / 2;
     }
+
+	real_amplitude_mV = calibration(channel, 0, real_amplitude_mV);
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);

@@ -45,7 +45,7 @@
 #define NOISE_MEAN_MIN 0 // 最小噪声均值，单位 V
 #define NOISE_MEAN_MAX 5.770 // 最大噪声均值，单位 V
 #define NOISE_STDDEV_MIN 0 // 最小噪声标准差，单位 V
-#define NOISE_STDDEV_MAX 2.885 // 最大噪声标准差，单位 V
+#define NOISE_STDDEV_MAX 5.770 // 最大噪声标准差，单位 V
 
 // CRC8计算参数
 #define CRC_POLYNOMIAL 0x07
