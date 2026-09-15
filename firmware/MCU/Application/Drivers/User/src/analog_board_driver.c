@@ -484,15 +484,19 @@ uint8_t analogBoard_setFrequency(uint8_t channel, uint64_t freq_uHz)
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_FREQ_H), (uint16_t)((freq_ctrl_word >> 32) & 0xFFFF))) != ACK_OK)
 		goto error_handler;
 	
-	// 影子寄存器更新
-	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
-		goto error_handler;
-
 	// 更新配置结构体中的频率值
 	if (channel == 1)
 		analogBoardConfig.ch1.freq_uHz = freq_uHz; 
 	else
 		analogBoardConfig.ch2.freq_uHz = freq_uHz; 
+
+	if ((ack = analogBoard_setAmplitude(channel, analogBoard_getAmplitude(channel))) != ACK_OK)
+		goto error_handler;
+
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
 
 	return ACK_OK;
 
