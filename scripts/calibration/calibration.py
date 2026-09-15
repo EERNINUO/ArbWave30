@@ -8,7 +8,7 @@
 # the Free Software Foundation, version 3 of the License.
 # ...
 
-# 测试滤波器及差分转单端电路的响应
+# 测量各频率的幅度用于校准模拟前端的频率响应
 # 测试设备：Siglent SDS824HD
 # 该脚本仅供参考，不同示波器的指令集可能不同，请根据实际情况修改。
 
@@ -21,8 +21,16 @@ from matplotlib import pyplot as plt
 OSCILLOSCOPE = "USB0::0xF4EC::0x1017::SDS08A0CA01306::INSTR"
 ARBWAVE30 = "ASRL18::INSTR"
 
-freq_list = []  # 测试频率列表，单位Hz
-vpp_list = []  # 测试结果列表，单位Vpp
+freq_list = [
+    10, 20, 30, 40, 50, 60, 70, 80, 90,
+    100, 200, 300, 400, 500, 600, 700, 800, 900,
+    1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+    10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000,
+    100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000,
+    1000000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000,
+    10000000, 12000000, 14000000, 16000000, 18000000, 20000000, 22000000, 24000000, 26000000, 28000000, 30000000
+]  # 测试频率列表，单位Hz
+vpp_list = [] # 测试结果列表，单位Vpp
 db_list = []  # 测试结果列表，单位dB
 
 if OSCILLOSCOPE == "" or ARBWAVE30 == "":
@@ -84,37 +92,45 @@ else:
 
     time.sleep(5)  # 等待示波器稳定
 
-    for exponent in range(1, 8):  # 指数项
-        timescale = 0.50 / (10 ** exponent)
-        oscilloscope.write(":TIM:SCAL " + str(timescale))
-        for i in range(1, 10):  # 系数项
-            if exponent != 7 or i < 4:  
-                freq = i * 10 ** exponent
-                arbwave30.write("SOURce1:FREQuency " + str(freq))
-                time.sleep(0.2)  # 等待信号稳定
-                oscilloscope.write("MEAS:ADV:STAT:RES")  # 清除测量结果
-                time.sleep(2)
-                oscilloscope.write(":MEAS:ADV:P1:STAT? MEAN")
+    # 填充初始值
+    for i in freq_list:
+        vpp_list.append(0)
+
+    for i in range(5):  # 测试5次
+        eve_vpp_list = []
+        for freq in freq_list:
+            if freq > 0 and math.log10(freq).is_integer():
+                scale = 0.50 / freq
+                oscilloscope.write(":TIM:SCAL " + str(scale))
                 time.sleep(0.2)
-                vpp = float(oscilloscope.read())
-                freq_list.append(freq)
-                vpp_list.append(vpp)
-                db_list.append(20 * math.log10(vpp / 12))  # 转换为dB
+
+            arbwave30.write("SOURce1:FREQuency " + str(freq))
+            time.sleep(0.2)  # 等待 信号稳定
+            oscilloscope.write("MEAS:ADV:STAT:RES")  # 清除测量结果
+            time.sleep(2)
+            oscilloscope.write(":MEAS:ADV:P1:STAT? MEAN")
+            time.sleep(0.2)
+            vpp = float(oscilloscope.read())
+            eve_vpp_list.append(vpp)
+
+        vpp_list = [x + y for x, y in zip(vpp_list, eve_vpp_list)]
+
+    vpp_list = [vpp / 5 for vpp in vpp_list]
+
     print("测试完成，测试结果如下：")
     print("频率列表：", freq_list)
     print("Vpp列表：", vpp_list)
-    print("dB列表：", db_list)
 
     fig = plt.figure()
     ax1 = fig.subplots()
 
     x = freq_list
-    y = db_list
+    y = vpp_list
 
     ax1.semilogx(x, y, label="diff to single Response")
 
     ax1.set_xlabel("Frequency (Hz)")
-    ax1.set_ylabel("Amplitude (dB)")
+    ax1.set_ylabel("Amplitude (Vpp)")
     ax1.set_title("diff to single Response")
     ax1.grid(True)
 
