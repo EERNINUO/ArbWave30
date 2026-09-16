@@ -539,7 +539,7 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	int16_t amplitude_ctrl_word = (int32_t)real_amplitude_mV * 0x7FFF / 10000; // 计算幅度控制字，强制类型转换是为了防止溢出
+	int16_t amplitude_ctrl_word = (int32_t)real_amplitude_mV * 0x7FFF / 2000; // 计算幅度控制字，强制类型转换是为了防止溢出
 	
 	// 发送幅度控制字
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_AMPL), *(uint16_t *)(&amplitude_ctrl_word))) != ACK_OK)
@@ -586,14 +586,14 @@ uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV)
     if (abs(real_offset_mV) + abs(real_amplitude_mV) > (VOLT_MAX * 1000)) {
         int16_t limit = (VOLT_MAX * 1000) - abs(real_amplitude_mV); 
         real_offset_mV = (real_offset_mV >= 0) ? limit : -limit;
-		offset_mV = cfg -> highImpedance_enable ? real_offset_mV : real_offset_mV / 2;
+		real_offset_mV = cfg -> highImpedance_enable ? real_offset_mV : real_offset_mV / 2;
     }
 
-	real_amplitude_mV = calibration(channel, 0, real_amplitude_mV);
+	real_offset_mV = calibration(channel, 10, real_offset_mV);
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	int16_t offset_ctrl_word = (int32_t)real_offset_mV * 0x7FFF / 10000; // 计算偏移量控制字，强制类型转换是为了防止溢出
+	int16_t offset_ctrl_word = (int32_t)real_offset_mV * 0x7FFF / 2000; // 计算偏移量控制字，强制类型转换是为了防止溢出
 
 	// 发送偏移量控制字
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_OFFSET), offset_ctrl_word)) != ACK_OK)
