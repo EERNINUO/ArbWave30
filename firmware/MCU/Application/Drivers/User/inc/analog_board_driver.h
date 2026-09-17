@@ -17,6 +17,8 @@
 #include "stm32f4xx.h"
 #include "main.h"
 
+#define ANALOGBOARD_MVP 1 // 1: MVP, 0: Full
+
 // 模拟板控制引脚定义
 #define SPI_CS_Port SPI1_CS_GPIO_Port
 #define SPI_CS_Pin SPI1_CS_Pin
@@ -34,8 +36,17 @@
 // 参数范围
 #define FREQ_MIN 0 // 最小频率，单位 Hz
 #define FREQ_MAX 30000000 // 最大频率，单位 Hz
-#define VOLT_MIN -10 // 最小输出电压，单位 V
-#define VOLT_MAX 10 // 最大输出电压，单位 V
+
+#ifdef ANALOGBOARD_MVP
+    #define VOLT_MIN -2 // 最小输出电压，单位 V
+    #define VOLT_MAX 2 // 最大输出电压，单位 V
+
+#else 
+    #define VOLT_MIN -10 // 最小输出电压，单位 V
+    #define VOLT_MAX 10 // 最大输出电压，单位 V
+
+#endif
+
 #define PHASE_MIN 0 // 最小相位，单位 度（°）
 #define PHASE_MAX 360 // 最大相位，单位 度（°）
 #define DUTY_MIN 0.01 // 最小占空比，单位 %
