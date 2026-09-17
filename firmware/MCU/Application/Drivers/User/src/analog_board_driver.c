@@ -15,6 +15,7 @@
 #include "analog_board_driver.h"
 #include <stdlib.h>
 #include "cmsis_os.h"
+#include "calibration.h"
 
 // 外部变量声明
 // 我一直觉得这种到处extern的写法很讨厌，但是CubeMX生成的代码就是这样，很难受
@@ -41,6 +42,10 @@ extern SPI_HandleTypeDef hspi1; // 声明SPI句柄
 #define CHx_OFFSET 0x05
 #define CHx_PHASE 0x06
 #define CHx_DUTY 0x07
+#define CHx_SLOPE_UP_L 0x08
+#define CHx_SLOPE_UP_H 0x09
+#define CHx_SLOPE_DOWN_L 0x0A
+#define CHx_SLOPE_DOWN_H 0x0B
 
 // 系统控制寄存器位定义
 
@@ -479,15 +484,19 @@ uint8_t analogBoard_setFrequency(uint8_t channel, uint64_t freq_uHz)
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_FREQ_H), (uint16_t)((freq_ctrl_word >> 32) & 0xFFFF))) != ACK_OK)
 		goto error_handler;
 	
-	// 影子寄存器更新
-	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
-		goto error_handler;
-
 	// 更新配置结构体中的频率值
 	if (channel == 1)
 		analogBoardConfig.ch1.freq_uHz = freq_uHz; 
 	else
 		analogBoardConfig.ch2.freq_uHz = freq_uHz; 
+
+	if ((ack = analogBoard_setAmplitude(channel, analogBoard_getAmplitude(channel))) != ACK_OK)
+		goto error_handler;
+
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
 
 	return ACK_OK;
 
@@ -519,7 +528,6 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
 		real_offset_mV = offset_mV * 2;
 	}
 
-
     // 限幅逻辑
     if (abs(real_amplitude_mV) + abs(real_offset_mV) > (VOLT_MAX * 1000)) {
         int16_t limit = (VOLT_MAX * 1000) - abs(real_offset_mV); 
@@ -527,9 +535,11 @@ uint8_t analogBoard_setAmplitude(uint8_t channel, int16_t amplitude_mV)
 		amplitude_mV = cfg -> highImpedance_enable ? real_amplitude_mV : real_amplitude_mV / 2;
     }
 
+	real_amplitude_mV = calibration(channel, analogBoard_getFrequency(channel), real_amplitude_mV);
+
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	int16_t amplitude_ctrl_word = (int32_t)real_amplitude_mV * 0x7FFF / 10000; // 计算幅度控制字，强制类型转换是为了防止溢出
+	int16_t amplitude_ctrl_word = (int32_t)real_amplitude_mV * 0x7FFF / 2000; // 计算幅度控制字，强制类型转换是为了防止溢出
 	
 	// 发送幅度控制字
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_AMPL), *(uint16_t *)(&amplitude_ctrl_word))) != ACK_OK)
@@ -576,12 +586,14 @@ uint8_t analogBoard_setOffset(uint8_t channel, int16_t offset_mV)
     if (abs(real_offset_mV) + abs(real_amplitude_mV) > (VOLT_MAX * 1000)) {
         int16_t limit = (VOLT_MAX * 1000) - abs(real_amplitude_mV); 
         real_offset_mV = (real_offset_mV >= 0) ? limit : -limit;
-		offset_mV = cfg -> highImpedance_enable ? real_offset_mV : real_offset_mV / 2;
+		real_offset_mV = cfg -> highImpedance_enable ? real_offset_mV : real_offset_mV / 2;
     }
+
+	real_offset_mV = calibration(channel, 10, real_offset_mV);
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	int16_t offset_ctrl_word = (int32_t)real_offset_mV * 0x7FFF / 10000; // 计算偏移量控制字，强制类型转换是为了防止溢出
+	int16_t offset_ctrl_word = (int32_t)real_offset_mV * 0x7FFF / 2000; // 计算偏移量控制字，强制类型转换是为了防止溢出
 
 	// 发送偏移量控制字
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_OFFSET), offset_ctrl_word)) != ACK_OK)
@@ -656,7 +668,7 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
 
 	uint8_t ack = 0;
 	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
-	uint16_t duty_ctrl_word = (int32_t)duty * 0xFF / 10000; // 计算占空比控制字，强制类型转换是为了防止溢出
+	uint16_t duty_ctrl_word = ((int32_t)duty * 0xFFFF + 5000) / 10000; // 计算占空比控制字，强制类型转换是为了防止溢出, 加5000是为了四舍五入
 
 	// 发送占空比
 	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_DUTY), duty_ctrl_word)) != ACK_OK)
@@ -672,6 +684,59 @@ uint8_t analogBoard_setDuty(uint8_t channel, uint16_t duty)
 	else
 		analogBoardConfig.ch2.duty = duty; 
 		
+	return ACK_OK;
+
+error_handler:
+	// 错误处理
+	return ack;
+}
+
+/**
+ * @brief  设置对称度，仅对三角波有效
+ * @param  channel: 通道号，1或2
+ * @param  Symmetry: 对称度，单位 0.01%（0~10000，对应 0~100.00）
+ * @retval ACK响应
+ */
+uint8_t analogBoard_setSymmetry(uint8_t channel, uint16_t Symmetry)
+{
+	if (Symmetry > (SYMMETRY_MAX * 100)) {
+		Symmetry = (SYMMETRY_MAX * 100); // 限制对称度范围
+	} else if (Symmetry < (SYMMETRY_MIN * 100)) {
+		Symmetry = (SYMMETRY_MIN * 100);
+	}
+
+	uint8_t ack = 0;
+	uint8_t reg_base_addr = REG_CH_BASE_ADDR(channel);
+	uint16_t symmetry_ctrl_word = ((uint32_t)Symmetry * 0xFFFF + 5000) / 10000; // 计算对称度控制字, 这里加5000是为了四舍五入
+	uint32_t slope_up_ctrl_word = (65535UL << 16) / symmetry_ctrl_word; // 计算上升沿控制字
+	uint32_t slope_down_ctrl_word = (65535UL << 16) / (65535U - symmetry_ctrl_word); // 计算下降沿控制字
+
+	// 发送对称度控制字
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_DUTY), symmetry_ctrl_word)) != ACK_OK)
+		goto error_handler;
+
+	// 发送上升沿控制字
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_SLOPE_UP_L), (uint16_t)(slope_up_ctrl_word & 0xFFFF))) != ACK_OK)
+		goto error_handler;
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_SLOPE_UP_H), (uint16_t)((slope_up_ctrl_word >> 16) & 0xFFFF))) != ACK_OK)
+		goto error_handler;
+
+	// 发送下降沿控制字
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_SLOPE_DOWN_L), (uint16_t)(slope_down_ctrl_word & 0xFFFF))) != ACK_OK)
+		goto error_handler;
+	if ((ack = analogBoard_sendData(REG_ADDR(reg_base_addr, CHx_SLOPE_DOWN_H), (uint16_t)((slope_down_ctrl_word >> 16) & 0xFFFF))) != ACK_OK)
+		goto error_handler;
+
+	// 影子寄存器更新
+	if ((ack = analogBoard_updateShadowReg()) != ACK_OK)
+		goto error_handler;
+
+		// 更新配置结构体中的占空比值
+	if (channel == 1)
+		analogBoardConfig.ch1.duty = Symmetry; 
+	else
+		analogBoardConfig.ch2.duty = Symmetry; 	// 更新配置结构体中的占空比值
+
 	return ACK_OK;
 
 error_handler:
@@ -760,6 +825,11 @@ uint16_t analogBoard_getPhase(uint8_t channel)
  * @retval 占空比/对称度，单位 0.01%
  */
 uint16_t analogBoard_getDuty(uint8_t channel)
+{
+	return (channel == 1) ? analogBoardConfig.ch1.duty : analogBoardConfig.ch2.duty;
+}
+
+uint16_t analogBoard_getSymmetry(uint8_t channel)
 {
 	return (channel == 1) ? analogBoardConfig.ch1.duty : analogBoardConfig.ch2.duty;
 }
