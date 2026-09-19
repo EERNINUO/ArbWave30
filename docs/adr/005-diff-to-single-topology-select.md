@@ -38,7 +38,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - 成本：需要额外采购运放。
 - 运放对比：
 
-| 参数 | OPA695 | OPA690 | OPA820 | OPA695 | LMH6624 | LMH6629 |
+| 参数 | OPA695 | OPA690 | OPA820 | LMH6609 | LMH6624 | LMH6629 |
 | --- | --- | --- | --- | --- | :--- | --- |
 | 拓扑结构 | 电流反馈 （CFB） | 电压反馈 （VFB） | 电压反馈 （VFB） | 电压反馈 （VFB） | 电压反馈 （VFB） | 电压反馈 （VFB） |
 | -3dB 带宽 | 1900MHz （G=1） | 535MHz （G=1） | 240MHz （G=2） | 900MHz （G=1） | 1.5 GHz | 900 MHz |
@@ -93,3 +93,5 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 ## 相关文档
 - [硬件架构文档](/docs/硬件架构文档.md)
 - [硬件设计文档（模拟板）](/docs/硬件设计文档/硬件设计文档(模拟板).md)
+
+> **2026-09-19 修订**：本决策在实测中被证伪（LMH6609 在 30MHz 衰减约 -9.5dB，反相端出现寄生极，且 CFA 的 Rf 并非硬性约束，Rf 稍大只会影响带宽，稳定性反而增加）。
