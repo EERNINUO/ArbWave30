@@ -77,9 +77,9 @@
 - [x] SCPI 协议栈移植
 - [x] 7阶椭圆滤波器焊接调试
 - [x] 输出性能粗略标定（THD、SFDR）
+- [x] 软件幅度校准
 
 ### 🏗️ 开发中
-- [ ] 软件幅度校准
 - [ ] 谐波性能优化
 
 ### 📋 待办（MVP 之后）
@@ -132,7 +132,7 @@ ArbWave30/
 │    ├── fpga/ # FPGA 设计源代码（Verilog）  
 │    │    ├── Application/ # 项目代码   
 │    │    └── FPGA_Test_Hardware/ # FPGA 硬件测试代码   
-│    │         ├── FPGA_Clock_Test/ # 时钟测试代码   
+│    │         ├── FPGA_Clodck_Test/ # 时钟测试代码   
 │    │         └── FPGA_Hardware_Test/ # FPGA 硬件测试代码   
 │    ├── mcu/ # MCU 固件源代码（C/C++）   
 │    │    ├── Application/ # 项目代码   

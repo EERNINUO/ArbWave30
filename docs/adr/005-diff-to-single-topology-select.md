@@ -94,4 +94,4 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 - [硬件架构文档](/docs/硬件架构文档.md)
 - [硬件设计文档（模拟板）](/docs/硬件设计文档/硬件设计文档(模拟板).md)
 
-> **2026-09-19 修订**：本决策在实测中被证伪（LMH6609 在 30MHz 衰减约 -9.5dB，反相端出现寄生极，且 CFA 的 Rf 并非硬性约束，Rf 稍大只会影响带宽，稳定性反而增加）。
+> **2026-09-19 修订**：本决策在实测中被证伪（LMH6609 在 30MHz 衰减约 -9.5dB，反相端出现寄生极点，且 CFA 的 Rf 并非硬性约束，Rf 稍大只会影响带宽，稳定性反而增加）。
