@@ -12146,7 +12146,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "30p"
+		(property "Value" "10p"
 			(at 72.644 90.17 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12249,7 +12249,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "30p"
+		(property "Value" "10p"
 			(at 88.138 90.17 0)
 			(show_name no)
 			(do_not_autoplace no)
