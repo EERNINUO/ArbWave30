@@ -11,7 +11,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 # ADR-005: 差分转单端电路拓扑选型
 
 ## 状态
-已采纳 （2026-08-05）
+已弃用 （2026-09-26）
 
 ## 背景
 经过计算，差分转单端电路原方案下 OPA695 在增益 G = 6 V/V 时，反向输入端阻抗 $Z_{Non} \approx 39.4 \Omega$，无法通过并联电阻实现 50Ω 输入阻抗。因此，需要修改电路拓扑来满足滤波器的输出负载要求。
