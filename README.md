@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
-    <img alt="仓库状态" src="https://img.shields.io/badge/status-MVP 调优中-blue">
+    <img alt="仓库状态" src="https://img.shields.io/badge/status-暂停更新-blue">
   </a>
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
     <img alt="GitHub 仓库星标" src="https://img.shields.io/github/stars/EERNINUO/ArbWave30">
@@ -36,6 +36,8 @@
 > **⚠️ 注意**：你当前查看的是 **develop** 开发分支，内容可能不稳定。
 > 推荐使用稳定发布版本：[查看 Releases](https://github.com/EERNINUO/ArbWave30/tree/releases)
 
+## ⚠️ 更新状态
+作者正在参与《0854 不相信眼泪》，本项目暂停更新，承诺 2026.12.25 恢复更新并发布第一个 Release。（你问我为什么不是 20 号就更新？好不容易解放了我不得爽玩几天）
 
 ## ✨ 特性
 
@@ -48,6 +50,16 @@
 - 相位噪声：-100dBc/Hz @10kHz offset（30MHz 载波）（目标值，受限于测试条件，目前无法标定）
 - 输出阻抗：50Ω
 - 参考时钟：内部 TCXO（±1ppm）或外部 10MHz 输入
+
+### 硬件指标（MVP）
+- 波形：正弦、方波、三角波、噪声波、直流
+- 正弦波最高 **30MHz**，方波最高 **5MHz**
+- 电压范围（高阻）：4Vpp（DC\~10MHz），2.8Vpp（10\~20MHz），2Vpp（20\~30MHz）
+- 幅值分辨率：2mV（典型），偏移范围 ±2V
+- 总谐波失真（THD）：< -50dBc @10MHz 满幅（目标值）
+- 相位噪声：-80dBc/Hz @10kHz offset（30MHz 载波）（目标值，受限于测试条件，目前无法标定）
+- 输出阻抗：50Ω
+- 参考时钟：内部 TCXO（±1ppm）
 
 ### 控制与接口
 - USB 2.0（USB CDC 类），支持 SCPI-1999 命令集
@@ -78,13 +90,14 @@
 - [x] SCPI 协议栈移植
 - [x] 7阶椭圆滤波器焊接调试
 - [x] 输出性能粗略标定（THD、SFDR）
+- [x] 软件幅度校准
 
 ### 🏗️ 开发中
-- [ ] 软件幅度校准
 - [ ] 谐波性能优化
 
 ### 📋 待办（MVP 之后）
 - [ ] 滤波器性能优化（重构滤波器，调整群延时，减少快速边沿的过冲/振铃）
+- [ ] 分板思路调整（电源板、模拟板、控制板）
 - [ ] 模拟板完整版设计（加入 硬件幅度控制、直流偏置、外部触发、外部时钟输入）
 - [ ] 输出性能精确标定（需要专业频谱仪，目前无法进行）
 - [ ] 上位机控制软件
@@ -115,6 +128,11 @@
 
 ---
 
+## ⚠️ 已知问题
+- 当前版本方波有约 13.5% 的过冲，为滤波器群延时特性所致，后续将通过优化滤波器设计解决。
+- 当前版本在运行一段时间后，在输出 25 MHz 以上正弦波时，有概率出现固定大小/方向的偏置抖动，怀疑是 FPGA 发热导致时序漂移，后续将通过优化 FPGA 时序约束和增加散热解决。
+- 当前分板设计会导致成品过长过细（约 225mm x 90mm），后续将调整分板方案，分为电源板、模拟板、控制板。
+
 ## 🧱 仓库结构
 ```text
 ArbWave30/  
@@ -133,7 +151,7 @@ ArbWave30/
 │    ├── fpga/ # FPGA 设计源代码（Verilog）  
 │    │    ├── Application/ # 项目代码   
 │    │    └── FPGA_Test_Hardware/ # FPGA 硬件测试代码   
-│    │         ├── FPGA_Clock_Test/ # 时钟测试代码   
+│    │         ├── FPGA_Clodck_Test/ # 时钟测试代码   
 │    │         └── FPGA_Hardware_Test/ # FPGA 硬件测试代码   
 │    ├── mcu/ # MCU 固件源代码（C/C++）   
 │    │    ├── Application/ # 项目代码   
