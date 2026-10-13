@@ -13,7 +13,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 | 文档编号 | ArbWave30-UM-002 | 版本 | V1.0 |
 | --- | --- | --- | --- |
 | 项目名称 | ArbWave30 | 日期 | 2026-08-17 |
-| 编写人 | EERNINUO | 状态 | 初稿 |
+| 编写人 | EERNINUO | 状态 | 试用 |
 
 ## 1. 概述
 本文档提供了 ArbWave30 任意波形发生器的远程控制命令集。该仪器遵循 **SCPI（Standard Commands for Programmable Instruments）1999.0 标准** 和 **IEEE 488.2-1992** 规范。
@@ -370,3 +370,4 @@ inst.close()
 |------|------|----------|--------|
 | V1.0 | 2026-08-17 | 初始架构 | EERNINUO |
 | V1.1 | 2026-08-18 | 添加命令 | EERNINUO |
+| V1.2 | 2026-09-25 | MVP 命令集草案 | EERNINUO |

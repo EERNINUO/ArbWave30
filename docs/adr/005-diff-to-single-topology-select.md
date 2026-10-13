@@ -11,7 +11,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 # ADR-005: 差分转单端电路拓扑选型
 
 ## 状态
-已采纳 （2026-08-05）
+已弃用 （2026-09-26）
 
 ## 背景
 经过计算，差分转单端电路原方案下 OPA695 在增益 G = 6 V/V 时，反向输入端阻抗 $Z_{Non} \approx 39.4 \Omega$，无法通过并联电阻实现 50Ω 输入阻抗。因此，需要修改电路拓扑来满足滤波器的输出负载要求。
@@ -40,13 +40,13 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 
 | 参数 | OPA695 | OPA690 | OPA820 | LMH6609 | LMH6624 | LMH6629 |
 | --- | --- | --- | --- | --- | :--- | --- |
-| 拓扑结构 | 电流反馈 (CFB） | 电压反馈 (VFB） | 电压反馈 (VFB） | 电压反馈 (VFB） | 电压反馈 (VFB） | 电压反馈 (VFB） |
-| -3dB 带宽 | 1900MHz (G=1） | 535MHz (G=1） | 240MHz (G=2） | 900MHz (G=1） | 1.5 GHz | 900 MHz |
-| 压摆率 (SR） | 5000 V/µs | 1900 V/µs | 240 V/µs | 1400 V/µs | 350 V/µs | 1600 V/µs |
-| 输出电流 (Iout） | ±140 mA | ±215 mA | ±110 mA | ±90 mA | - | ±250 mA |
-| 电压噪声 (eₙ） | 2 nV/√Hz | 4.6 nV/√Hz | 2.5 nV/√Hz | 3.1 nV/√Hz | 0.92 nV/√Hz | 0.69 nV/√Hz |
+| 拓扑结构 | 电流反馈 （CFB） | 电压反馈 （VFB） | 电压反馈 （VFB） | 电压反馈 （VFB） | 电压反馈 （VFB） | 电压反馈 （VFB） |
+| -3dB 带宽 | 1900MHz （G=1） | 535MHz （G=1） | 240MHz （G=2） | 900MHz （G=1） | 1.5 GHz | 900 MHz |
+| 压摆率 （SR） | 5000 V/µs | 1900 V/µs | 240 V/µs | 1400 V/µs | 350 V/µs | 1600 V/µs |
+| 输出电流 （Iout） | ±140 mA | ±215 mA | ±110 mA | ±90 mA | - | ±250 mA |
+| 电压噪声 （eₙ） | 2 nV/√Hz | 4.6 nV/√Hz | 2.5 nV/√Hz | 3.1 nV/√Hz | 0.92 nV/√Hz | 0.69 nV/√Hz |
 | 电源电压 | 5V 至 12V | 5V 至 12V | 5V 至 12V | 6.6V 至 12V | 5V 至 12V| 2.7V 至 5.5V |
-| 最小稳定增益 | 灵活 (CFB特性） | 单位增益稳定 | 单位增益稳定 | 单位增益稳定 | ≥ 10 | ≥ 4 或 10 |
+| 最小稳定增益 | 灵活 （CFB特性） | 单位增益稳定 | 单位增益稳定 | 单位增益稳定 | ≥ 10 | ≥ 4 或 10 |
 | 封装 | SOIC-8 | SOIC-8 | SOIC-8 | SOIC-8 | SOIC-8 | SOT-23 |
 | TI 官网价格 | $2.274 | $3.520 | $2.245 | $1.657 | $3.128 | $3.300 |
 | 立创商城价格[^1] | ￥11.29 | ￥39.64 | ￥20.14 | ￥34.06 | ￥41.54 | ￥32.02 |
@@ -93,3 +93,5 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 ## 相关文档
 - [硬件架构文档](/docs/硬件架构文档.md)
 - [硬件设计文档（模拟板）](/docs/硬件设计文档/硬件设计文档(模拟板).md)
+
+> **2026-09-19 修订**：本决策在实测中被证伪（LMH6609 在 30MHz 衰减约 -9.5dB，反相端出现寄生极点，且 CFA 的 Rf 并非硬性约束，Rf 稍大只会影响带宽，稳定性反而增加）。

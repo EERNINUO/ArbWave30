@@ -31,8 +31,8 @@ sym-lib-table
 *.net
 *.xml.rej
 *.kicad_prl
+~*.lck
 # KiCad 项目本地配置
-*.kicad_pro
 *.kicad_wk
 # 立创EDA 导出临时文件
 *.eprj
