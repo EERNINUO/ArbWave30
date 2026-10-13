@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
-    <img alt="仓库状态" src="https://img.shields.io/badge/status-MVP 调优中-blue">
+    <img alt="仓库状态" src="https://img.shields.io/badge/status-暂停更新-blue">
   </a>
   <a href="https://github.com/EERNINUO/ArbWave30" style="margin: 2px;">
     <img alt="GitHub 仓库星标" src="https://img.shields.io/github/stars/EERNINUO/ArbWave30">
@@ -35,6 +35,8 @@
 
 {{BRANCH_WARNING}}
 
+## ⚠️ 更新状态
+作者正在参与《0854 不相信眼泪》，本项目暂停更新，承诺 2026.12.25 恢复更新并发布第一个 Release。（你问我为什么不是 20 号就更新？好不容易解放了我不得爽玩几天）
 
 ## ✨ 特性
 
