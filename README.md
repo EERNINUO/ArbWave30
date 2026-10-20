@@ -143,11 +143,11 @@ ArbWave30/
 │    ├── 设计笔记/ # 设计笔记
 │    ├── 用户手册/ # 用户手册  
 │    └──  LICENSE # CC BY-SA 4.0  
-├── hardware/ # 原理图、PCB源文件 （🚧 开发中）   
+├── hardware/ # 原理图、PCB源文件   
 │    ├── analog_board/ # 模拟板 PCB设计  
 │    ├── control_board/ # 控制板 PCB设计  
 │    └── LICENSE # CERN-OHL-S-2.0   
-├── firmware/ （🚧 开发中）   
+├── firmware/ 
 │    ├── fpga/ # FPGA 设计源代码（Verilog）  
 │    │    ├── Application/ # 项目代码   
 │    │    └── FPGA_Test_Hardware/ # FPGA 硬件测试代码   
@@ -161,7 +161,7 @@ ArbWave30/
 │    └── Clock_Generator_Config/ # 时钟发生器配置     
 ├── simulink/ # LTspice 仿真文件  
 ├── datasheets/ # 组件数据手册，参考设计  
-├── scripts/ # 自动化测试脚本（PyVISA）（🚧 开发中）  
+├── scripts/ # 自动化测试脚本（PyVISA）  
 │    ├── test_filter/ # 滤波器测试脚本  
 │    └── test_diff_to_single # 差分转单端输出测试脚本   
 ├── LICENSE # GPL-3.0  
@@ -171,7 +171,7 @@ ArbWave30/
 
 ## 🚀 快速开始
 
-> 项目处于 **最小可行产品（MVP）验证阶段**，正在进行软硬件联调，待 MVP 验证完成后，将提供：
+> 项目处于 **最小可行产品（MVP）验证阶段，未来会出现破坏兼容性的变更**，正在进行 MVP 版本软硬件联调，待 MVP 验证完成后，将提供：
 > - 打样 PCB 的 Gerber 文件及 BOM
 > - FPGA 比特流烧录方法（通过 JTAG 加载）
 > - 固件编译与升级步骤
