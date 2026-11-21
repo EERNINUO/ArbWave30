@@ -1,3 +1,5 @@
+<!-- Assisted-by: DeepSeek - 文档框架 -->
+
 # 许可证（Licensing）
 
 本项目按目录分层授权，不同部分适用不同许可证。根目录 `LICENSE` 为固件的 GPL-3.0 全文；**当子目录下另有 `LICENSE` 时，以子目录为准**。
@@ -19,7 +21,6 @@
 
 以下第三方内容**不随本仓库分发**，需自行从原厂获取：
 
-- 器件数据手册、应用笔记、IBIS 模型、评估板资料（版权归 ADI / TI / IVI Foundation）；
 - 高云 Gowin IP 生成物（DDS / rPLL / OSC / FIFO，版权归高云半导体），仓库仅保留 `.ipc` 配置，用 Gowin IP Generator 重新生成，见 [firmware/FPGA/README.md](firmware/FPGA/README.md)；
 - ST STM32 USB Device Library（SLA0044，与 GPL-3.0 不兼容），用 `scripts/fetch_st_usb.ps1` 获取，见 [firmware/MCU/README.md](firmware/MCU/README.md)。
 
@@ -29,4 +30,4 @@
 
 ## 商业授权
 
-如需将本项目的固件或硬件设计用于闭源商业产品，或需要保修、支持、定制，可联系作者讨论商业授权。
+目前没有商业化计划，欢迎就合作与定制联系

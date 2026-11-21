@@ -1,3 +1,5 @@
+<!-- Assisted-by: DeepSeek - 文档框架 -->
+
 # FPGA 工程构建说明
 
 ## 工具链

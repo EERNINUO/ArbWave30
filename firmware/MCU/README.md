@@ -1,3 +1,5 @@
+<!-- Assisted-by: DeepSeek - 文档框架 -->
+
 # MCU 固件构建说明
 
 ## 目录

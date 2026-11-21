@@ -1,4 +1,5 @@
-﻿<#
+﻿# Assisted-by: DeepSeek
+<#
 .SYNOPSIS
     获取 STM32 USB Device Library（SLA0044），本仓库不随源码分发。
 
