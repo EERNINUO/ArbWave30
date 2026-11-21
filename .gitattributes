@@ -1,0 +1,32 @@
+# ============================================================
+# GitHub Linguist：语言统计规则
+# 目的：把厂商库与生成物排除出语言统计，只保留自有 C / Verilog / Python。
+# 注意：GitHub 按默认分支计算，合并进 develop 后才会反映在仓库页面。
+# ============================================================
+
+# ---- ST 厂商代码（CubeMX 生成）----
+**/Drivers/STM32F4xx_HAL_Driver/**   linguist-vendored
+**/Drivers/CMSIS/**                  linguist-vendored
+
+# ---- 第三方中间件 ----
+**/Middlewares/Third_Party/**        linguist-vendored
+**/Middlewares/ST/**                 linguist-vendored
+
+# ---- Keil 工程 / 启动文件 / CubeMX 生成 ----
+**/MDK-ARM/**                        linguist-generated linguist-vendored
+**/*.uvprojx                         linguist-generated
+**/*.sct                             linguist-generated
+**/.mxproject                        linguist-generated
+**/RTE/**                            linguist-generated
+
+# ---- 文档 ----
+docs/**                              linguist-documentation
+*.md                                 linguist-documentation
+
+# ---- 不随仓库分发的厂商产物（防止以后误提交时计入统计）----
+datasheet/**                         linguist-vendored
+**/temp/**                           linguist-generated
+**/dds_ii/**                         linguist-generated
+**/fifo_hs/**                        linguist-generated
+**/gowin_rpll/**                     linguist-generated
+**/gowin_osc/**                      linguist-generated
