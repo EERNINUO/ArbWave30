@@ -136,38 +136,45 @@
 
 ## 🧱 仓库结构
 ```text
-ArbWave30/  
-├── docs/ # 设计文档  
-│    ├── pic/ # 文档图片  
-│    ├── adr/ # 决策记录  
-│    ├── 硬件设计文档/ # 硬件设计文档  
-│    ├── 设计笔记/ # 设计笔记
-│    ├── 用户手册/ # 用户手册  
-│    └──  LICENSE # CC BY-SA 4.0  
-├── hardware/ # 原理图、PCB源文件   
-│    ├── analog_board/ # 模拟板 PCB设计  
-│    ├── control_board/ # 控制板 PCB设计  
-│    └── LICENSE # CERN-OHL-S-2.0   
-├── firmware/ 
-│    ├── fpga/ # FPGA 设计源代码（Verilog）  
-│    │    ├── Application/ # 项目代码   
-│    │    └── FPGA_Test_Hardware/ # FPGA 硬件测试代码   
-│    │         ├── FPGA_Clodck_Test/ # 时钟测试代码   
-│    │         └── FPGA_Hardware_Test/ # FPGA 硬件测试代码   
-│    ├── mcu/ # MCU 固件源代码（C/C++）   
-│    │    ├── Application/ # 项目代码   
-│    │    ├── MCU_Test_Hardware/ # MCU 硬件测试代码   
-│    │    │    └── min_system_test/ # MCU 最小系统测试代码   
-│    │    └── SCPI_Test/ # SCPI-parser 移植测试工程   
-│    └── Clock_Generator_Config/ # 时钟发生器配置     
-├── simulink/ # LTspice 仿真文件  
-├── datasheets/ # 组件数据手册，参考设计  
-├── scripts/ # 自动化测试脚本（PyVISA）  
-│    ├── test_filter/ # 滤波器测试脚本  
-│    └── test_diff_to_single # 差分转单端输出测试脚本   
-├── LICENSE # GPL-3.0  
-└── README.md  
+ArbWave30/
+├── .github/workflows/           # README 自动生成
+├── docs/                        # 设计文档（CC-BY-SA-4.0）
+│   ├── adr/                     # 架构决策记录
+│   ├── 硬件设计文档/             # 控制板 / 模拟板 / 板间接口
+│   ├── 设计笔记/                 # 滤波器等设计迭代
+│   ├── 调试笔记/                 # 实板调试记录
+│   ├── 用户手册/                 # SCPI 参考手册、操作手册
+│   ├── pic/                     # 文档图片
+│   ├── 硬件架构文档.md
+│   ├── 软件设计文档.md
+│   ├── 项目技术规格书.md
+│   └── LICENSE                  # CC-BY-SA-4.0
+├── hardware/                    # 原理图 / PCB / BOM（CERN-OHL-S-2.0）
+│   ├── analog_board/            # 模拟板 KiCad 工程
+│   ├── control_board/           # 控制板 KiCad 工程
+│   └── LICENSE                  # CERN-OHL-S-2.0
+├── firmware/                    # 固件与 FPGA 逻辑（GPL-3.0-only）
+│   ├── FPGA/                    # Verilog
+│   │   ├── Application/         # DDS / SPI 从机 / 寄存器组 / DAC 接口
+│   │   ├── FPGA_Test_Hardware/  # 时钟与硬件测试
+│   │   └── README.md            # 构建说明（IP 需重新生成）
+│   ├── MCU/                     # C
+│   │   ├── Application/         # 主固件（SCPI / USB CDC / FreeRTOS）
+│   │   ├── MCU_Test_Hardware/   # 最小系统、模拟板测试
+│   │   ├── SCPI_Test/           # SCPI 解析验证
+│   │   └── README.md            # 构建说明（ST USB 库需自行获取）
+│   └── Clock_Generator_Config/  # CDCI6214 配置
+├── scripts/                     # 测试与辅助脚本（GPL-3.0-only）
+│   ├── test_filter/             # 滤波器测试（PyVISA）
+│   ├── test_diff_to_single/     # 差分转单端测试
+│   └── fetch_st_usb.ps1         # 获取 ST USB 库（不入库）
+├── LICENSE                      # 固件 GPL-3.0（分层说明见 LICENSING.md）
+├── LICENSING.md                 # 分目录许可证说明
+├── NOTICE.md                    # 第三方组件与出处
+├── README.md                    # 本文件（由模板生成）
+└── README.template.md           # README 模板
 ```
+
 ---
 
 ## 🚀 快速开始
